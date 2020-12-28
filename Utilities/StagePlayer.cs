@@ -37,24 +37,21 @@ namespace Artco
 
         public static void SetFlags(params Flag[] flag)
         {
-            for (int i = 0; i < flag.Length; i++) {
+            for (int i = 0; i < flag.Length; i++)
                 stage_flag |= flag[i];
-            }
         }
 
         public static void UnsetFlag(params Flag[] flag)
         {
-            for (int i = 0; i < flag.Length; i++) {
+            for (int i = 0; i < flag.Length; i++)
                 stage_flag &= ~flag[i];
-            }
         }
 
         public static bool ORCheckFlags(params Flag[] flag)
         {
             for (int i = 0; i < flag.Length; i++) {
-                if (stage_flag.HasFlag(flag[i])) {
+                if (stage_flag.HasFlag(flag[i]))
                     return true;
-                }
             }
 
             return false;
@@ -62,8 +59,8 @@ namespace Artco
 
         public StagePlayer(Action<Image> draw_function, Action complete_function)
         {
-            this._draw_function = draw_function;
-            this._complete_function = complete_function;
+            _draw_function = draw_function;
+            _complete_function = complete_function;
         }
 
         public void SetBackground(Background back)
@@ -78,16 +75,14 @@ namespace Artco
 
         public void SaveStartBackground()
         {
-            if (_cur_back != null) {
+            if (_cur_back != null)
                 _start_back = _cur_back;
-            }
         }
 
         public void LoadStartBackground()
         {
-            if (_start_back != null) {
+            if (_start_back != null)
                 _cur_back = _start_back;
-            }
 
             _start_back = null;
         }
@@ -95,15 +90,13 @@ namespace Artco
         public void SetInitializeImage()
         {
             VideoCapture video_capture = new VideoCapture(_cur_back.remote_path);
-            if (!video_capture.IsOpened()) {
+            if (!video_capture.IsOpened())
                 return;
-            }
 
             using Mat mat = new Mat();
             video_capture.Read(mat);
-            if (mat.Empty()) {
+            if (mat.Empty())
                 return;
-            }
 
             _draw_function(mat.ToBitmap());
         }
@@ -113,9 +106,9 @@ namespace Artco
             _is_stop = false;
             _capture = new VideoCapture(_cur_back.remote_path);
 
-            if (!_capture.IsOpened()) {
+            if (!_capture.IsOpened())
                 return;
-            }
+
 
             stage_player_thread = new Thread(RunPlayerThreadStart) { IsBackground = true };
             stage_player_thread.Start();
@@ -138,18 +131,16 @@ namespace Artco
             Mat frame = new Mat();
             while (true) {
                 lock (this) {
-                    if (_is_stop) {
+                    if (_is_stop)
                         break;
-                    }
                 }
 
                 long started = st.ElapsedMilliseconds;
 
                 _capture.Read(frame);
                 if (frame.Empty()) {
-                    if (ORCheckFlags(Flag.NOREPEAT)) {
+                    if (ORCheckFlags(Flag.NOREPEAT))
                         break;
-                    }
 
                     _capture.Set(VideoCaptureProperties.PosAviRatio, 0);
                     continue;
@@ -166,9 +157,9 @@ namespace Artco
             frame.Dispose();
             _complete_function?.Invoke();
         }
-        
+
         public static void SetHomeImage()
-        {            
+        {
             MainForm.draw_background(Properties.Resources.HomeImage);
         }
 

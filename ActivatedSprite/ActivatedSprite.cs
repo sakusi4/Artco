@@ -71,8 +71,14 @@ namespace Artco
                 y = y
             };
 
-            sprite.org_img_list.Add(new Bitmap(cur_img));
+            Bitmap bitmap;
+            lock (this) {
+                bitmap = new Bitmap(cur_img);
+            }
+
+            sprite.org_img_list.Add(bitmap);
             sprite.MakeZoomedImg(sprite.org_img_list[0]);
+            sprite.img_list.Add(new Bitmap(sprite.org_img_list[0]));
 
             return sprite;
         }
@@ -234,6 +240,14 @@ namespace Artco
             set {
                 lock (this) {
                     _img_list = value;
+                }
+            }
+        }
+
+        public int img_list_count {
+            get {
+                lock (this) {
+                    return _img_list.Count;
                 }
             }
         }

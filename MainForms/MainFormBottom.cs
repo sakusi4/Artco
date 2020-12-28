@@ -121,7 +121,7 @@ namespace Artco
             InvalidateEditorPanel();
         }
 
-        private void MoveCodeBlock(bool isLeft)
+        private void MoveCodeBlock(bool is_left)
         {
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
                 return;
@@ -129,7 +129,7 @@ namespace Artco
             if (ActivatedSpriteController.IsEmpty())
                 return;
 
-            ActivatedSpriteController.cur_sprite.code_editor.MoveCode(isLeft);
+            ActivatedSpriteController.cur_sprite.code_editor.MoveCode(is_left);
         }
     }
 }

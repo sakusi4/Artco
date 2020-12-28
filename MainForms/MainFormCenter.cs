@@ -24,16 +24,18 @@ namespace Artco
                     e.Graphics.DrawString(sprite.speak_text, DynamicResources.font, Brushes.DimGray, text_rect);
                 }
 
-                lock (sprite)
+                lock (sprite) {
                     e.Graphics.DrawImage(sprite.cur_img, sprite.x, sprite.y);
+                }
 
                 for (int j = 0; j < sprite.cloned_sprite_list.Count; j++) {
                     var clone = sprite.cloned_sprite_list[j];
                     if (!clone.is_visible)
                         continue;
 
-                    lock (clone)
+                    lock (clone) {
                         e.Graphics.DrawImage(clone.cur_img, clone.x, clone.y);
+                    }
                 }
             }
         }
@@ -41,6 +43,8 @@ namespace Artco
         private void SelectBackCB(object sender)
         {
             var background = (Background)sender;
+            if (background == null)
+                return;
 
             StopProject();
             stage_player.SetBackground(background);
@@ -153,13 +157,13 @@ namespace Artco
             if (sprite == null)
                 return;
 
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
-                return;
-
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
                 Block.SendSignalToSprite(sprite, 4);
                 return;
             }
+
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
+                return;
             
             _grabbed_sprite = sprite;
             ActivatedSpriteController.Focus(ActivatedSpriteController.sprite_list.IndexOf(sprite));

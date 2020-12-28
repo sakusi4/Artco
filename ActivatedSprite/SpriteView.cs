@@ -152,7 +152,7 @@ namespace Artco
                 _sprite.org_img_list = ActivatedSpriteController.CloneBitmapList(sprite_edit_form.original_imgs);
 
                 _sprite.zoomed_img_list.RemoveRange(0, _sprite.zoomed_img_list.Count);
-                _sprite.img_list.RemoveRange(0, _sprite.img_list.Count);
+                _sprite.img_list.RemoveRange(0, _sprite.img_list_count);
 
                 for (int i = 0; i < _sprite.org_img_list.Count; i++) {
                     var original_img = _sprite.org_img_list[i];

@@ -73,9 +73,9 @@ namespace Artco
         public void ActionAnimateN(ActivatedSprite s, int line_num, string[] values) => AnimateSprite(s, line_num, values, (int)GetConstantOrVariable(s, values[0]));
 
         // Control
-        public void ControlTime1(ActivatedSprite s, int line_num, string[] values) => SleepVariable(1);
-        public void ControlTime2(ActivatedSprite s, int line_num, string[] values) => SleepVariable(2);
-        public void ControlTimeN(ActivatedSprite s, int line_num, string[] values) => SleepVariable(GetConstantOrVariable(s, values[0]));
+        public void ControlTime1(ActivatedSprite s, int line_num, string[] values) => SleepVariable(s, line_num, 1);
+        public void ControlTime2(ActivatedSprite s, int line_num, string[] values) => SleepVariable(s, line_num, 2);
+        public void ControlTimeN(ActivatedSprite s, int line_num, string[] values) => SleepVariable(s, line_num, GetConstantOrVariable(s, values[0]));
         public void ControlLoopN(ActivatedSprite s, int line_num, string[] values) => PushLoopStack(s, line_num, values);
         public void ControlLoop(ActivatedSprite s, int line_num, string[] values) => InitLoopVariables(s, line_num);
         public void ControlFlag(ActivatedSprite s, int line_num, string[] values) => PopLoopStack(s, line_num, values);
@@ -203,14 +203,13 @@ namespace Artco
                 Thread.Sleep(delay);
             }
         }
-        
+
         public void RotateImage(ActivatedSprite s, double angle, bool cw)
         {
             lock (s) {
                 Bitmap origin_bmp = s.GetOriginalImg();
-                Bitmap cur_bmp = s.cur_img;
                 double degree = (cw) ? 360.0 - angle : angle;
-                (s.img_list[s.cur_img_num], s.x, s.y) = ImageUtility.RotateImage(origin_bmp, cur_bmp, degree, s.x, s.y);
+                (s.cur_img, s.x, s.y) = ImageUtility.RotateImage(origin_bmp, s.cur_img, degree, s.x, s.y);
             }
         }
 
@@ -324,16 +323,25 @@ namespace Artco
 
         public void JumpSprite(ActivatedSprite s, int line_num, int n)
         {
-            for (int i = (n > 0) ? 0 : -1; i < n && !IsFinish(s, line_num); i = (n > 0) ? i + 1 : i) {
+            int i = (n > 0) ? 0 : -1;
+            while (i < n) {
                 for (int j = 5; j > 0; j--) {
                     s.arrow = 8;
                     MoveSprite(s, j * 10, 1, 100);
+
+                    if (IsFinish(s, line_num))
+                        return;
                 }
 
                 for (int j = 1; j <= 5; j++) {
                     s.arrow = 6;
                     MoveSprite(s, j * 10, 1, 100);
+
+                    if (IsFinish(s, line_num))
+                        return;
                 }
+
+                i = (n > 0) ? i + 1 : i;
             }
         }
 
@@ -397,12 +405,22 @@ namespace Artco
             }
         }
 
-        public void SleepVariable(double value)
+        public void SleepVariable(ActivatedSprite s, int line_num, double value)
         {
-            if (value < 0)
+            if (value < 0.1)
                 return;
 
-            Thread.Sleep((int)(value * 1000.0));
+            if (value < 1) {
+                Thread.Sleep((int)(value * 1000.0));
+                return;
+            }
+
+            for (int i = 0; i < value; i++) {
+                if (IsFinish(s, line_num))
+                    return;
+
+                Thread.Sleep(1 * 1000);
+            }
         }
 
         public void PushLoopStack(ActivatedSprite s, int line_num, string[] values)
@@ -422,11 +440,10 @@ namespace Artco
             s.loop_stack.Push(line_num, s.pc[line_num], 0);
         }
 
-        // 수정 필요: 스레드 위험
         public void FlipXBitmap(ActivatedSprite s)
         {
             lock (s) {
-                for (int i = 0; i < s.img_list.Count; i++) {
+                for (int i = 0; i < s.img_list_count; i++) {
                     s.img_list[i].RotateFlip(RotateFlipType.RotateNoneFlipX);
                 }
             }
@@ -435,8 +452,8 @@ namespace Artco
         public void FlipYBitmap(ActivatedSprite s)
         {
             lock (s) {
-                for (int i = 0; i < s.img_list.Count; i++) {
-                    s.img_list[s.cur_img_num].RotateFlip(RotateFlipType.RotateNoneFlipY);
+                for (int i = 0; i < s.img_list_count; i++) {
+                    s.img_list[i].RotateFlip(RotateFlipType.RotateNoneFlipY);
                 }
             }
         }
@@ -444,13 +461,13 @@ namespace Artco
         public void ChangeSpriteBitmap(ActivatedSprite s, bool is_next = true)
         {
             if (is_next) {
-                int max = s.img_list.Count - 1;
+                int max = s.img_list_count - 1;
                 s.cur_img_num = (s.cur_img_num < max) ? s.cur_img_num + 1 : 0;
 
                 lock (s)
                     s.cur_img = s.GetOriginalImg();
             } else {
-                s.cur_img_num = (s.cur_img_num > 0) ? s.cur_img_num - 1 : s.img_list.Count - 1;
+                s.cur_img_num = (s.cur_img_num > 0) ? s.cur_img_num - 1 : s.img_list_count - 1;
 
                 lock (s)
                     s.cur_img = s.GetOriginalImg();

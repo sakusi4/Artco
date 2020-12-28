@@ -143,7 +143,7 @@ namespace Artco
                 }
 
                 return true;
-            } else if ((StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) &&
+            } else if ((!StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) &&
                   ((msg.Msg == WM_KEYDOWN) || (msg.Msg == WM_SYSKEYDOWN))) {
                 if (keyData == Keys.Left) {
                     MoveCodeBlock(true);
@@ -173,30 +173,30 @@ namespace Artco
         private void MainForm_Shown(object sender, EventArgs e)
         {
             // 빠른 테스트용
-            stage_player = new StagePlayer(DrawBackground, FinishStagePlayerCB);
+            stage_player = new StagePlayer(draw_background, finish_stage_player_cb);
             StagePlayer.SetFlagZero();
             StagePlayer.SetHomeImage();
 
-            //string path = "./themes/" + Setting._language + "/Stage_Default";            
-            //string audioName = path + ".wav";
-            //string videoName = path + ".mp4";
+            //string path = "./themes/" + Setting.language + "/Stage_Default";
+            //string audio_name = path + ".wav";
+            //string video_name = path + ".mp4";
 
             //StagePlayer.SetFlagZero();
             //StagePlayer.SetFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.LOADING, StagePlayer.Flag.NOREPEAT);
 
-            //_stagePlayer = new StagePlayer(SafeDrawBackground, () =>
-            //{
-            //    _stagePlayer = new StagePlayer(SafeDrawBackground, BackThreadStopComplete);
+
+            //stage_player = new StagePlayer(draw_background, () => {
+            //    stage_player = new StagePlayer(draw_background, finish_stage_player_cb);
             //    StagePlayer.SetFlagZero();
             //    StagePlayer.SetHomeImage();
 
             //    Music.ReleaseMusic();
             //});
 
-            //_stagePlayer.SetBackground(new Background(null, -1, 0, videoName, null, true));
-            //_stagePlayer.Start();
+            //stage_player.SetBackground(new Background(null, -1, 0, video_name, null, true));
+            //stage_player.Start();
 
-            //Music.SetMusic(audioName);
+            //Music.SetMusic(audio_name);
             //Music.PlayBackMusic();
         }
 

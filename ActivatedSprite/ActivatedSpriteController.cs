@@ -110,7 +110,7 @@ namespace Artco
                 sprite.wait_signal_obj.Clear();
                 sprite.sprite_runner = null;
                 sprite.cur_img_num = 0;
-                sprite.img_list[sprite.cur_img_num] = sprite.GetOriginalImg();
+                sprite.cur_img = sprite.GetOriginalImg();
                 sprite.speak_text = null;
                 sprite.is_visible = true;
                 sprite.is_cw = false;

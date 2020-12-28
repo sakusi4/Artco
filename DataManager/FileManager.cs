@@ -178,7 +178,8 @@ namespace Artco
 
         public static string GetExecutableVersion()
         {
-            double local_ver = double.Parse(Properties.Settings.Default.version);
+            double local_ver = double.Parse(File.ReadAllText("version.txt"));
+            //double local_ver = double.Parse(Properties.Settings.Default.version);
             double remote_ver = double.Parse(new StreamReader(GetStreamFromHTTP(http_root_dir + "version.txt")).ReadLine());
             return (local_ver < remote_ver) ? remote_ver.ToString() : null;
         }
@@ -195,8 +196,9 @@ namespace Artco
 
         public static void UpdateVersionInfo(string new_ver)
         {
-            Properties.Settings.Default.version = new_ver;
-            Properties.Settings.Default.Save();
+            File.WriteAllText("version.txt", new_ver);
+            //Properties.Settings.Default.version = new_ver;
+            //Properties.Settings.Default.Save();
         }
 
         public static bool DownloadFileFromHTTP(string src_path, string dst_path)

@@ -784,9 +784,11 @@ namespace Artco
         public int DownMove(ActivatedSprite s, int n)
         {
             int y = s.y;
-
-            if (y + n + s.height < RuntimeEnv.height)
+            int next_y = y + n + s.height;
+            if (next_y <= RuntimeEnv.height)
                 s.ChangeLoc(0, n);
+            else
+                s.y = RuntimeEnv.height - s.height;
 
             return 0;
         }
@@ -794,9 +796,11 @@ namespace Artco
         public int RightMove(ActivatedSprite s, int n)
         {
             int x = s.x;
-
-            if (x + n + s.width < RuntimeEnv.width)
+            int next_x = x + n + s.width;
+            if (next_x <= RuntimeEnv.width)
                 s.ChangeLoc(n, 0);
+            else
+                s.x = RuntimeEnv.width - s.width;
 
             return 0;
         }

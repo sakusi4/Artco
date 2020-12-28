@@ -31,6 +31,8 @@ namespace Artco
 
         public void SetGameEnvironment()
         {
+            StagePlayer.SetFlags(StagePlayer.Flag.GAME);
+
             SetGameDatas(GetGameDatas());
             CreatePlayer();
             PlayIntro();
@@ -111,7 +113,6 @@ namespace Artco
         public void Ready()
         {
             player.is_visible = true;
-            StagePlayer.SetFlags(StagePlayer.Flag.GAME);
             MainForm.stage_player.SetInitializeImage();
         }
 

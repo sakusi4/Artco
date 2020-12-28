@@ -45,7 +45,7 @@ namespace Artco
         private void ShowMoveMenu()
         {
             ClearMenuBitmaps();
-            
+
             btn_MoveTab.Image = Properties.Resources.Move2;
 
             Block.selected_category = 1;

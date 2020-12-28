@@ -1,0 +1,11 @@
+packages/
+obj/
+.vs/
+bin/
+*.suo
+*.user
+*.dll.config
+*.pdb
+*.xml
+*.exe
+*.exe.config

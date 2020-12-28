@@ -1,0 +1,841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\OpenCvSharp4.runtime.win.4.2.0.20200108\build\net\OpenCvSharp4.runtime.win.props" Condition="Exists('packages\OpenCvSharp4.runtime.win.4.2.0.20200108\build\net\OpenCvSharp4.runtime.win.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B0E8F8E-863C-4665-80E3-E002701BFF59}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Artco</RootNamespace>
+    <AssemblyName>Artco</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <TargetCulture>ko-KP</TargetCulture>
+    <ProductName>Artco</ProductName>
+    <PublisherName>상상날다</PublisherName>
+    <SuiteName>Artco</SuiteName>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5EB926D987DE098E59689C485869FE6EF7B94026</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Artco_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ArtcoCustomControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ArtcoCustomControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu_UI_v1.5.3, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>packages\OpenCvSharp4.4.2.0.20200108\lib\net461\OpenCvSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Blob, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>packages\OpenCvSharp4.4.2.0.20200108\lib\net461\OpenCvSharp.Blob.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>packages\OpenCvSharp4.4.2.0.20200108\lib\net461\OpenCvSharp.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>packages\OpenCvSharp4.4.2.0.20200108\lib\net461\OpenCvSharp.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActivatedSprite\ActivatedSpriteController.cs" />
+    <Compile Include="StorageForms\Back2StorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageForms\Back2StorageForm.Designer.cs">
+      <DependentUpon>Back2StorageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageForms\Back1StorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageForms\Back1StorageForm.Designer.cs">
+      <DependentUpon>Back1StorageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PopupForms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActivatedSprite\CodeEditor.cs" />
+    <Compile Include="ActivatedSprite\SpriteView.cs" />
+    <Compile Include="PopupForms\MakeConditionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\MakeConditionForm.Designer.cs">
+      <DependentUpon>MakeConditionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Music.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PictureTools\EditSprite.cs" />
+    <Compile Include="PictureTools\ImageUtility.cs" />
+    <Compile Include="PopupForms\PracticeResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\PracticeResultForm.Designer.cs">
+      <DependentUpon>PracticeResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Runtime\RuntimeSprite.cs" />
+    <Compile Include="Runtime\RuntimeSpriteCode.cs" />
+    <Compile Include="Runtime\UserVariable.cs" />
+    <Compile Include="Utilities\StagePlayer.cs" />
+    <Compile Include="PopupForms\CreateVarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\CreateVarForm.Designer.cs">
+      <DependentUpon>CreateVarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageForms\MusicStorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageForms\MusicStorageForm.Designer.cs">
+      <DependentUpon>MusicStorageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageForms\ProjectStorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageForms\ProjectStorageForm.Designer.cs">
+      <DependentUpon>ProjectStorageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageForms\SoundStorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageForms\SoundStorageForm.Designer.cs">
+      <DependentUpon>SoundStorageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StorageForms\SpriteStorageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StorageForms\SpriteStorageForm.Designer.cs">
+      <DependentUpon>SpriteStorageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\ArtcoObject.cs" />
+    <Compile Include="Utilities\ArtcoProject.cs" />
+    <Compile Include="PopupForms\AudioRecordingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\AudioRecordingForm.Designer.cs">
+      <DependentUpon>AudioRecordingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActivatedSprite\ActivatedSprite.cs" />
+    <Compile Include="Runtime\RuntimeFuncs.cs" />
+    <Compile Include="Utilities\FloatingTextbox.cs" />
+    <Compile Include="Utilities\Utility.cs" />
+    <Compile Include="PopupForms\MsgBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\MsgBoxForm.Designer.cs">
+      <DependentUpon>MsgBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Setting.cs" />
+    <Compile Include="PopupForms\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Background.cs" />
+    <Compile Include="DataManager\FileManager.cs" />
+    <Compile Include="DataManager\DBManager.cs" />
+    <Compile Include="Utilities\PracticeMode.cs" />
+    <Compile Include="Models\Block.cs" />
+    <Compile Include="Utilities\DynamicResources.cs" />
+    <Compile Include="MainForms\MainFormLeft.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForms\MainFormBottom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForms\MainFormRight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForms\MainFormCenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\RenameSpriteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\RenameSpriteForm.Designer.cs">
+      <DependentUpon>RenameSpriteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sound.cs" />
+    <Compile Include="SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashForm.Designer.cs">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runtime\RuntimeEnv.cs" />
+    <Compile Include="Models\Sprite.cs" />
+    <Compile Include="PictureTools\SpriteEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PictureTools\SpriteEditForm.Designer.cs">
+      <DependentUpon>SpriteEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateForm.Designer.cs">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PopupForms\SpeakInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PopupForms\SpeakInputForm.Designer.cs">
+      <DependentUpon>SpeakInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\CustomControls.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utilities\VideoRecord.cs" />
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\MakeConditionForm.resx">
+      <DependentUpon>MakeConditionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\PracticeResultForm.resx">
+      <DependentUpon>PracticeResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\CreateVarForm.resx">
+      <DependentUpon>CreateVarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\AudioRecordingForm.resx">
+      <DependentUpon>AudioRecordingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\MsgBoxForm.resx">
+      <DependentUpon>MsgBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\RenameSpriteForm.resx">
+      <DependentUpon>RenameSpriteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PictureTools\SpriteEditForm.resx">
+      <DependentUpon>SpriteEditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateForm.resx">
+      <DependentUpon>UpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopupForms\SpeakInputForm.resx">
+      <DependentUpon>SpeakInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageForms\Back2StorageForm.resx">
+      <DependentUpon>Back2StorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageForms\Back1StorageForm.resx">
+      <DependentUpon>Back1StorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageForms\MusicStorageForm.resx">
+      <DependentUpon>MusicStorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageForms\ProjectStorageForm.resx">
+      <DependentUpon>ProjectStorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageForms\SoundStorageForm.resx">
+      <DependentUpon>SoundStorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageForms\SpriteStorageForm.resx">
+      <DependentUpon>SpriteStorageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Art_Block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Art_Block_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Artco_BG_Storage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Artco_BG_Storage_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Artco_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\BG_Block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\BG_Block_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\BGM_Block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\BGM_Block_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Center_Stage_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Close_Window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Coding_Block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Coding_Block_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Editor_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Full_Editor_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Left_Block_Page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Left_Block_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Minimize_Window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\My_BG_Storage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\My_BG_Storage_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Right_Block_Page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Right_Sprite_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Screen_Maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Screen_Minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Sound_Block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Sound_Block_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Sprite_Block.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Sprite_Block_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Sprite_Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Sprite_Info_Active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Title_Bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Code_Clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MediaPlayer">
+      <Guid>{22D6F304-B0F6-11D0-94AB-0080C74C7E95}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Screen_Webcam.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Art_Screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\ArtEditor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Trash_Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Trash_Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\effects\fire.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\effects\fire_effect.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\theme\default\Back_Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icon.ico" />
+    <None Include="bin\Debug\Cursor.png" />
+    <None Include="bin\Debug\themes\default\UpdateForm.png" />
+    <None Include="bin\Debug\themes\default\SpriteOpenForm.png" />
+    <None Include="bin\Debug\themes\default\SpriteEditUndo.png" />
+    <None Include="bin\Debug\themes\default\SpriteEditRedo.png" />
+    <None Include="bin\Debug\themes\default\GlassNormalScreen.png" />
+    <None Include="bin\Debug\themes\default\GlassFullScreen.png" />
+    <None Include="bin\Debug\themes\default\GlassTrashCan.png" />
+    <None Include="bin\Debug\themes\default\GlassEditor.png" />
+    <None Include="bin\Debug\themes\default\RenameInput.png" />
+    <None Include="bin\Debug\themes\default\RecordingForm_recording.png" />
+    <None Include="bin\Debug\themes\default\RecordingForm_play.png" />
+    <None Include="bin\Debug\themes\default\RecordingForm_pause.png" />
+    <None Include="bin\Debug\themes\default\Storage_RecorderButton.png" />
+    <None Include="bin\Debug\themes\default\Storage_FileButton.png" />
+    <None Include="bin\Debug\themes\default\RecordingForm_stop.png" />
+    <None Include="bin\Debug\themes\default\RecordingForm.png" />
+    <None Include="bin\Debug\themes\default\ChangeDirectory.png" />
+    <None Include="bin\Debug\themes\default\OpenDirectory.png" />
+    <None Include="bin\Debug\themes\default\REC.png" />
+    <None Include="bin\Debug\themes\default\RSettingBtn.png" />
+    <None Include="bin\Debug\themes\default\BS_ Background Storage.png" />
+    <None Include="bin\Debug\themes\default\PS_PictureStorage.png" />
+    <None Include="bin\Debug\themes\default\SS_Sound Storage.png" />
+    <None Include="bin\Debug\themes\default\Storage_Search.png" />
+    <None Include="bin\Debug\themes\default\SpeakTextForm.png" />
+    <None Include="bin\Debug\themes\default\RMusicBtn.png" />
+    <None Include="bin\Debug\themes\default\EditAddSprite.png" />
+    <None Include="bin\Debug\themes\default\Artco_Front2.png" />
+    <None Include="bin\Debug\themes\default\Artco_Front1.png" />
+    <None Include="bin\Debug\themes\default\Artco_Back2.png" />
+    <None Include="bin\Debug\themes\default\Artco_Back1.png" />
+    <None Include="bin\Debug\themes\default\Artco_Right2.png" />
+    <None Include="bin\Debug\themes\default\Artco_Right1.png" />
+    <None Include="bin\Debug\themes\default\Artco_Left2.png" />
+    <None Include="bin\Debug\themes\default\Artco_Left1.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Right2.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Right1.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Left2.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Left1.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Front2.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Front1.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Back2.png" />
+    <None Include="bin\Debug\themes\games\Resources\Artco_Back1.png" />
+    <None Include="bin\Debug\themes\default\HelperBack.png" />
+    <None Include="bin\Debug\themes\default\Edit_TopLine.png" />
+    <None Include="bin\Debug\themes\default\Edit_LeftLine.png" />
+    <None Include="bin\Debug\themes\default\Edit_Botline.png" />
+    <None Include="bin\Debug\themes\default\File_Grey.png" />
+    <None Include="bin\Debug\themes\default\File_Orange.png" />
+    <None Include="bin\Debug\themes\default\File_Green.png" />
+    <None Include="bin\Debug\themes\default\File_Purple.png" />
+    <None Include="bin\Debug\themes\default\File_Mint.png" />
+    <None Include="bin\Debug\themes\default\File_Red.png" />
+    <None Include="bin\Debug\themes\default\Edit_Copy.png" />
+    <None Include="bin\Debug\themes\default\Close.png" />
+    <None Include="bin\Debug\themes\default\Minimize.png" />
+    <None Include="bin\Debug\themes\default\EditorBack.png" />
+    <None Include="bin\Debug\themes\default\StageBackOutline.png" />
+    <None Include="bin\Debug\themes\default\StageBack.png" />
+    <None Include="bin\Debug\themes\default\Edit_OpenSprite.png" />
+    <None Include="bin\Debug\themes\default\FlipXBtn.png" />
+    <None Include="bin\Debug\themes\default\Control2.png" />
+    <None Include="bin\Debug\themes\default\Control1.png" />
+    <None Include="bin\Debug\themes\default\FullScreenBtn.png" />
+    <None Include="bin\Debug\themes\default\WindowBack.png" />
+    <None Include="bin\Debug\themes\default\Move1.png" />
+    <None Include="bin\Debug\themes\default\Move2.png" />
+    <None Include="bin\Debug\themes\default\RectCutBtn.png" />
+    <None Include="bin\Debug\themes\default\SizeIncreseBtn.png" />
+    <None Include="bin\Debug\themes\default\SizeDecreseBtn.png" />
+    <None Include="bin\Debug\themes\default\FreeCutBtn.png" />
+    <None Include="bin\Debug\themes\default\OriginalImage.png" />
+    <None Include="bin\Debug\themes\default\Practice2.png" />
+    <None Include="bin\Debug\themes\default\Practice1.png" />
+    <None Include="bin\Debug\themes\default\Practice_Next.png" />
+    <None Include="bin\Debug\themes\default\Practice_Repeat.png" />
+    <None Include="bin\Debug\themes\default\Practice_Stop.png" />
+    <None Include="bin\Debug\themes\default\ArtSelectedLine.png" />
+    <None Include="bin\Debug\themes\default\ArtcoLogo.png" />
+    <None Include="bin\Debug\themes\default\EraseBtn.png" />
+    <None Include="bin\Debug\themes\default\FlipYBtn.png" />
+    <None Include="bin\Debug\themes\default\TopBar.png" />
+    <None Include="bin\Debug\themes\default\BrushBtn.png" />
+    <None Include="bin\Debug\themes\default\MagicBackBtn.png" />
+    <None Include="bin\Debug\themes\default\BlockAllRemove.png" />
+    <None Include="bin\Debug\themes\default\action2.png" />
+    <None Include="bin\Debug\themes\default\action1.png" />
+    <None Include="bin\Debug\themes\default\SpriteAllRemove.png" />
+    <None Include="bin\Debug\themes\default\OpenSprite.png" />
+    <None Include="bin\Debug\themes\default\RRotate.png" />
+    <None Include="bin\Debug\themes\default\RCameraBtn.png" />
+    <None Include="bin\Debug\themes\default\RProjectSaveBtn.png" />
+    <None Include="bin\Debug\themes\default\RUpdateBtn.png" />
+    <None Include="bin\Debug\themes\default\RightPageArrow.png" />
+    <None Include="bin\Debug\themes\default\RProjectOpenBtn.png" />
+    <None Include="bin\Debug\themes\default\RBackimageBtn.png" />
+    <None Include="bin\Debug\themes\default\RSpriteBack.png" />
+    <None Include="bin\Debug\themes\default\RSpriteBtn.png" />
+    <None Include="bin\Debug\themes\default\RNoticeBtn.png" />
+    <None Include="bin\Debug\themes\default\RGameBtn.png" />
+    <None Include="bin\Debug\themes\default\RGameButton.png" />
+    <None Include="bin\Debug\themes\default\LRotate.png" />
+    <None Include="bin\Debug\themes\default\LeftPageArrow.png" />
+    <None Include="bin\Debug\themes\default\LeftBlockBackRemove.png" />
+    <None Include="bin\Debug\themes\default\LeftBlockBack.png" />
+    <None Include="bin\Debug\themes\default\HomeImage.png" />
+    <None Include="bin\Debug\themes\default\home.png" />
+    <None Include="bin\Debug\themes\default\편집창윗보더.png" />
+    <None Include="bin\Debug\themes\default\편집창왼보더.png" />
+    <None Include="bin\Debug\themes\default\편집창밑보더.png" />
+    <None Include="bin\Debug\themes\default\편집창_그림열기.png" />
+    <None Include="bin\Debug\themes\default\ReturnGame.png" />
+    <None Include="bin\Debug\themes\default\연습_다음단계.png" />
+    <None Include="bin\Debug\themes\default\연습_다시하기.png" />
+    <None Include="bin\Debug\themes\default\연습_그만하기.png" />
+    <None Include="bin\Debug\themes\default\올가미버튼.png" />
+    <None Include="bin\Debug\themes\default\중앙배경화면라인활성화.png" />
+    <None Include="bin\Debug\themes\default\L블럭배경화면삭제.png" />
+    <None Include="bin\Debug\themes\default\L블럭화면삭제.png" />
+    <None Include="bin\Debug\themes\default\중앙하단블록화면2.png" />
+    <None Include="bin\Debug\themes\default\중앙배경화면라인2.png" />
+    <None Include="bin\Debug\themes\default\헬퍼폼배경.png" />
+    <None Include="bin\Debug\themes\default\편집창_복사.png" />
+    <None Include="bin\Debug\themes\default\전체배경.png" />
+    <None Include="bin\Debug\themes\default\연습_비활성.png" />
+    <None Include="bin\Debug\themes\default\연습_활성.png" />
+    <None Include="bin\Debug\themes\default\R불러오기메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\Sprite_Info_Active2.png" />
+    <None Include="bin\Debug\themes\default\Sprite_Info2.png" />
+    <None Include="bin\Debug\themes\default\그림전체삭제.png" />
+    <None Include="bin\Debug\themes\default\그림불러오기.png" />
+    <None Include="bin\Debug\themes\default\블럭전체삭제.png" />
+    <None Include="bin\Debug\themes\default\자르기버튼.png" />
+    <None Include="bin\Debug\themes\default\좌우반전.png" />
+    <None Include="bin\Debug\themes\default\색지우개버튼.png" />
+    <None Include="bin\Debug\themes\default\상하반전.png" />
+    <None Include="bin\Debug\themes\default\브러쉬버튼.png" />
+    <None Include="bin\Debug\themes\default\마술봉버튼.png" />
+    <None Include="bin\Debug\themes\default\R회전.png" />
+    <None Include="bin\Debug\themes\default\L회전.png" />
+    <None Include="bin\Debug\themes\default\확대버튼.png" />
+    <None Include="bin\Debug\themes\default\축소버튼.png" />
+    <None Include="bin\Debug\themes\default\R업데이트메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\L블럭배경화면.png" />
+    <None Include="bin\Debug\themes\default\PLAY.png" />
+    <None Include="bin\Debug\themes\default\전체창열기.png" />
+    <None Include="bin\Debug\themes\default\Trash_Close.png" />
+    <None Include="bin\Debug\themes\default\Trash_Open.png" />
+    <None Include="bin\Debug\themes\default\R그림메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R공지사항메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R게임메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R촬영메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R저장메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R성능메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R배경음악메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R배경메뉴버튼_01.png" />
+    <None Include="bin\Debug\themes\default\R그림화면.png" />
+    <None Include="bin\Debug\themes\default\중앙하단블록화면.png" />
+    <None Include="bin\Debug\themes\default\중앙배경화면라인.png" />
+    <None Include="bin\Debug\themes\default\그림선택민트.png" />
+    <None Include="bin\Debug\themes\default\그림선택핑크.png" />
+    <None Include="bin\Debug\themes\default\상단bar.png" />
+    <None Include="bin\Debug\themes\default\L삼각방향.png" />
+    <None Include="bin\Debug\themes\default\R삼각방향.png" />
+    <None Include="bin\Debug\themes\default\아르트코로고.png" />
+    <None Include="bin\Debug\themes\default\창닫기.png" />
+    <None Include="bin\Debug\themes\default\창내리기.png" />
+    <None Include="bin\Debug\themes\default\원래대로.png" />
+    <None Include="bin\Debug\themes\default\STOP.png" />
+    <None Include="bin\Debug\themes\default\파일레드.png" />
+    <None Include="bin\Debug\themes\default\파일회색.png" />
+    <None Include="bin\Debug\themes\default\파일주황.png" />
+    <None Include="bin\Debug\themes\default\파일연녹.png" />
+    <None Include="bin\Debug\themes\default\파일보라.png" />
+    <None Include="bin\Debug\themes\default\파일민트.png" />
+    <None Include="bin\Debug\themes\default\파일1.png" />
+    <None Include="bin\Debug\themes\default\SoundMenu.png" />
+    <None Include="bin\Debug\themes\default\SoundMenu_Active.png" />
+    <None Include="bin\Debug\themes\default\ArtMenu_Active.png" />
+    <None Include="bin\Debug\themes\default\ArtMenu.png" />
+    <None Include="bin\Debug\themes\default\제어_활성.png" />
+    <None Include="bin\Debug\themes\default\제어_비활성.png" />
+    <None Include="bin\Debug\themes\default\이동_활성.png" />
+    <None Include="bin\Debug\themes\default\이동_비활성.png" />
+    <None Include="bin\Debug\themes\default\동작_활성.png" />
+    <None Include="bin\Debug\themes\default\동작_비활성.png" />
+    <None Include="bin\Debug\themes\default\Coding2Menu_Active.png" />
+    <None Include="bin\Debug\themes\default\Coding2Menu.png" />
+    <None Include="bin\Debug\themes\default\Coding1Menu_Active.png" />
+    <None Include="bin\Debug\themes\default\Coding1Menu.png" />
+    <None Include="bin\Debug\themes\default\BG_Storage.png" />
+    <None Include="bin\Debug\themes\default\Back_Info.png" />
+    <None Include="bin\Debug\themes\default\Artco_Server_Select.png" />
+    <None Include="bin\Debug\themes\default\Artco_Loading.gif" />
+    <None Include="bin\Debug\themes\default\artco_icon.ico" />
+    <None Include="bin\Debug\themes\default\Sprite_Storage.png" />
+    <None Include="bin\Debug\themes\default\Sprite_Info_Active.png" />
+    <None Include="bin\Debug\themes\default\Sprite_Info.png" />
+    <None Include="bin\Debug\themes\default\bg_folder.png" />
+    <None Include="bin\Debug\themes\default\Update.png" />
+    <None Include="bin\Debug\themes\default\Updates.png" />
+    <None Include="bin\Debug\themes\default\About_Artco.png" />
+    <None Include="bin\Debug\themes\default\Server_Select_Input.png" />
+    <None Include="bin\Debug\themes\default\Server_Select_Back.png" />
+    <None Include="bin\Debug\themes\default\Select_Server_Submit.png" />
+    <None Include="bin\Debug\themes\default\Block_Outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\User_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\SS_animal_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\SS_etc_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\SS_life_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\SS_music_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\SS_nature_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\National_studies_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\SplashVideo.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\Momochung_Tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\PO_ProjectOpen_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\PO_PictureOpen_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_ThemeBackground_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_Cartoonbackground_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_CodingApplied1_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_CodingApplied2_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_CodingPractice_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_ControlBlockPractice_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_MovementBlockPractice_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_PlaneBackground_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\BS_Reallifebackground_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\themes\chinese\HomeImage.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\OpenCvSharp4.runtime.win.4.2.0.20200108\build\net\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\OpenCvSharp4.runtime.win.4.2.0.20200108\build\net\OpenCvSharp4.runtime.win.props'))" />
+  </Target>
+</Project>

@@ -18,6 +18,11 @@ namespace Artco
             foreach (var key in UserVariableManager.user_variables.Keys) {
                 listbox_VarList.Items.Add(key.ToString());
             }
+
+            listbox_VarList.Items.Add("X");
+            listbox_VarList.Items.Add("Y");
+            listbox_VarList.Items.Add("Width");
+            listbox_VarList.Items.Add("Height");
         }
 
         private void Btn_OK_Click(object sender, System.EventArgs e)

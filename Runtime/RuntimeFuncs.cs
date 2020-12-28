@@ -906,11 +906,17 @@ namespace Artco
 
         public static double GetConstantOrVariable(ActivatedSprite s, string value)
         {
-            if (value.Equals("cx"))
-                return s.x;
+            if (value.Equals("X"))
+                return s.x + s.width;
 
-            if (value.Equals("cy"))
-                return s.y;
+            if (value.Equals("Y"))
+                return s.y + s.height;
+
+            if (value.Equals("Width"))
+                return RuntimeEnv.width;
+
+            if (value.Equals("Height"))
+                return RuntimeEnv.height;
 
             if (double.TryParse(value, out double n)) {
                 return n;

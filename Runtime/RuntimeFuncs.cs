@@ -130,7 +130,7 @@ namespace Artco
                 left = x;
                 right = x + width;
                 top = y;
-                bottom = y = height;
+                bottom = y + height;
 
                 if ((name.Equals(walls[0]) && left > 0) ||
                     (name.Equals(walls[1]) && right < RuntimeEnv.width) ||
@@ -809,8 +809,10 @@ namespace Artco
         {
             int x = s.x;
 
-            if (x - n > 0)
+            if (x - n >= 0)
                 s.ChangeLoc(-n, 0);
+            else
+                s.x = 0;
 
             return 0;
         }
@@ -819,8 +821,10 @@ namespace Artco
         {
             int y = s.y;
 
-            if (y - n > 0)
+            if (y - n >= 0)
                 s.ChangeLoc(0, -n);
+            else
+                s.y = 0;
 
             return 0;
         }

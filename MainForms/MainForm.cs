@@ -46,7 +46,7 @@ namespace Artco
             SetMouseWheelEvent();
 
             RuntimeEnv.SetStageSize(pbx_Stage.Width, pbx_Stage.Height);
-            
+
             CodeEditor.parent_panel = pnl_EditorBox;
             SpriteView.sprite_list_panel = pnl_SpriteList;
         }
@@ -168,36 +168,37 @@ namespace Artco
         {
             StopProject();
         }
-
-        // 수정 필요
+        
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            // 빠른 테스트용
+
+#if (TEST)
             stage_player = new StagePlayer(draw_background, finish_stage_player_cb);
             StagePlayer.SetFlagZero();
             StagePlayer.SetHomeImage();
+#else
+            string path = "./themes/" + Setting.language + "/Stage_Default";
+            string audio_name = path + ".wav";
+            string video_name = path + ".mp4";
 
-            //string path = "./themes/" + Setting.language + "/Stage_Default";
-            //string audio_name = path + ".wav";
-            //string video_name = path + ".mp4";
-
-            //StagePlayer.SetFlagZero();
-            //StagePlayer.SetFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.LOADING, StagePlayer.Flag.NOREPEAT);
+            StagePlayer.SetFlagZero();
+            StagePlayer.SetFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.LOADING, StagePlayer.Flag.NOREPEAT);
 
 
-            //stage_player = new StagePlayer(draw_background, () => {
-            //    stage_player = new StagePlayer(draw_background, finish_stage_player_cb);
-            //    StagePlayer.SetFlagZero();
-            //    StagePlayer.SetHomeImage();
+            stage_player = new StagePlayer(draw_background, () => {
+                stage_player = new StagePlayer(draw_background, finish_stage_player_cb);
+                StagePlayer.SetFlagZero();
+                StagePlayer.SetHomeImage();
 
-            //    Music.ReleaseMusic();
-            //});
+                Music.ReleaseMusic();
+            });
 
-            //stage_player.SetBackground(new Background(null, -1, 0, video_name, null, true));
-            //stage_player.Start();
+            stage_player.SetBackground(new Background(null, -1, 0, video_name, null, true));
+            stage_player.Start();
 
-            //Music.SetMusic(audio_name);
-            //Music.PlayBackMusic();
+            Music.SetMusic(audio_name);
+            Music.PlayBackMusic();
+#endif
         }
 
         private void MainForm_Paint(object sender, PaintEventArgs e)

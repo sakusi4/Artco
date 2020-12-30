@@ -17,8 +17,11 @@ namespace Artco
         private static readonly Dictionary<string, string> _local_dirs = new Dictionary<string, string>();
         private static readonly MultiMap<string> _requeset_files = new MultiMap<string>();
 
-        //public static string server_addr { get; } = "182.151.21.32";
+#if (TEST)
         public static string server_addr { get; } = "192.168.56.128";
+#else
+        public static string server_addr { get; } = "182.151.21.32";
+#endif
         public static string http_root_dir { get; } = "http://" + server_addr + "/artco/";
         public static string ftp_root_dir { get; } = "ftp://" + server_addr + "/artco/";
 

@@ -163,14 +163,19 @@ namespace Artco
 
             FileInfo file_info = new FileInfo(dialog.FileName);
 
-            string video_path = Setting.user_back_path + "/" + file_info.Name;
-            string preview_path = video_path.Substring(0, video_path.Length - 4) + ".jpg";
-            string only_name = file_info.Name.Substring(0, file_info.Name.Length - 4);
+            int cnt = 0;
+            string video_path;
+            string only_name;
+            string preview_path;
 
-            if (File.Exists(video_path)) {
-                new MsgBoxForm("This file already exists.").ShowDialog();
-                return;
+            while (true) {
+                only_name = "User" + (++cnt);
+                video_path = Setting.user_back_path + "/" + only_name + ".mp4";
+                if (!File.Exists(video_path))
+                    break;                
             }
+
+            preview_path = video_path.Substring(0, video_path.Length - 4) + ".jpg";            
 
             File.Copy(file_info.FullName, video_path, true);
             VideoCapture capture = new VideoCapture(video_path);
@@ -185,7 +190,7 @@ namespace Artco
             Background.backgrounds[0][category].Add(back);
 
             BackStorageView view = CreateStorageMiniView(back, category);
-            view.content_image = new System.Drawing.Bitmap(preview_path);
+            view.content_image = new Bitmap(preview_path);
 
             _miniviews[_user_tab_num].Add(view);
             _content_panels[_user_tab_num].Controls.Add(view);

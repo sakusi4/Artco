@@ -268,6 +268,16 @@ namespace Artco
             }
         }
 
+        public static Bitmap GetImageFromLocal(string path)
+        {
+            try {
+                Bitmap local_image = Image.FromFile(path) as Bitmap;
+                return local_image;
+            } catch (Exception) {
+                return null;
+            }
+        }
+
         public static Bitmap MakeImageWithArea(Bitmap source_bm, List<Point> points)
         {
             Bitmap bm = new Bitmap(source_bm.Width, source_bm.Height);

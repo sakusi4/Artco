@@ -11,19 +11,19 @@ namespace Artco
 
         public static int is_edu;
         public string name;
-        public string remote_path;
+        public string background_path;
         public string preview_path;
         public int mode;
         public bool is_user;
         public int level;
 
         public Background(string name, int mode, int level,
-                string remote_path, string preview_path, bool is_user)
+                string background_path, string preview_path, bool is_user)
         {
             this.name = name;
             this.mode = mode;
             this.level = level;
-            this.remote_path = remote_path;
+            this.background_path = background_path;
             this.preview_path = preview_path;
             this.is_user = is_user;
         }
@@ -34,13 +34,17 @@ namespace Artco
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]) - 5;
-                string remote_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".mp4";
+#if (DEMO)
+                string background_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".jpg";
-
+#else
+                string background_path = "./" + datas[i + 3] + ".mp4";
+                string preview_path = "./" + datas[i + 3] + ".jpg";
+#endif
                 for (; category >= backgrounds[0].Count;)
                     backgrounds[0].Add(new List<Background>());
 
-                backgrounds[0][category].Add(new Background(name, 0, 0, remote_path, preview_path, false));
+                backgrounds[0][category].Add(new Background(name, 0, 0, background_path, preview_path, false));
             }
 
             backgrounds[0].Add(new List<Background>()); // user tab
@@ -66,14 +70,19 @@ namespace Artco
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
                 int mode = int.Parse(datas[i + 3]);
-                string remote_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".mp4";
+#if (DEMO)
+                string background_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".jpg";
+#else
+                string background_path = "./" + datas[i + 4] + ".mp4";
+                string preview_path = "./" + datas[i + 4] + ".jpg";
+#endif
                 int level = int.Parse(datas[i + 5]);
 
                 for (; category >= backgrounds[1].Count;)
                     backgrounds[1].Add(new List<Background>());
 
-                backgrounds[1][category].Add(new Background(name, mode, level, remote_path, preview_path, false));
+                backgrounds[1][category].Add(new Background(name, mode, level, background_path, preview_path, false));
             }
         }
 

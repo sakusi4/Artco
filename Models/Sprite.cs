@@ -10,21 +10,21 @@ namespace Artco
 
         public static List<List<Sprite>> sprites { get; } = new List<List<Sprite>>();
         public string name { get; set; }
-        public string remote_path { get; }
+        public string sprite_path { get; }
         public bool is_remove_back { get; }
         public Bitmap user_tab_preview_img { get; }
 
         public Sprite() { }
 
-        public Sprite(string name, string remote_path, bool is_remove_back, Bitmap user_tab_preview_img)
+        public Sprite(string name, string sprite_path, bool is_remove_back, Bitmap user_tab_preview_img)
         {
             this.name = name;
-            this.remote_path = remote_path;
+            this.sprite_path = sprite_path;
             this.is_remove_back = is_remove_back;
             this.user_tab_preview_img = user_tab_preview_img;
         }
 
-        public Sprite(Sprite sprite) : this(sprite.name, sprite.remote_path, sprite.is_remove_back, sprite.user_tab_preview_img) { }
+        public Sprite(Sprite sprite) : this(sprite.name, sprite.sprite_path, sprite.is_remove_back, sprite.user_tab_preview_img) { }
 
         public void SetTmpImgList(List<Bitmap> bitmaps)
         {
@@ -39,7 +39,7 @@ namespace Artco
         public Bitmap GetSpriteImage()
         {
             if (_tmp_img_list == null || _tmp_img_list.Count == 0) {
-                return ImageUtility.GetNormalizedSizeImg(ImageUtility.GetImageFromURL(remote_path));
+                return ImageUtility.GetNormalizedSizeImg(ImageUtility.GetImageFromURL(sprite_path));
             } else {
                 return ImageUtility.GetNormalizedSizeImg(_tmp_img_list[0]);
             }
@@ -53,9 +53,13 @@ namespace Artco
             WebClient downloader = FileManager.GetHttpClient();
             for (int i = 0; i < file_names.Length; i++) {
                 string name = file_names[i].Substring(0, file_names[i].Length - 4);
-                string remote_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
+#if (DEMO)
+                string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
                 Sprite sprite = new Sprite(name, remote_path, true, ImageUtility.GetImageFromURL(remote_path, downloader));
-
+#else
+                string sprite_path = "./" + "sprites/" + Setting.user_name + "/" + file_names[i];
+                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromLocal(sprite_path));
+#endif
                 sprites[0].Add(sprite);
             }
             downloader.Dispose();
@@ -76,9 +80,13 @@ namespace Artco
             WebClient downloader = FileManager.GetHttpClient();
             for (int i = 0; i < file_names.Length; i++) {
                 string name = file_names[i].Substring(0, file_names[i].Length - 4);
-                string remote_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
-                Sprite sprite = new Sprite(name, remote_path, true, ImageUtility.GetImageFromURL(remote_path, downloader));
-
+#if (DEMO)
+                string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
+                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromURL(sprite_path, downloader));
+#else
+                string sprite_path = "./" + "sprites/" + Setting.user_name + "/" + file_names[i];
+                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromLocal(sprite_path));
+#endif
                 sprites[0].Add(sprite);
             }
             downloader.Dispose();
@@ -87,12 +95,15 @@ namespace Artco
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
-                string remote_path = FileManager.http_root_dir + datas[i + 3];
-
+#if (DEMO)
+                string sprite_path = FileManager.http_root_dir + datas[i + 3];
+#else
+                string sprite_path = "./" + datas[i + 3];
+#endif
                 for (; category >= sprites.Count;)
                     sprites.Add(new List<Sprite>());
 
-                sprites[category].Add(new Sprite(name, remote_path, false, null));
+                sprites[category].Add(new Sprite(name, sprite_path, false, null));
             }
         }
 

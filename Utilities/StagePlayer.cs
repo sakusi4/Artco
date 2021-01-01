@@ -89,7 +89,7 @@ namespace Artco
 
         public void SetInitializeImage()
         {
-            VideoCapture video_capture = new VideoCapture(_cur_back.remote_path);
+            VideoCapture video_capture = new VideoCapture(_cur_back.background_path);
             if (!video_capture.IsOpened())
                 return;
 
@@ -104,7 +104,7 @@ namespace Artco
         public void Start()
         {
             _is_stop = false;
-            _capture = new VideoCapture(_cur_back.remote_path);
+            _capture = new VideoCapture(_cur_back.background_path);
 
             if (!_capture.IsOpened())
                 return;

@@ -112,7 +112,7 @@ namespace Artco
                     {(sender, e) => {
 
                         var cur_back = MainForm.stage_player.GetBackground();
-                        if(cur_back != null && cur_back.remote_path.Equals(back.remote_path))
+                        if(cur_back != null && cur_back.background_path.Equals(back.background_path))
                         {
                             new MsgBoxForm("素材正在使用中").ShowDialog();
                             return;
@@ -122,7 +122,7 @@ namespace Artco
                         GC.Collect();
                         GC.WaitForPendingFinalizers();
 
-                        File.Delete(back.remote_path);
+                        File.Delete(back.background_path);
                         File.Delete(back.preview_path);
 
                         int user_tab = Background.backgrounds[0].Count - 1;

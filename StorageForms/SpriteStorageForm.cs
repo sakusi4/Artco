@@ -82,7 +82,7 @@ namespace Artco
                     if (tab == _user_tab_num)
                         view.content_image = new Bitmap(sprite.user_tab_preview_img);
                     else
-                        view.content_image = ImageUtility.GetImageFromURL(sprite.remote_path, downloader);
+                        view.content_image = ImageUtility.GetImageFromURL(sprite.sprite_path, downloader);
                 }
             });
 
@@ -109,7 +109,7 @@ namespace Artco
                     Utility.ShowContextMenu(sender, args.Location.X + 14, args.Location.Y + 12, new string[] { "删除" }, new List<Action<object, EventArgs>>()
                     {(sender, e) => {
                         Sprite.sprites[0].Remove(sprite);
-                        FileManager.DeleteFileFromFTP(sprite.remote_path);
+                        FileManager.DeleteFileFromFTP(sprite.sprite_path);
                         _content_panels[_user_tab_num].Controls.Remove(miniview);
                     }});
                 };
@@ -193,7 +193,7 @@ namespace Artco
                         continue;
 
                     var miniview = CreateStorageMiniView(sprite, _cur_tab_num);
-                    miniview.content_image = ImageUtility.GetImageFromURL(sprite.remote_path, downloader);
+                    miniview.content_image = ImageUtility.GetImageFromURL(sprite.sprite_path, downloader);
                     _content_panels[_cur_tab_num].Controls.Add(miniview);
                 }
             }

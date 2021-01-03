@@ -77,7 +77,7 @@ namespace Artco
                     if (view.content_image != null)
                         continue;
 
-                    view.content_image = ImageUtility.GetImageFromURL(back.preview_path, downloader);
+                    view.content_image = ImageUtility.GetImageFromPath(back.preview_path, downloader);
                 }
             });
 
@@ -155,7 +155,7 @@ namespace Artco
                         continue;
 
                     var view = CreateStorageMiniView(back, _cur_tab_num);
-                    view.content_image = ImageUtility.GetImageFromURL(back.preview_path, downloader);
+                    view.content_image = ImageUtility.GetImageFromPath(back.preview_path, downloader);
 
                     _content_panels[_cur_tab_num].Controls.Add(view);
                 }

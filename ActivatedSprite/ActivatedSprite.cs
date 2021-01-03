@@ -38,7 +38,7 @@ namespace Artco
             var tmp_imgs = sprite.GetTmpImgList();
 
             if (tmp_imgs == null) {
-                Bitmap img = ImageUtility.GetImageFromURL(remote_path);
+                Bitmap img = ImageUtility.GetImageFromPath(sprite_path);
                 org_img_list.Add(ImageUtility.GetNormalizedSizeImg(img));
 
                 // 사용자 이미지의 경우 배경 제거

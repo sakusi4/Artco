@@ -1236,7 +1236,17 @@ namespace Artco.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImageFail {
+            get {
+                object obj = ResourceManager.GetObject("ImageFail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>

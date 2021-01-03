@@ -765,9 +765,7 @@
     <None Include="bin\Debug\themes\default\Select_Server_Submit.png" />
     <None Include="bin\Debug\themes\default\Block_Outline.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="bin\Debug\themes\chinese\User_tab.png" />
   </ItemGroup>
@@ -830,6 +828,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\themes\chinese\HomeImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageFail.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageFail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

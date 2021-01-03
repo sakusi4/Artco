@@ -248,7 +248,7 @@ namespace Artco
             return BmpDrawToBmp(back_image, fore_image, pos.X, pos.Y);
         }
 
-        public static Bitmap GetImageFromURL(string url, WebClient web_client = null)
+        public static Bitmap GetImageFromPath(string url, WebClient web_client = null) //서버 및 로컬에서 모두 받아올 수 있음
         {
             try {
                 Bitmap download_image;
@@ -264,17 +264,7 @@ namespace Artco
                 download_image.SetResolution(96, 96);
                 return download_image;
             } catch (Exception) {
-                return null;
-            }
-        }
-
-        public static Bitmap GetImageFromLocal(string path)
-        {
-            try {
-                Bitmap local_image = Image.FromFile(path) as Bitmap;
-                return local_image;
-            } catch (Exception) {
-                return null;
+                return Properties.Resources.ImageFail;
             }
         }
 

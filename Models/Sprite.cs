@@ -39,7 +39,7 @@ namespace Artco
         public Bitmap GetSpriteImage()
         {
             if (_tmp_img_list == null || _tmp_img_list.Count == 0) {
-                return ImageUtility.GetNormalizedSizeImg(ImageUtility.GetImageFromURL(sprite_path));
+                return ImageUtility.GetNormalizedSizeImg(ImageUtility.GetImageFromPath(sprite_path));
             } else {
                 return ImageUtility.GetNormalizedSizeImg(_tmp_img_list[0]);
             }
@@ -48,21 +48,7 @@ namespace Artco
         public static void UpdateSpriteData()
         {
             sprites[0].RemoveRange(0, sprites[0].Count);
-
-            string[] file_names = FileManager.GetFtpFolderItems(FileManager.ftp_root_dir + "sprites/" + Setting.user_name + "/");
-            WebClient downloader = FileManager.GetHttpClient();
-            for (int i = 0; i < file_names.Length; i++) {
-                string name = file_names[i].Substring(0, file_names[i].Length - 4);
-#if (DEMO)
-                string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
-                Sprite sprite = new Sprite(name, remote_path, true, ImageUtility.GetImageFromURL(remote_path, downloader));
-#else
-                string sprite_path = "./" + "sprites/" + Setting.user_name + "/" + file_names[i];
-                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromLocal(sprite_path));
-#endif
-                sprites[0].Add(sprite);
-            }
-            downloader.Dispose();
+            AddUserSpriteData();
         }
 
         public static void AddSpriteData(string[] datas)
@@ -76,20 +62,7 @@ namespace Artco
                 sprites.Add(new List<Sprite>());
 
             // 저장소 유저 이미지 미리 다운로드
-            string[] file_names = FileManager.GetFtpFolderItems(FileManager.ftp_root_dir + "sprites/" + Setting.user_name + "/");
-            WebClient downloader = FileManager.GetHttpClient();
-            for (int i = 0; i < file_names.Length; i++) {
-                string name = file_names[i].Substring(0, file_names[i].Length - 4);
-#if (DEMO)
-                string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
-                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromURL(sprite_path, downloader));
-#else
-                string sprite_path = "./" + "sprites/" + Setting.user_name + "/" + file_names[i];
-                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromLocal(sprite_path));
-#endif
-                sprites[0].Add(sprite);
-            }
-            downloader.Dispose();
+            AddUserSpriteData();
 
             const int row_cnt = 4;
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
@@ -116,6 +89,30 @@ namespace Artco
             }
 
             return null;
+        }
+
+        private static void AddUserSpriteData()
+        {
+#if (DEMO)
+            string[] file_names = FileManager.GetFtpFolderItems(FileManager.ftp_root_dir + "sprites/" + Setting.user_name + "/");
+            WebClient downloader = FileManager.GetHttpClient();
+#else
+            string[] file_names = FileManager.GetLocalFolderItems("./sprites/" + Setting.user_name + "/");
+#endif
+            for (int i = 0; i < file_names.Length; i++) {
+                string name = file_names[i].Substring(0, file_names[i].Length - 4);
+#if (DEMO)
+                string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
+                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromPath(sprite_path, downloader));
+#else
+                string sprite_path = "./sprites/" + Setting.user_name + "/" + file_names[i];
+                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromPath(sprite_path));
+#endif
+                sprites[0].Add(sprite);
+            }
+#if (DEMO)
+            downloader.Dispose();
+#endif
         }
     }
 }

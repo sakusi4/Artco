@@ -297,6 +297,21 @@ namespace Artco
             }
         }
 
+        public static string[] GetLocalFolderItems(string path)
+        {
+            try {
+                List<string> file_name = new List<string>();
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(path);
+                foreach (var item in di.GetFiles()) {
+                    file_name.Add(item.Name);
+                }
+                return file_name.ToArray();
+            }
+            catch(DirectoryNotFoundException) {
+                return new string[] { };
+            }
+        }
+
         public static Stream GetStreamFromHTTP(string path)
         {
             string remote_path = path;

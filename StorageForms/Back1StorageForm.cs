@@ -84,7 +84,7 @@ namespace Artco
                     if (back.is_user)
                         view.content_image = new Bitmap(back.preview_path);
                     else
-                        view.content_image = ImageUtility.GetImageFromURL(back.preview_path, downloader);
+                        view.content_image = ImageUtility.GetImageFromPath(back.preview_path, downloader);
                 }
             });
 
@@ -235,7 +235,7 @@ namespace Artco
                     if (back.is_user)
                         view.content_image = new Bitmap(back.preview_path);
                     else
-                        view.content_image = ImageUtility.GetImageFromURL(back.preview_path, downloader);
+                        view.content_image = ImageUtility.GetImageFromPath(back.preview_path, downloader);
 
                     _content_panels[_cur_tab_num].Controls.Add(view);
                 }

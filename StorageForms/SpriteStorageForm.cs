@@ -82,7 +82,7 @@ namespace Artco
                     if (tab == _user_tab_num)
                         view.content_image = new Bitmap(sprite.user_tab_preview_img);
                     else
-                        view.content_image = ImageUtility.GetImageFromURL(sprite.sprite_path, downloader);
+                        view.content_image = ImageUtility.GetImageFromPath(sprite.sprite_path, downloader);
                 }
             });
 
@@ -193,7 +193,7 @@ namespace Artco
                         continue;
 
                     var miniview = CreateStorageMiniView(sprite, _cur_tab_num);
-                    miniview.content_image = ImageUtility.GetImageFromURL(sprite.sprite_path, downloader);
+                    miniview.content_image = ImageUtility.GetImageFromPath(sprite.sprite_path, downloader);
                     _content_panels[_cur_tab_num].Controls.Add(miniview);
                 }
             }

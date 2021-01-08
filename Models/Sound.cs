@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Media;
+using System.Text;
 
 namespace Artco
 {
@@ -26,7 +28,8 @@ namespace Artco
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 //int idx = int.Parse(datas[i + 2]);
                 int category = int.Parse(datas[i + 3]);
-                string local_path = "./" + datas[i + 4];
+                string local_path = "./" + Path.GetDirectoryName(datas[i + 4]) + "/" +
+                    Convert.ToBase64String(Encoding.Unicode.GetBytes(Path.GetFileNameWithoutExtension(datas[i + 4]))) + ".artcowav";
 
                 for (; category >= sounds.Count;)
                     sounds.Add(new List<Sound>());

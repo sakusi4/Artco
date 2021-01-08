@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Net;
+using System.Text;
 
 namespace Artco
 {
@@ -71,7 +74,8 @@ namespace Artco
 #if (DEMO)
                 string sprite_path = FileManager.http_root_dir + datas[i + 3];
 #else
-                string sprite_path = "./" + datas[i + 3];
+                string sprite_path = "./" + Path.GetDirectoryName(datas[i + 3]) + "/" + 
+                    Convert.ToBase64String(Encoding.Unicode.GetBytes(Path.GetFileNameWithoutExtension(datas[i + 3]))) + ".artcopng";
 #endif
                 for (; category >= sprites.Count;)
                     sprites.Add(new List<Sprite>());

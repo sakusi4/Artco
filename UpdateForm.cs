@@ -27,6 +27,7 @@ namespace Artco
         private async void UpdateResources()
         {
             await Task.Run(new Action(() => {
+#if (DEMO)
                 var check_list = FileManager.SetDirectories(Utility.ReadSettingDirs());
 
                 SafeUpdateStatusLabel("Checking for changed resources.......  ");
@@ -43,7 +44,7 @@ namespace Artco
                 }
 
                 Thread.Sleep(1000);
-
+#endif
                 SafeUpdateStatusLabel("Checking for changed version.......  ");
                 string new_ver = FileManager.GetExecutableVersion();
                 if (new_ver != null) {

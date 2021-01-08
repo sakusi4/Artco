@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace Artco
 {
@@ -38,8 +40,10 @@ namespace Artco
                 string background_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".jpg";
 #else
-                string background_path = "./" + datas[i + 3] + ".mp4";
-                string preview_path = "./" + datas[i + 3] + ".jpg";
+                string background_path = "./" + Path.GetDirectoryName(datas[i + 3]) + "/" +
+                    Convert.ToBase64String(Encoding.Unicode.GetBytes(Path.GetFileNameWithoutExtension(datas[i + 3]))) + ".artcomp4";
+                string preview_path = "./" + Path.GetDirectoryName(datas[i + 3]) + "/" +
+                    Convert.ToBase64String(Encoding.Unicode.GetBytes(Path.GetFileNameWithoutExtension(datas[i + 3]))) + ".artcojpg";
 #endif
                 for (; category >= backgrounds[0].Count;)
                     backgrounds[0].Add(new List<Background>());
@@ -74,8 +78,10 @@ namespace Artco
                 string background_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".jpg";
 #else
-                string background_path = "./" + datas[i + 4] + ".mp4";
-                string preview_path = "./" + datas[i + 4] + ".jpg";
+                string background_path = "./" + Path.GetDirectoryName(datas[i + 4]) + "/" +
+                    Convert.ToBase64String(Encoding.Unicode.GetBytes(Path.GetFileNameWithoutExtension(datas[i + 4]))) + ".artcomp4";
+                string preview_path = "./" + Path.GetDirectoryName(datas[i + 4]) + "/" +
+                    Convert.ToBase64String(Encoding.Unicode.GetBytes(Path.GetFileNameWithoutExtension(datas[i + 4]))) + ".artcojpg";
 #endif
                 int level = int.Parse(datas[i + 5]);
 

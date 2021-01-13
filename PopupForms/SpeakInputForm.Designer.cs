@@ -41,7 +41,7 @@
             this.txtbox_SpeakText.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtbox_SpeakText.Font = new System.Drawing.Font("Gulim", 20F);
             this.txtbox_SpeakText.Location = new System.Drawing.Point(16, 151);
-            this.txtbox_SpeakText.MaxLength = 10;
+            this.txtbox_SpeakText.MaxLength = 30;
             this.txtbox_SpeakText.Name = "txtbox_SpeakText";
             this.txtbox_SpeakText.Size = new System.Drawing.Size(376, 31);
             this.txtbox_SpeakText.TabIndex = 0;

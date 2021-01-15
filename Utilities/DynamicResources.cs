@@ -9,8 +9,7 @@ namespace Artco
         public static Bitmap b_edit_copy = new Bitmap("./themes/" + Setting.language + "/Edit_Copy.png");
         public static Bitmap b_edit_opensprite = new Bitmap("./themes/" + Setting.language + "/Edit_OpenStorage.png");
         public static Bitmap b_edit_reset = new Bitmap("./themes/" + Setting.language + "/Edit_Reset.png");
-        public static Bitmap b_full_speak_box = new Bitmap(Properties.Resources.SpeakBox);
-        public static Bitmap b_half_speak_box = new Bitmap(b_full_speak_box, b_full_speak_box.Width, (int)(b_full_speak_box.Height * 0.7));
+        public static Bitmap b_speak_box = new Bitmap(Properties.Resources.SpeakBox);
 
         public static Bitmap b_msg_box_form = new Bitmap("./themes/" + Setting.language + "/MsgBoxForm.png");
         public static Bitmap b_msg_box_ok_btn = new Bitmap("./themes/" + Setting.language + "/MsgBoxOKBtn.png");

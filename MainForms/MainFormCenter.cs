@@ -13,15 +13,7 @@ namespace Artco
                     continue;
 
                 if (sprite.speak_text != null) {
-                    Bitmap speak_box = (sprite.speak_text.Length <= 5) ? DynamicResources.b_half_speak_box : DynamicResources.b_full_speak_box;
-
-                    int x = sprite.x + 20;
-                    int y = sprite.y - speak_box.Height;
-
-                    Rectangle text_rect = new Rectangle(x + 20, y + 20, speak_box.Width - 20, speak_box.Height - 20);
-
-                    e.Graphics.DrawImage(speak_box, x, y);
-                    e.Graphics.DrawString(sprite.speak_text, DynamicResources.font, Brushes.DimGray, text_rect);
+                    ShowSpeakBox(sprite, e);
                 }
 
                 lock (sprite) {
@@ -38,6 +30,34 @@ namespace Artco
                     }
                 }
             }
+        }
+
+        private SizeF MeasureTextRectangle(string text, PaintEventArgs e)
+        {
+            SizeF layout_size = new SizeF(140, 30 * 6);
+            SizeF string_size = e.Graphics.MeasureString(text, DynamicResources.font, layout_size);
+
+            if(string_size.Height >= 30 *3) {
+                layout_size.Width = 280;
+                string_size = e.Graphics.MeasureString(text, DynamicResources.font, layout_size);
+            }
+
+            return string_size;
+        }
+
+        private void ShowSpeakBox(ActivatedSprite sprite, PaintEventArgs e)
+        {
+            Size string_size = Size.Ceiling(MeasureTextRectangle(sprite.speak_text, e));
+            Size speak_box_size = new Size(string_size.Width + 40, string_size.Height + 40);
+            Bitmap speak_box = new Bitmap(DynamicResources.b_speak_box, speak_box_size);
+
+            int x = sprite.x + 20;
+            int y = sprite.y - speak_box.Height;
+
+            Rectangle text_rect = new Rectangle(x + 20, y + 20, string_size.Width, string_size.Height);
+
+            e.Graphics.DrawImage(speak_box, x, y);
+            e.Graphics.DrawString(sprite.speak_text, DynamicResources.font, Brushes.DimGray, text_rect);
         }
 
         private void SelectBackCB(object sender)

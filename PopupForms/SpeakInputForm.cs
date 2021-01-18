@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Artco
 {
@@ -16,6 +17,11 @@ namespace Artco
 
             _text_box = text_box;
             txtbox_SpeakText.Text = _text_box.Text;
+
+            foreach (var key in UserVariableManager.user_variables.Keys) {
+                combobox_VarLiat.Items.Add(key.ToString());
+            }
+            combobox_VarLiat.Items.Insert(0, string.Empty);
         }
 
         private void SpeakInputForm_Load(object sender, System.EventArgs e)
@@ -39,6 +45,17 @@ namespace Artco
         {
             _text_box.Text = txtbox_SpeakText.Text;
             Close();
+        }
+
+        private void Combobox_VarLiat_DropDownClosed(object sender, System.EventArgs e)
+        {
+            if (combobox_VarLiat.SelectedItem == null) {
+                return;
+            } else {
+                if (combobox_VarLiat.SelectedItem.ToString() != string.Empty) {
+                    txtbox_SpeakText.Text += "{" + combobox_VarLiat.SelectedItem.ToString() + "}";
+                }
+            }
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Artco
         {
             InitializeComponent();
 
-            BackgroundImage = DynamicResources.b_speak_text_form;
-            btn_Submit.Image = DynamicResources.b_msg_box_ok_btn;
-            btn_Close.Image = DynamicResources.b_msg_box_cancel_btn;
+            BackgroundImage = Properties.Resources.SpeakTextForm;
+            btn_Submit.Image = Properties.Resources.MsgBoxOKBtn;
+            btn_Close.Image = Properties.Resources.MsgBoxcancelBtn;
 
             _text_box = text_box;
             txtbox_SpeakText.Text = _text_box.Text;

@@ -47,7 +47,8 @@ namespace Artco
             try {
                 foreach (Match match in reg_exp.Matches(speak_text)) {
                     string key = match.Value.Substring(1, match.Value.Length - 2);
-                    dic.Add(key, UserVariableManager.user_variables[key].GetValue().ToString());
+                    if(dic.ContainsKey(key) == false)
+                        dic.Add(key, UserVariableManager.user_variables[key].GetValue().ToString());
                 }
             } catch (KeyNotFoundException e) {
                 Debug.Print(e.Message);

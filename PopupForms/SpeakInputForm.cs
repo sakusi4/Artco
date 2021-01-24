@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Artco
@@ -19,9 +20,8 @@ namespace Artco
             txtbox_SpeakText.Text = _text_box.Text;
 
             foreach (var key in UserVariableManager.user_variables.Keys) {
-                combobox_VarLiat.Items.Add(key.ToString());
+                listbox_VarList.Items.Add(key.ToString());
             }
-            combobox_VarLiat.Items.Insert(0, string.Empty);
         }
 
         private void SpeakInputForm_Load(object sender, System.EventArgs e)
@@ -47,14 +47,15 @@ namespace Artco
             Close();
         }
 
-        private void Combobox_VarLiat_DropDownClosed(object sender, System.EventArgs e)
+        private void Listbox_Varlist_Click(object sender, MouseEventArgs e)
         {
-            if (combobox_VarLiat.SelectedItem == null) {
-                return;
-            } else {
-                if (combobox_VarLiat.SelectedItem.ToString() != string.Empty) {
-                    txtbox_SpeakText.Text += "{" + combobox_VarLiat.SelectedItem.ToString() + "}";
-                }
+            Point point = e.Location;
+            int selected_idx = listbox_VarList.IndexFromPoint(point);
+
+            if (selected_idx != -1)
+            {
+                string selected_item = listbox_VarList.Items[selected_idx] as string;
+                txtbox_SpeakText.Text += "{" + selected_item + "}";
             }
         }
     }

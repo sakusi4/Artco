@@ -17,7 +17,7 @@ namespace Artco
         public static Bitmap b_msg_box_yes_btn = new Bitmap("./themes/" + Setting.language + "/MsgBoxYesBtn.png");
         public static Bitmap b_msg_box_cancel_btn = new Bitmap("./themes/" + Setting.language + "/MsgBoxCancelBtn.png");        
         public static Bitmap b_recording_form = new Bitmap("./themes/" + Setting.language + "/RecordingForm.png");
-        public static Bitmap b_speak_text_form = new Bitmap("./themes/" + Setting.language + "/SpeakTextForm.png");
+        public static Bitmap b_speak_text_form = new Bitmap(Properties.Resources.SpeakTextForm);
         
         public static Font font = new Font(FontLibrary.private_font.Families[0], 17F);        
         public static Cursor cursor = new Cursor(Properties.Resources.Cursor.GetHicon());

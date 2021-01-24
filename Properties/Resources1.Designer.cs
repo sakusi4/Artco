@@ -1236,7 +1236,7 @@ namespace Artco.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -1246,7 +1246,7 @@ namespace Artco.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
@@ -1650,6 +1650,26 @@ namespace Artco.Properties {
         internal static System.Drawing.Bitmap MoveUpN {
             get {
                 object obj = ResourceManager.GetObject("MoveUpN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MsgBoxcancelBtn {
+            get {
+                object obj = ResourceManager.GetObject("MsgBoxcancelBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MsgBoxOKBtn {
+            get {
+                object obj = ResourceManager.GetObject("MsgBoxOKBtn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2249,6 +2269,16 @@ namespace Artco.Properties {
         internal static System.Drawing.Bitmap SpeakBox {
             get {
                 object obj = ResourceManager.GetObject("SpeakBox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SpeakTextForm {
+            get {
+                object obj = ResourceManager.GetObject("SpeakTextForm", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

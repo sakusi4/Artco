@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Artco
 {
@@ -10,12 +12,16 @@ namespace Artco
         {
             InitializeComponent();
 
-            BackgroundImage = DynamicResources.b_speak_text_form;
-            btn_Submit.Image = DynamicResources.b_msg_box_ok_btn;
-            btn_Close.Image = DynamicResources.b_msg_box_cancel_btn;
+            BackgroundImage = Properties.Resources.SpeakTextForm;
+            btn_Submit.Image = Properties.Resources.MsgBoxOKBtn;
+            btn_Close.Image = Properties.Resources.MsgBoxcancelBtn;
 
             _text_box = text_box;
             txtbox_SpeakText.Text = _text_box.Text;
+
+            foreach (var key in UserVariableManager.user_variables.Keys) {
+                listbox_VarList.Items.Add(key.ToString());
+            }
         }
 
         private void SpeakInputForm_Load(object sender, System.EventArgs e)
@@ -39,6 +45,18 @@ namespace Artco
         {
             _text_box.Text = txtbox_SpeakText.Text;
             Close();
+        }
+
+        private void Listbox_Varlist_Click(object sender, MouseEventArgs e)
+        {
+            Point point = e.Location;
+            int selected_idx = listbox_VarList.IndexFromPoint(point);
+
+            if (selected_idx != -1)
+            {
+                string selected_item = listbox_VarList.Items[selected_idx] as string;
+                txtbox_SpeakText.Text += "{" + selected_item + "}";
+            }
         }
     }
 }

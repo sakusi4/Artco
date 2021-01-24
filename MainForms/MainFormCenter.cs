@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Artco
 {
@@ -13,7 +16,10 @@ namespace Artco
                     continue;
 
                 if (sprite.speak_text != null) {
-                    ShowSpeakBox(sprite, e);
+                    Point sprite_point = new Point(sprite.x, sprite.y);
+                    string sprite_text = SubstituteVariables(sprite.speak_text);
+
+                    ShowSpeakBox(sprite_point, sprite_text, e);
                 }
 
                 lock (sprite) {
@@ -32,7 +38,30 @@ namespace Artco
             }
         }
 
-        private SizeF MeasureTextRectangle(string text, PaintEventArgs e)
+        private string SubstituteVariables(string speak_text)
+        {
+            string substituted_text = speak_text;
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            Regex reg_exp = new Regex(@"\{(.*?)\}", RegexOptions.Compiled);
+
+            try {
+                foreach (Match match in reg_exp.Matches(speak_text)) {
+                    string key = match.Value.Substring(1, match.Value.Length - 2);
+                    if(dic.ContainsKey(key) == false)
+                        dic.Add(key, UserVariableManager.user_variables[key].GetValue().ToString());
+                }
+            } catch (KeyNotFoundException e) {
+                Debug.Print(e.Message);
+            }
+
+            foreach (string key in dic.Keys) {
+                substituted_text = substituted_text.Replace("{" + key + "}", dic[key]);
+            }
+
+            return substituted_text;
+        }
+
+        private SizeF MeasureTextArea(string text, PaintEventArgs e)
         {
             SizeF layout_size = new SizeF(140, 30 * 6);
             SizeF string_size = e.Graphics.MeasureString(text, DynamicResources.font, layout_size);
@@ -45,19 +74,16 @@ namespace Artco
             return string_size;
         }
 
-        private void ShowSpeakBox(ActivatedSprite sprite, PaintEventArgs e)
+        private void ShowSpeakBox(Point point, string text, PaintEventArgs e)
         {
-            Size string_size = Size.Ceiling(MeasureTextRectangle(sprite.speak_text, e));
-            Size speak_box_size = new Size(string_size.Width + 40, string_size.Height + 40);
-            Bitmap speak_box = new Bitmap(DynamicResources.b_speak_box, speak_box_size);
+            Size string_area = Size.Ceiling(MeasureTextArea(text, e));
+            Size speak_box_size = new Size(string_area.Width + 40, string_area.Height + 40);
+            Bitmap speak_box = new Bitmap(Properties.Resources.SpeakBox, speak_box_size);
+            Point speak_box_point = new Point(point.X + 20, point.Y - speak_box.Height);
+            Rectangle text_rect = new Rectangle(speak_box_point.X + 20, speak_box_point.Y + 20, string_area.Width, string_area.Height);
 
-            int x = sprite.x + 20;
-            int y = sprite.y - speak_box.Height;
-
-            Rectangle text_rect = new Rectangle(x + 20, y + 20, string_size.Width, string_size.Height);
-
-            e.Graphics.DrawImage(speak_box, x, y);
-            e.Graphics.DrawString(sprite.speak_text, DynamicResources.font, Brushes.DimGray, text_rect);
+            e.Graphics.DrawImage(speak_box, speak_box_point.X, speak_box_point.Y);
+            e.Graphics.DrawString(text, DynamicResources.font, Brushes.DimGray, text_rect);
         }
 
         private void SelectBackCB(object sender)

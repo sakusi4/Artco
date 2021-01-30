@@ -54,11 +54,12 @@ namespace Artco
             while (_cur_tab_num >= _miniviews.Count)
                 _miniviews.Add(new List<ProjectStorageView>());
 
-            string filter = (_cur_tab_num == 0) ? ".ArtcoProject" : ".ArtcoObject";
+            string filter = (_cur_tab_num == 0) ? ".artcoproj" : ".artcoobj";
+            string filter_old = (_cur_tab_num == 0) ? ".ArtcoProject" : ".ArtcoObject";
 
             DirectoryInfo di = new DirectoryInfo(Setting.save_path);
             foreach (var file in di.GetFiles()) {
-                if (file.Extension.Equals(filter)) {
+                if (file.Extension.Equals(filter) || file.Extension.Equals(filter_old)) {
                     string name = file.Name.Split('.')[0];
                     if (_miniviews[_cur_tab_num].Exists(item => item.content_name.Equals(name)))
                         continue;

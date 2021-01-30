@@ -81,7 +81,7 @@ namespace Artco
             if (rename_sprite_form.ShowDialog() != DialogResult.OK)
                 return;
 
-            string file_name = rename_sprite_form.new_name + ".ArtcoProject";
+            string file_name = rename_sprite_form.new_name + ".artcoproj";
             string save_path = Setting.save_path + "/" + file_name;
             if (new ArtcoProject().SaveProject(save_path)) {
                 //FileManager.UploadSaveFile(savePath, fileName);
@@ -92,7 +92,7 @@ namespace Artco
         private void SelectSaveHandler(object sender)
         {
             string path = (string)sender;
-            if (path.Contains(".ArtcoProject")) {
+            if (path.Contains(".ArtcoProject") || path.Contains(".artcoproj")) {
                 ArtcoProject artco_project = new ArtcoProject();
                 if (!artco_project.LoadProject(path))
                     return;

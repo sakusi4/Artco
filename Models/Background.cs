@@ -107,5 +107,18 @@ namespace Artco
 
             return null;
         }
+
+        public static Background GetPathToBack(string path)
+        {
+            foreach (var backgrounds in backgrounds) {
+                foreach (var tab in backgrounds) {
+                    var ret = tab.Find(item => item.background_path.Equals(path));
+                    if (ret != null)
+                        return ret;
+                }
+            }
+
+            return null;
+        }
     }
 }

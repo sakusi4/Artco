@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace Artco
 {
@@ -18,8 +19,7 @@ namespace Artco
 
         public bool SaveObject(ActivatedSprite sprite, string name)
         {
-            var codes = sprite.code_list;
-            string path = Setting.save_path + "/" + name + ".ArtcoObject";
+            string path = Setting.save_path + "/" + name + ".artcoobj";
 
             if (File.Exists(path)) {
                 using MsgBoxForm msg_box = new MsgBoxForm("该文件已存在, 是否覆盖?", true);
@@ -28,65 +28,113 @@ namespace Artco
                     return false;
             }
 
-            string header = sprite.name + "\n";
-            header += sprite.x.ToString() + ":" + sprite.y.ToString() + "\n";
-
-            int code_count = 0;
-            for (int i = 0; i < codes.Count; i++)
-                code_count += codes[i].Count;
-
-            header += code_count.ToString() + "\n";
-
-            for (int i = 0; i < codes.Count; i++) {
-                for (int j = 0; j < codes[i].Count; j++) {
-                    var code = codes[i][j];
-                    if (code.block_view.controls != null) {
-                        string values = code.name;
-                        for (int k = 0; k < code.block_view.controls.Count; k++)
-                            values += ":" + code.block_view.controls[k].Text;
-
-                        values += "\n";
-                        header += values;
-                    } else {
-                        header += code.name + "\n";
-                    }
-                }
-            }
-
-            int sprite_img_cnt = sprite.org_img_list.Count;
-            header += sprite_img_cnt.ToString() + "\n";
-
-            List<byte[]> bytes = new List<byte[]>();
-
-            for (int i = 0; i < sprite_img_cnt; i++) {
-                using (MemoryStream ms = new MemoryStream()) {
-                    sprite.org_img_list[i].Save(ms, ImageFormat.Png);
-                    bytes.Add(ms.ToArray());
-                }
-
-                header += bytes[i].Length.ToString() + "\n";
-            }
-
-            int header_size = Encoding.UTF8.GetBytes(header).Length;
-
             try {
-                using (StreamWriter wr = new StreamWriter(path)) {
-                    wr.Write(header);
-                    wr.Write(header_size.ToString() + "\n");
+                File.WriteAllText(path, JsonSerializeObject(sprite));
+
+                string old_file_path = Setting.save_path + "/" + name + ".ArtcoObject";
+                if (File.Exists(old_file_path)) {
+                    File.Delete(old_file_path);
                 }
 
-                for (int i = 0; i < sprite_img_cnt; i++) {
-                    using FileStream file = new FileStream(path, FileMode.Append, FileAccess.Write);
-                    file.Write(bytes[i], 0, bytes[i].Length);
-                }
             } catch (Exception) {
                 return false;
             }
-
             return true;
         }
 
         public bool LoadObject(string path)
+        {
+            if (Path.GetExtension(path) == ".artcoobj") {
+                return JsonDeserializeObject(File.ReadAllText(path));
+            } else {
+                return ByteDeserializeObject(path);
+            }
+        }
+
+        public string JsonSerializeObject(ActivatedSprite sprite)
+        {
+            JsonArtcoObject artco_obj = new JsonArtcoObject();
+
+            artco_obj.name = sprite.name;
+            artco_obj.point = new Tuple<int, int>(sprite.x, sprite.y);
+
+            artco_obj.code_blocks = new List<List<Tuple<string, List<string>>>>();
+            for (int i = 0; i < sprite.code_list.Count; i++) {
+                artco_obj.code_blocks.Add(new List<Tuple<string, List<string>>>());
+                for (int j = 0; j < sprite.code_list[i].Count; j++) {
+                    var block = sprite.code_list[i][j];
+                    if (block.block_view.controls != null) {
+                        List<string> control = new List<string>();
+                        for (int k = 0; k < block.block_view.controls.Count; k++) {
+                            string value = block.block_view.controls[k].Text;
+                            if (UserVariableManager.user_variables.ContainsKey(value))
+                                value += ":" + UserVariableManager.user_variables[value].GetValue().ToString();
+                            control.Add(value);
+                        }
+                        artco_obj.code_blocks[i].Add(new Tuple<string, List<string>>(block.name, control));
+                    } else {
+                        artco_obj.code_blocks[i].Add(new Tuple<string, List<string>>(block.name, null));
+                    }
+                }
+            }
+
+            artco_obj.bitmap = new List<byte[]>();
+            ImageConverter converter = new ImageConverter();
+            for (int i = 0; i < sprite.org_img_list.Count; i++) {
+                artco_obj.bitmap.Add((byte[])converter.ConvertTo(sprite.org_img_list[i], typeof(byte[])));
+            }
+
+            return JsonSerializer.Serialize(artco_obj);
+        }
+
+        public bool JsonDeserializeObject(string serialized_obj)
+        {
+            try {
+                JsonArtcoObject artco_obj = new JsonArtcoObject();
+                artco_obj = JsonSerializer.Deserialize<JsonArtcoObject>(serialized_obj);
+
+                List<Bitmap> bmp_list = new List<Bitmap>();
+                for (int i = 0; i < artco_obj.bitmap.Count; i++) {
+                    bmp_list.Add(ImageUtility.ByteArrayToImage(artco_obj.bitmap[i]) as Bitmap);
+                }
+
+                Sprite sprite = new Sprite(artco_obj.name, null, false, null);
+                sprite.SetTmpImgList(bmp_list);
+
+                MainForm.select_sprite_cb?.Invoke(sprite);
+
+                ActivatedSpriteController.cur_sprite.x = artco_obj.point.Item1;
+                ActivatedSpriteController.cur_sprite.y = artco_obj.point.Item2;
+
+                for (int i = 0; i < artco_obj.code_blocks.Count; i++) {
+                    for (int j = 0; j < artco_obj.code_blocks[i].Count; j++) {
+                        string block_name = artco_obj.code_blocks[i][j].Item1;
+                        List<string> block_value = artco_obj.code_blocks[i][j].Item2;
+
+                        Block block = new Block(Block.GetBlockByName(block_name));
+                        ActivatedSpriteController.cur_sprite.code_editor.AddCode(block);
+
+                        if (block_value != null) {
+                            for (int k = 0; k < block_value.Count; k++) {
+                                string[] splits = block_value[k].Split(':');
+                                string key = splits[0];
+                                block.block_view.controls[k].Text = key;
+                                if (splits.Length == 2) {
+                                    object val = double.Parse(splits[1]);
+                                    UserVariableManager.AddVariable(key, val);
+                                }
+                            }
+                        }
+                    }
+                }
+
+            } catch (Exception) {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ByteDeserializeObject(string path)
         {
             try {
                 using StreamReader rdr = new StreamReader(path);
@@ -165,8 +213,15 @@ namespace Artco
             } catch (Exception) {
                 return false;
             }
-
             return true;
         }
+    }
+
+    internal struct JsonArtcoObject
+    {
+        public string name { get; set; }
+        public Tuple<int, int> point { get; set; }
+        public List<List<Tuple<string, List<string>>>> code_blocks { get; set; }
+        public List<byte[]> bitmap { get; set; }
     }
 }

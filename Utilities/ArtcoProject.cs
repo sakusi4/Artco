@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace Artco
 {
@@ -18,99 +19,91 @@ namespace Artco
                     return false;
             }
 
-            int header_size = 0;
             var cur_back = MainForm.stage_player.GetBackground();
             if (cur_back == null) {
                 new MsgBoxForm("you have to choose a background").ShowDialog();
                 return false;
             }
 
-            string background_name = MainForm.stage_player.GetBackground().name + "\n";
-            string variable_count = UserVariableManager.GetSize().ToString() + "\n";
-            string sprite_count = ActivatedSpriteController.sprite_list.Count.ToString() + "\n";
-
             try {
-                List<List<byte[]>> bytes = new List<List<byte[]>>();
+                File.WriteAllText(path, JsonSerializeProject());
 
-                using (StreamWriter wr = new StreamWriter(path)) {
-                    wr.Write(background_name);
-                    wr.Write(variable_count);
-                    wr.Write(sprite_count);
+                string old_file_path = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path) + ".ArtcoProject");
+                if (File.Exists(old_file_path)) {
+                    File.Delete(old_file_path);
                 }
 
-                string header = string.Empty;
-                foreach (var key in UserVariableManager.user_variables.Keys) {
-                    string val = UserVariableManager.user_variables[key].GetValue().ToString();
-                    header += key + ":" + val + "\n";
-                }
-
-                for (int i = 0; i < ActivatedSpriteController.sprite_list.Count; i++) {
-                    var sprite = ActivatedSpriteController.sprite_list[i];
-                    string name = sprite.name;
-
-                    header += name + "\n";
-                    header += sprite.x.ToString() + ":" + sprite.y.ToString() + "\n";
-
-                    var codes = sprite.code_list;
-                    int code_count = 0;
-                    for (int j = 0; j < codes.Count; j++)
-                        code_count += codes[j].Count;
-
-                    header += code_count.ToString() + "\n";
-
-                    for (int j = 0; j < codes.Count; j++) {
-                        for (int k = 0; k < codes[j].Count; k++) {
-                            var code = codes[j][k];
-                            if (code.block_view.controls != null) {
-                                string values = code.name;
-                                for (int l = 0; l < code.block_view.controls.Count; l++)
-                                    values += ":" + code.block_view.controls[l].Text;
-
-                                values += "\n";
-                                header += values;
-                            } else {
-                                header += code.name + "\n";
-                            }
-                        }
-                    }
-
-                    int sprite_img_cnt = sprite.org_img_list.Count;
-                    header += sprite_img_cnt.ToString() + "\n";
-
-                    bytes.Add(new List<byte[]>());
-                    for (int j = 0; j < sprite_img_cnt; j++) {
-                        using (MemoryStream ms = new MemoryStream()) {
-                            sprite.org_img_list[j].Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                            bytes[i].Add(ms.ToArray());
-                        }
-
-                        header += bytes[i][j].Length.ToString() + "\n";
-                    }
-                }
-
-                header_size += Encoding.UTF8.GetBytes(header).Length;
-                header_size += Encoding.UTF8.GetBytes(background_name).Length;
-                header_size += Encoding.UTF8.GetBytes(variable_count).Length;
-                header_size += Encoding.UTF8.GetBytes(sprite_count).Length;
-                using (StreamWriter wr = new StreamWriter(path, true)) {
-                    wr.Write(header);
-                    wr.Write(header_size.ToString() + "\n");
-                }
-
-                for (int i = 0; i < bytes.Count; i++) {
-                    for (int j = 0; j < bytes[i].Count; j++) {
-                        using FileStream file = new FileStream(path, FileMode.Append, FileAccess.Write);
-                        file.Write(bytes[i][j], 0, bytes[i][j].Length);
-                    }
-                }
             } catch (Exception) {
                 return false;
             }
-
             return true;
         }
 
         public bool LoadProject(string path)
+        {
+            if (Path.GetExtension(path) == ".artcoproj") {
+                return JsonDeserializeProject(File.ReadAllText(path));
+            } else {
+                return ByteDeserializeProject(path);
+            }
+        }
+
+        private string JsonSerializeProject()
+        {
+            JsonArtcoProject artco_proj = new JsonArtcoProject();
+
+            artco_proj.background_path = MainForm.stage_player.GetBackground().background_path;
+
+            if (Music.cur_music != null) {
+                artco_proj.bgm_path = Music.cur_music.SoundLocation;
+            }
+
+            artco_proj.user_variables = new List<Tuple<string, string>>();
+            foreach (var key in UserVariableManager.user_variables.Keys) {
+                Tuple<string, string> user_var = new Tuple<string, string>(key, UserVariableManager.user_variables[key].GetValue().ToString());
+                artco_proj.user_variables.Add(user_var);
+            }
+
+            artco_proj.serialized_sprites = new List<string>();
+            for (int i = 0; i < ActivatedSpriteController.sprite_list.Count; i++) {
+                string serialized_sprite = new ArtcoObject().JsonSerializeObject(ActivatedSpriteController.sprite_list[i]);
+                artco_proj.serialized_sprites.Add(serialized_sprite);
+            }
+
+            return JsonSerializer.Serialize(artco_proj);
+        }
+
+        private bool JsonDeserializeProject(string serialized_proj)
+        {
+            try {
+                JsonArtcoProject artco_proj = new JsonArtcoProject();
+                artco_proj = JsonSerializer.Deserialize<JsonArtcoProject>(serialized_proj);
+
+                MainForm.select_back_cb?.Invoke(Background.GetPathToBack(artco_proj.background_path));
+
+                if (artco_proj.bgm_path != null) {
+                    Music.SetMusic(artco_proj.bgm_path);
+                }
+
+                for (int i = 0; i < artco_proj.user_variables.Count; i++) {
+                    string key = artco_proj.user_variables[i].Item1;
+                    double val = double.Parse(artco_proj.user_variables[i].Item2);
+                    UserVariableManager.AddVariable(key, val);
+                }
+
+                for (int i = 0; i < artco_proj.serialized_sprites.Count; i++) {
+                    if (new ArtcoObject().JsonDeserializeObject(artco_proj.serialized_sprites[i]) == false) {
+                        return false;
+                    }
+                }
+
+            } catch (Exception) {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ByteDeserializeProject(string path)
         {
             try {
                 string header_size;
@@ -210,5 +203,13 @@ namespace Artco
 
             return true;
         }
+    }
+
+    internal struct JsonArtcoProject
+    {
+        public string background_path { get; set; }
+        public string bgm_path { get; set; }
+        public List<Tuple<string, string>> user_variables { get; set; }
+        public List<string> serialized_sprites { get; set; }
     }
 }

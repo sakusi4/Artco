@@ -278,36 +278,51 @@ namespace Artco
 
         private void ChangeScreenState(bool is_full)
         {
-            if (is_full)
+            if (is_full) {
                 StagePlayer.SetFlags(StagePlayer.Flag.FULLSCREEN);
-            else
+                SetPanelsVisible(false);
+
+            } else {
                 StagePlayer.UnsetFlag(StagePlayer.Flag.FULLSCREEN);
-
-            this.ThreadSafe(x => x.WindowState = (is_full) ? FormWindowState.Maximized : FormWindowState.Normal);
-
-            if (is_full)
-                pbx_Stage.Invoke(new Action(() => pbx_Stage.BringToFront()));
-
-            pbx_Stage.ThreadSafe(x => x.Location = (is_full) ? new Point(0, 40) : new Point(461, 104));
-            pbx_Stage.ThreadSafe(x => x.Width = (is_full) ? 1920 : 1000);
-            pbx_Stage.ThreadSafe(x => x.Height = (is_full) ? 1040 : 550);
-
-            stage_panel.ThreadSafe(x => x.Width = (is_full) ? 1920 : 1000);
-            stage_panel.ThreadSafe(x => x.Height = (is_full) ? 1040 : 550);
+                SetPanelsVisible(true);
+            }
 
             ActivatedSpriteController.TranslateSizeAndLoc(is_full);
             RuntimeEnv.width = stage_panel.Width;
             RuntimeEnv.height = stage_panel.Height;
 
-            btn_RecordingReady.ThreadSafe(x => x.Visible = is_full);
+            btn_ReturnHome.ThreadSafe(x => x.Visible = !is_full);
             btn_FullRunAnimate.ThreadSafe(x => x.Visible = is_full);
             btn_FullStopAnimate.ThreadSafe(x => x.Visible = is_full);
-            btn_ReturnHome.ThreadSafe(x => x.Visible = !is_full);
+            btn_RecordingReady.ThreadSafe(x => x.Visible = is_full);            
 
             Bitmap close_btn = (is_full) ? Properties.Resources.ReleaseFullModeBtn : Properties.Resources.Close;
             btn_Close.ThreadSafe(x => x.Image = close_btn);
 
             InvalidateStageForm();
+        }
+
+        private void SetPanelsVisible(bool flag)
+        {
+            pnl_stage_bottom.Visible = flag;
+            pnl_stage_left.Visible = flag;
+            pnl_stage_right.Visible = flag;
+            pnl_stage_top.Visible = flag;
+
+            pnl_BlockTab.Visible = flag;
+            pnl_Left.Visible = flag;
+            pnl_Menu.Visible = flag;
+            pnl_Right.Visible = flag;
+            pnl_EditorBox.Visible = flag;
+
+            pnl_col_padding0.Visible = flag;
+            pnl_col_padding1.Visible = flag;
+            pnl_col_padding2.Visible = flag;
+            pnl_row_padding0.Visible = flag;
+            pnl_row_padding1.Visible = flag;
+            pnl_row_padding2.Visible = flag;
+            pnl_row_padding3.Visible = flag;
+
         }
     }
 }

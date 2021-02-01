@@ -20,10 +20,14 @@ namespace Artco
         {
             this._sprite = sprite;
 
+            int width = parent_panel.Width - 90;
+            int height = parent_panel.Height;
+
             code_panel = new DoubleBufferedFlowPanel {
                 Location = new Point(39, 0),
                 Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right,
-                Size = new Size(958, (MainForm.is_full_editor) ? 700 : 300),
+                //Size = new Size(958, (MainForm.is_full_editor) ? 700 : 300),
+                Size = new Size(width, height),
                 FlowDirection = FlowDirection.LeftToRight,
                 BorderStyle = BorderStyle.None,
                 BackColor = Color.Transparent,
@@ -67,9 +71,11 @@ namespace Artco
 
         public void AddNewCodeLine()
         {
+            int width = parent_panel.Width - 90;
+                        
             DoubleBufferedFlowPanel line_panel = new DoubleBufferedFlowPanel {
                 FlowDirection = FlowDirection.LeftToRight,
-                Size = new Size(958, 105),
+                Size = new Size(width, 1),
                 BorderStyle = BorderStyle.None,
                 BackColor = Color.Transparent,
             };
@@ -94,10 +100,11 @@ namespace Artco
 
             codes.Add(code);
             var line_panel = code_panel.Controls[cur_line_num];
-            if (line_panel.Controls.Count != 0 && line_panel.Controls.Count % 9 == 0)
+            line_panel.Controls.Add(code.block_view);
+
+            if (code.block_view.Location.X < code.block_view.Width)
                 line_panel.Height += 105;
 
-            line_panel.Controls.Add(code.block_view);
             selected_code = code;
 
             if (code.block_view.controls == null)

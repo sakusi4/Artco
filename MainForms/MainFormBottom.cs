@@ -61,30 +61,18 @@ namespace Artco
 
         private void Btn_ChangeEditorSize_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME)) {
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
                 return;
-            }
-
-            pnl_EditorBox.BringToFront();
-
-            Action<Point, int, int> action = (Point point, int width, int height) => {
-                is_full_editor ^= true;
-                pnl_EditorBox.Location = point;
-                pnl_EditorBox.Width = width;
-                pnl_EditorBox.Height = height;
-            };
 
             if (!is_full_editor) {
-                action(new Point(439, 326), 1043, 700);
-                btn_CodeClear.Location = new Point(998, 643);
-                pnl_EditorBox.BackgroundImage = Properties.Resources.GlassEditor;
+                pnl_EditorBox.Height *= 2;
                 btn_ChangeEditorSize.Image = Properties.Resources.GlassNormalScreen;
             } else {
-                action(new Point(439, 726), 1043, 300);
-                btn_CodeClear.Location = new Point(998, 250);
-                pnl_EditorBox.BackgroundImage = Properties.Resources.GlassEditor_Small;
+                pnl_EditorBox.Height /= 2;
                 btn_ChangeEditorSize.Image = Properties.Resources.GlassFullScreen;
             }
+
+            is_full_editor ^= true;
 
             if (ActivatedSpriteController.IsEmpty())
                 return;

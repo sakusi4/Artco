@@ -32,6 +32,16 @@ namespace Artco
             }
         }
 
+        public static void SetSpritesViewSize()
+        {
+            int width = (SpriteView.sprite_list_panel.Width / 2) - 30;
+            int height = (int)(width * 1.1);
+
+            foreach (var sprite in _sprite_list) {
+                sprite.sprite_view.sprite_view.Size = new Size(width, height);
+            }
+        }
+
         public static void Focus(int new_sprite_num)
         {
             if (new_sprite_num == -1) {

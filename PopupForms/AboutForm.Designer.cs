@@ -41,7 +41,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.CadetBlue;
-            this.label1.Location = new System.Drawing.Point(77, 58);
+            this.label1.Location = new System.Drawing.Point(85, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(133, 25);
             this.label1.TabIndex = 76;
@@ -52,9 +52,9 @@
             this.btn_OK.BackColor = System.Drawing.Color.Transparent;
             this.btn_OK.Image = global::Artco.Properties.Resources.VarFormOK;
             this.btn_OK.ImageActive = null;
-            this.btn_OK.Location = new System.Drawing.Point(104, 100);
+            this.btn_OK.Location = new System.Drawing.Point(109, 92);
             this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(79, 33);
+            this.btn_OK.Size = new System.Drawing.Size(92, 30);
             this.btn_OK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btn_OK.TabIndex = 77;
             this.btn_OK.TabStop = false;
@@ -64,21 +64,23 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Artco.Properties.Resources.Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(28, 11);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(241, 31);
+            this.pictureBox1.Size = new System.Drawing.Size(248, 29);
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(285, 145);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(304, 134);
             this.Controls.Add(this.btn_OK);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AboutForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

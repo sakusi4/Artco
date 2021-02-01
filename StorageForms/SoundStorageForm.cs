@@ -21,7 +21,9 @@ namespace Artco
         public SoundStorageForm(Action<object> complete_handler = null)
         {
             InitializeComponent();
-            this._complete_handler = complete_handler;
+            _complete_handler = complete_handler;
+
+            Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
         }
 
         private void StorageForm_Load(object sender, EventArgs e)
@@ -35,8 +37,8 @@ namespace Artco
         {
             for (int i = 0; i < _max_tab_num + 1; i++) {
                 DoubleBufferedFlowPanel content_panel = new DoubleBufferedFlowPanel {
-                    Location = new Point(32, 97),
-                    Size = new Size(1838, 845),
+                    Location = new Point(10, 10),
+                    Size = new Size(pnl_Contents.Width - 30, pnl_Contents.Height - 50),
                     AutoScroll = true,
                     BackColor = Color.White,
                     Visible = false
@@ -44,7 +46,7 @@ namespace Artco
 
                 _miniviews.Add(new List<SoundStorageView>());
                 _content_panels.Add(content_panel);
-                Controls.Add(content_panel);
+                pnl_Contents.Controls.Add(content_panel);
             }
 
             _content_panels[_cur_tab_num].Visible = true;

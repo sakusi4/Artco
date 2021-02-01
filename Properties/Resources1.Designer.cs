@@ -63,6 +63,56 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1Background_Storage {
+            get {
+                object obj = ResourceManager.GetObject("_1Background_Storage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _2Picture_Storage {
+            get {
+                object obj = ResourceManager.GetObject("_2Picture_Storage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3EducationBackground_Storage {
+            get {
+                object obj = ResourceManager.GetObject("_3EducationBackground_Storage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _4BackgroundSound_Storage {
+            get {
+                object obj = ResourceManager.GetObject("_4BackgroundSound_Storage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _5Sound_Storage {
+            get {
+                object obj = ResourceManager.GetObject("_5Sound_Storage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Action1 {
             get {
                 object obj = ResourceManager.GetObject("Action1", resourceCulture);
@@ -540,16 +590,6 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BS__Background_Storage {
-            get {
-                object obj = ResourceManager.GetObject("BS__Background_Storage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap BS_Cartoonbackground_tab {
             get {
                 object obj = ResourceManager.GetObject("BS_Cartoonbackground_tab", resourceCulture);
@@ -633,6 +673,26 @@ namespace Artco.Properties {
         internal static System.Drawing.Bitmap BS_ThemeBackground_tab {
             get {
                 object obj = ResourceManager.GetObject("BS_ThemeBackground_tab", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Button_Play {
+            get {
+                object obj = ResourceManager.GetObject("Button_Play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Button_Stop {
+            get {
+                object obj = ResourceManager.GetObject("Button_Stop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -923,6 +983,36 @@ namespace Artco.Properties {
         internal static System.Drawing.Bitmap Cursor {
             get {
                 object obj = ResourceManager.GetObject("Cursor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edit_Copy {
+            get {
+                object obj = ResourceManager.GetObject("Edit_Copy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edit_OpenStorage {
+            get {
+                object obj = ResourceManager.GetObject("Edit_OpenStorage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edit_Reset {
+            get {
+                object obj = ResourceManager.GetObject("Edit_Reset", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1253,6 +1343,16 @@ namespace Artco.Properties {
         internal static System.Drawing.Bitmap LeftPageArrow {
             get {
                 object obj = ResourceManager.GetObject("LeftPageArrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LeftPanelBG {
+            get {
+                object obj = ResourceManager.GetObject("LeftPanelBG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1857,16 +1957,6 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PS_PictureStorage {
-            get {
-                object obj = ResourceManager.GetObject("PS_PictureStorage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap PS_plants_tab {
             get {
                 object obj = ResourceManager.GetObject("PS_plants_tab", resourceCulture);
@@ -2106,6 +2196,16 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RightPanelBG {
+            get {
+                object obj = ResourceManager.GetObject("RightPanelBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RMusicBtn {
             get {
                 object obj = ResourceManager.GetObject("RMusicBtn", resourceCulture);
@@ -2216,16 +2316,6 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap setting_2Page {
-            get {
-                object obj = ResourceManager.GetObject("setting_2Page", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap setting_BG {
             get {
                 object obj = ResourceManager.GetObject("setting_BG", resourceCulture);
@@ -2306,26 +2396,6 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SpriteEditRedo {
-            get {
-                object obj = ResourceManager.GetObject("SpriteEditRedo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SpriteEditUndo {
-            get {
-                object obj = ResourceManager.GetObject("SpriteEditUndo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap SS_animal_tab {
             get {
                 object obj = ResourceManager.GetObject("SS_animal_tab", resourceCulture);
@@ -2376,39 +2446,9 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SS_Sound_Storage {
-            get {
-                object obj = ResourceManager.GetObject("SS_Sound_Storage", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Stage_LocatiBox {
             get {
                 object obj = ResourceManager.GetObject("Stage_LocatiBox", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap StageBack {
-            get {
-                object obj = ResourceManager.GetObject("StageBack", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap StageBackOutline {
-            get {
-                object obj = ResourceManager.GetObject("StageBackOutline", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2546,9 +2586,9 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WindowFormblue {
+        internal static System.Drawing.Bitmap WindowFormBlue {
             get {
-                object obj = ResourceManager.GetObject("WindowFormblue", resourceCulture);
+                object obj = ResourceManager.GetObject("WindowFormBlue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

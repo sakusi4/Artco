@@ -53,7 +53,7 @@
             // 
             this.btn_Close.BackColor = System.Drawing.Color.Transparent;
             this.btn_Close.Font = new System.Drawing.Font("Magic R", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btn_Close.Image = ((System.Drawing.Image)(resources.GetObject("btn_Close.Image")));
+            this.btn_Close.Image = global::Artco.Properties.Resources.MsgBoxcancelBtn;
             this.btn_Close.ImageActive = null;
             this.btn_Close.Location = new System.Drawing.Point(198, 317);
             this.btn_Close.Name = "btn_Close";
@@ -68,7 +68,7 @@
             // 
             this.btn_Submit.BackColor = System.Drawing.Color.Transparent;
             this.btn_Submit.Font = new System.Drawing.Font("Magic R", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btn_Submit.Image = ((System.Drawing.Image)(resources.GetObject("btn_Submit.Image")));
+            this.btn_Submit.Image = global::Artco.Properties.Resources.MsgBoxOKBtn;
             this.btn_Submit.ImageActive = null;
             this.btn_Submit.Location = new System.Drawing.Point(308, 317);
             this.btn_Submit.Name = "btn_Submit";
@@ -95,6 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.BackgroundImage = global::Artco.Properties.Resources.SpeakTextForm;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(636, 373);
             this.Controls.Add(this.listbox_VarList);

@@ -201,14 +201,6 @@ namespace Artco
 #endif
         }
 
-        private void MainForm_Paint(object sender, PaintEventArgs e)
-        {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) &&
-                !StagePlayer.ORCheckFlags(StagePlayer.Flag.LOADING)) {
-                e.Graphics.DrawImage(Properties.Resources.StageBackOutline, 427, 70);
-            }
-        }
-
         private void StartProject()
         {
             ReleaseFocus();
@@ -234,8 +226,7 @@ namespace Artco
 
             RuntimeEnv.RunActivatedSprites();
 
-            StagePlayer.SetFlags(StagePlayer.Flag.PLAYING);
-            SafeInvalidateStageOutline();
+            StagePlayer.SetFlags(StagePlayer.Flag.PLAYING);            
         }
 
         private bool CheckError()
@@ -276,8 +267,7 @@ namespace Artco
 
             Music.StopBackMusic();
 
-            StagePlayer.UnsetFlag(StagePlayer.Flag.PLAYING);
-            SafeInvalidateStageOutline();
+            StagePlayer.UnsetFlag(StagePlayer.Flag.PLAYING);            
 
             _change_screen_state?.Invoke(false);
             _change_screen_state = null;

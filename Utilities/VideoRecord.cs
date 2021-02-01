@@ -9,8 +9,7 @@ namespace Artco
         private static System.Timers.Timer _timer;
         private static Process _prc_ffmpeg;
         private static string _video_name;
-        private static int _sec;
-        private static int _min;
+        private static int _sec;        
 
         public static void SetVideoName(string name)
         {
@@ -22,12 +21,9 @@ namespace Artco
         private static void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             _sec++;
-            if (_sec == 60) {
+            if (_sec == 60)
                 _sec = 0;
-                _min++;
-            }
-
-            MainForm.set_recording_time(_min.ToString() + ":" + _sec.ToString());
+            
             MainForm.show_recording_btn((_sec % 2 != 0));
         }
 
@@ -55,8 +51,7 @@ namespace Artco
             _prc_ffmpeg.StartInfo = process_start_info;
             _prc_ffmpeg.Start();
             _prc_ffmpeg.StandardInput.WriteLine(option);
-
-            MainForm.show_recording_time(true);
+            
             _timer.Start();
             return true;
         }
@@ -72,12 +67,7 @@ namespace Artco
 
             _timer.Stop();
             _sec = 0;
-            _min = 0;
-
-            MainForm.set_recording_time(_min.ToString() + ":" + _sec.ToString());
-            MainForm.show_recording_time(false);
-            MainForm.show_recording_btn(true);
-
+            
             Thread.Sleep(1000);
             _prc_ffmpeg?.Dispose();
 

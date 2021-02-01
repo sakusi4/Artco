@@ -53,12 +53,11 @@
             this.pnl_stage_bottom = new Artco.DoubleBufferedPanel();
             this.btn_ToggleBgm = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_ReturnHome = new Bunifu.Framework.UI.BunifuImageButton();
-            this.btn_StopProject = new Bunifu.Framework.UI.BunifuImageButton();
-            this.btn_StartProject = new Bunifu.Framework.UI.BunifuImageButton();
             this.lbl_Ypos = new System.Windows.Forms.Label();
             this.lbl_Xpos = new System.Windows.Forms.Label();
             this.btn_FullScreen = new Bunifu.Framework.UI.BunifuImageButton();
             this.pbx_MousePos = new System.Windows.Forms.PictureBox();
+            this.btn_Run = new Bunifu.Framework.UI.BunifuImageButton();
             this.pnl_stage_top = new System.Windows.Forms.Panel();
             this.pnl_row_padding1 = new System.Windows.Forms.Panel();
             this.pnl_EditorBox = new Artco.TransparentPanel();
@@ -105,10 +104,9 @@
             this.pnl_stage_bottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ToggleBgm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ReturnHome)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_StopProject)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_StartProject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_FullScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_MousePos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_Run)).BeginInit();
             this.pnl_EditorBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_CodeClear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ChangeEditorSize)).BeginInit();
@@ -431,12 +429,11 @@
             this.pnl_stage_bottom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnl_stage_bottom.Controls.Add(this.btn_ToggleBgm);
             this.pnl_stage_bottom.Controls.Add(this.btn_ReturnHome);
-            this.pnl_stage_bottom.Controls.Add(this.btn_StopProject);
-            this.pnl_stage_bottom.Controls.Add(this.btn_StartProject);
             this.pnl_stage_bottom.Controls.Add(this.lbl_Ypos);
             this.pnl_stage_bottom.Controls.Add(this.lbl_Xpos);
             this.pnl_stage_bottom.Controls.Add(this.btn_FullScreen);
             this.pnl_stage_bottom.Controls.Add(this.pbx_MousePos);
+            this.pnl_stage_bottom.Controls.Add(this.btn_Run);
             this.pnl_stage_bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnl_stage_bottom.Location = new System.Drawing.Point(0, 570);
             this.pnl_stage_bottom.Name = "pnl_stage_bottom";
@@ -451,7 +448,7 @@
             this.btn_ToggleBgm.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_ToggleBgm.Image = global::Artco.Properties.Resources.BgmOnBtn;
             this.btn_ToggleBgm.ImageActive = null;
-            this.btn_ToggleBgm.Location = new System.Drawing.Point(120, 0);
+            this.btn_ToggleBgm.Location = new System.Drawing.Point(92, 0);
             this.btn_ToggleBgm.Margin = new System.Windows.Forms.Padding(0);
             this.btn_ToggleBgm.Name = "btn_ToggleBgm";
             this.btn_ToggleBgm.Padding = new System.Windows.Forms.Padding(4);
@@ -481,40 +478,6 @@
             this.btn_ReturnHome.TabStop = false;
             this.btn_ReturnHome.Zoom = 5;
             this.btn_ReturnHome.Click += new System.EventHandler(this.Btn_ReturnHome_Click);
-            // 
-            // btn_StopProject
-            // 
-            this.btn_StopProject.BackColor = System.Drawing.Color.Transparent;
-            this.btn_StopProject.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_StopProject.Image = global::Artco.Properties.Resources.Stop;
-            this.btn_StopProject.ImageActive = null;
-            this.btn_StopProject.Location = new System.Drawing.Point(70, 0);
-            this.btn_StopProject.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_StopProject.Name = "btn_StopProject";
-            this.btn_StopProject.Padding = new System.Windows.Forms.Padding(5);
-            this.btn_StopProject.Size = new System.Drawing.Size(50, 57);
-            this.btn_StopProject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btn_StopProject.TabIndex = 53;
-            this.btn_StopProject.TabStop = false;
-            this.btn_StopProject.Zoom = 5;
-            this.btn_StopProject.Click += new System.EventHandler(this.Btn_StopAnimate_Click);
-            // 
-            // btn_StartProject
-            // 
-            this.btn_StartProject.BackColor = System.Drawing.Color.Transparent;
-            this.btn_StartProject.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btn_StartProject.Image = global::Artco.Properties.Resources.Play;
-            this.btn_StartProject.ImageActive = null;
-            this.btn_StartProject.Location = new System.Drawing.Point(20, 0);
-            this.btn_StartProject.Margin = new System.Windows.Forms.Padding(0);
-            this.btn_StartProject.Name = "btn_StartProject";
-            this.btn_StartProject.Padding = new System.Windows.Forms.Padding(5);
-            this.btn_StartProject.Size = new System.Drawing.Size(50, 57);
-            this.btn_StartProject.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.btn_StartProject.TabIndex = 52;
-            this.btn_StartProject.TabStop = false;
-            this.btn_StartProject.Zoom = 5;
-            this.btn_StartProject.Click += new System.EventHandler(this.Btn_StartProject_Click);
             // 
             // lbl_Ypos
             // 
@@ -575,6 +538,24 @@
             this.pbx_MousePos.TabIndex = 66;
             this.pbx_MousePos.TabStop = false;
             this.pbx_MousePos.Visible = false;
+            // 
+            // btn_Run
+            // 
+            this.btn_Run.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Run.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btn_Run.Image = global::Artco.Properties.Resources.Button_Play;
+            this.btn_Run.ImageActive = null;
+            this.btn_Run.Location = new System.Drawing.Point(20, 0);
+            this.btn_Run.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Run.Name = "btn_Run";
+            this.btn_Run.Padding = new System.Windows.Forms.Padding(5);
+            this.btn_Run.Size = new System.Drawing.Size(72, 57);
+            this.btn_Run.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btn_Run.TabIndex = 72;
+            this.btn_Run.TabStop = false;
+            this.btn_Run.Tag = "0";
+            this.btn_Run.Zoom = 5;
+            this.btn_Run.Click += new System.EventHandler(this.Btn_Run_Click);
             // 
             // pnl_stage_top
             // 
@@ -1086,10 +1067,9 @@
             this.pnl_stage_bottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ToggleBgm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ReturnHome)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_StopProject)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_StartProject)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_FullScreen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_MousePos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_Run)).EndInit();
             this.pnl_EditorBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btn_CodeClear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_ChangeEditorSize)).EndInit();
@@ -1137,8 +1117,6 @@
         private Bunifu.Framework.UI.BunifuImageButton btn_Close;
         private Bunifu.Framework.UI.BunifuImageButton btn_ReturnHome;
         private Bunifu.Framework.UI.BunifuImageButton btn_FullScreen;
-        private Bunifu.Framework.UI.BunifuImageButton btn_StartProject;
-        private Bunifu.Framework.UI.BunifuImageButton btn_StopProject;
         private DoubleBufferedPanel pnl_Left;
         private Bunifu.Framework.UI.BunifuImageButton btn_CreateVariable;
         private TransparentPanel pnl_EditorBox;
@@ -1180,6 +1158,7 @@
         private System.Windows.Forms.Panel panel3;
         private DoubleBufferedFlowPanel pnl_VarMenu;
         private DoubleBufferedPanel pnl_Blocks;
+        private Bunifu.Framework.UI.BunifuImageButton btn_Run;
     }
 }
 

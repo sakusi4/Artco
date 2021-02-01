@@ -25,8 +25,8 @@ namespace Artco
         public static Action finish_stage_player_cb { get; set; }
         public static Action finish_act_sprites_cb { get; set; }
         public static Action remove_all_sprite { get; set; }
-        public static Action start_project { get; set; }
-        public static Action stop_project { get; set; }
+        public static Func<bool> start_project { get; set; }
+        public static Func<bool> stop_project { get; set; }
         public static Action release_focus { get; set; }
 
         public MainForm()
@@ -159,16 +159,6 @@ namespace Artco
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void Btn_StartProject_Click(object sender, EventArgs e)
-        {
-            StartProject();
-        }
-
-        private void Btn_StopAnimate_Click(object sender, EventArgs e)
-        {
-            StopProject();
-        }
-
         private void MainForm_Shown(object sender, EventArgs e)
         {
 
@@ -200,18 +190,18 @@ namespace Artco
 #endif
         }
 
-        private void StartProject()
+        private bool StartProject()
         {
             ReleaseFocus();
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) ||
                 stage_player.GetBackground() == null) {
-                return;
+                return false;
             }
 
             if (!CheckError()) {
                 new MsgBoxForm("错误的编码编辑").ShowDialog();
-                return;
+                return false;
             }
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
@@ -225,7 +215,9 @@ namespace Artco
 
             RuntimeEnv.RunActivatedSprites();
 
-            StagePlayer.SetFlags(StagePlayer.Flag.PLAYING);            
+            StagePlayer.SetFlags(StagePlayer.Flag.PLAYING);
+
+            return true;
         }
 
         private bool CheckError()
@@ -238,11 +230,29 @@ namespace Artco
             return true;
         }
 
-        private void StopProject()
+        private void Btn_Run_Click(object sender, EventArgs e)
+        {
+            if(int.Parse(btn_Run.Tag.ToString()) == 0) {
+                if (!StartProject()) 
+                    return;
+
+                btn_Run.Tag = 1;
+                btn_Run.Image = Properties.Resources.Button_Stop;
+            } else {
+
+                if (!StopProject())
+                    return;
+
+                btn_Run.Tag = 0;
+                btn_Run.Image = Properties.Resources.Button_Play;
+            }
+        }
+
+        private bool StopProject()
         {
             if (!StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) ||
                 StagePlayer.ORCheckFlags(StagePlayer.Flag.LOADING)) {
-                return;
+                return false;
             }
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
@@ -250,6 +260,7 @@ namespace Artco
             }
 
             RuntimeEnv.StopActivatedSprites();
+            return true;
         }
 
         public void FinishActSpritesCB()

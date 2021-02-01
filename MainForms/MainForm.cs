@@ -10,7 +10,8 @@ namespace Artco
         private Point _form_loc = new Point(0, 0);
         private bool _is_form_move;
 
-        public static Size form_size;
+        public static Size form_size { get; set; }
+        public static Area client_area { get; set; }
         public static StagePanel stage_panel { get; set; } = new StagePanel();
         public static StagePlayer stage_player { get; set; }
         public static PracticeMode practice_mode { get; set; }
@@ -507,6 +508,8 @@ namespace Artco
             Width = int.Parse(splits[0]);
             Height = int.Parse(splits[1]) - 40;
             form_size = new Size(Width, Height);
+            client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height, 
+                form_size.Width, form_size.Height - pnl_Topbar.Height);
 
             pnl_BlockTab.Width = (int)(Width * col_factors[0]);
             pnl_Left.Width = (int)(Width * col_factors[1]);
@@ -557,8 +560,13 @@ namespace Artco
 
         private void Pnl_Topbar_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && _is_form_move)
-                Location = new Point(Location.X + (e.X - _form_loc.X), Location.Y + (e.Y - _form_loc.Y));
+            if (e.Button == MouseButtons.Left && _is_form_move) {
+                int x = Location.X + (e.X - _form_loc.X);
+                int y = Location.Y + (e.Y - _form_loc.Y);
+                Location = new Point(x, y);
+                client_area.x = x;
+                client_area.y = y + pnl_Topbar.Height;
+            }
         }
 
         private void Pnl_Topbar_MouseUp(object sender, MouseEventArgs e)
@@ -569,8 +577,24 @@ namespace Artco
             if (Math.Abs(Location.X) < 50 && Math.Abs(Location.Y) < 50)
                 Location = new Point(0, 0);
 
-            _is_form_move = false;
-        }     
+            _is_form_move = false;            
+        }      
+    }
+
+    public class Area
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
+
+        public Area(int x, int y, int width, int height)
+        {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
+        }
     }
 
     internal static class Ex

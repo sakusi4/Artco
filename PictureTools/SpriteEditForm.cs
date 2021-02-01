@@ -42,9 +42,6 @@ namespace Artco
             _font_and_color.Item2 = Color.Black;
 
             cmbbox_PenWidth.SelectedIndex = 1;
-            btn_CopySprite.Image = DynamicResources.b_edit_copy;
-            btn_OpenSprite.Image = DynamicResources.b_edit_opensprite;
-            btn_OriginalImage.Image = DynamicResources.b_edit_reset;
             InitializeEditSprite();
         }
 

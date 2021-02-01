@@ -48,7 +48,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1280, 800);
+            this.panel1.Size = new System.Drawing.Size(1150, 680);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -56,7 +56,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1282, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.Size = new System.Drawing.Size(26, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "Log";
             // 
@@ -72,12 +72,13 @@
             // 
             // lbl_Details
             // 
+            this.lbl_Details.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Details.AutoSize = true;
             this.lbl_Details.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(176)))), ((int)(((byte)(72)))));
             this.lbl_Details.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbl_Details.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Details.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lbl_Details.Location = new System.Drawing.Point(1187, 6);
+            this.lbl_Details.Location = new System.Drawing.Point(1049, 9);
             this.lbl_Details.Name = "lbl_Details";
             this.lbl_Details.Size = new System.Drawing.Size(89, 16);
             this.lbl_Details.TabIndex = 1;
@@ -86,10 +87,12 @@
             // 
             // pbx_Loading
             // 
+            this.pbx_Loading.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbx_Loading.Dock = System.Windows.Forms.DockStyle.Left;
             this.pbx_Loading.Location = new System.Drawing.Point(0, 0);
             this.pbx_Loading.Name = "pbx_Loading";
-            this.pbx_Loading.Size = new System.Drawing.Size(1280, 800);
+            this.pbx_Loading.Size = new System.Drawing.Size(1280, 680);
+            this.pbx_Loading.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbx_Loading.TabIndex = 0;
             this.pbx_Loading.TabStop = false;
             // 
@@ -98,7 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1280, 800);
+            this.ClientSize = new System.Drawing.Size(1150, 680);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

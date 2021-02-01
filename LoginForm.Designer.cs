@@ -34,6 +34,7 @@
             this.pbx_RememberMe = new System.Windows.Forms.PictureBox();
             this.btn_Close = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_Enter = new Bunifu.Framework.UI.BunifuImageButton();
+            this.cmbbox_Resolution = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_RememberMe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Enter)).BeginInit();
@@ -101,6 +102,17 @@
             this.btn_Enter.Zoom = 5;
             this.btn_Enter.Click += new System.EventHandler(this.Btn_Enter_Click);
             // 
+            // cmbbox_Resolution
+            // 
+            this.cmbbox_Resolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbbox_Resolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbbox_Resolution.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.cmbbox_Resolution.FormattingEnabled = true;
+            this.cmbbox_Resolution.Location = new System.Drawing.Point(1025, 12);
+            this.cmbbox_Resolution.Name = "cmbbox_Resolution";
+            this.cmbbox_Resolution.Size = new System.Drawing.Size(84, 21);
+            this.cmbbox_Resolution.TabIndex = 18;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -108,6 +120,7 @@
             this.BackgroundImage = global::Artco.Properties.Resources.LoginForm;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1150, 680);
+            this.Controls.Add(this.cmbbox_Resolution);
             this.Controls.Add(this.btn_Enter);
             this.Controls.Add(this.btn_Close);
             this.Controls.Add(this.pbx_RememberMe);
@@ -137,5 +150,6 @@
                 private System.Windows.Forms.PictureBox pbx_RememberMe;
                 private Bunifu.Framework.UI.BunifuImageButton btn_Close;
                 private Bunifu.Framework.UI.BunifuImageButton btn_Enter;
-        }
+        private System.Windows.Forms.ComboBox cmbbox_Resolution;
+    }
 }

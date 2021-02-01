@@ -17,7 +17,12 @@ namespace Artco
         private void SelectServerForm_Load(object sender, EventArgs e)
         {
             Cursor = new Cursor(Properties.Resources.Cursor.GetHicon());
-            
+
+            foreach (var item in Setting.resolution_list)
+                cmbbox_Resolution.Items.Add(item);
+
+            cmbbox_Resolution.SelectedIndex = Properties.Settings.Default.resolution;
+
             Setting.serial_num = GetSerialNumber();
 
             txtbox_Username.Font = new Font(FontLibrary.private_font.Families[0], 17F);
@@ -50,6 +55,7 @@ namespace Artco
                 Properties.Settings.Default.UserName = (_is_remember_me) ? txtbox_Username.Text : "";
                 Properties.Settings.Default.UserPass = (_is_remember_me) ? txtbox_userpass.Text : "";
                 Properties.Settings.Default.RememberMe = _is_remember_me;
+                Properties.Settings.Default.resolution = cmbbox_Resolution.SelectedIndex;
                 Properties.Settings.Default.Save();
 
                 Setting.user_name = txtbox_Username.Text;

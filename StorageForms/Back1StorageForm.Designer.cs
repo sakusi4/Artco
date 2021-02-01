@@ -223,7 +223,7 @@ namespace Artco
             // 
             // btn_OpenUserFile
             // 
-            this.btn_OpenUserFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(255)))), ((int)(((byte)(160)))));
+            this.btn_OpenUserFile.BackColor = System.Drawing.Color.Transparent;
             this.btn_OpenUserFile.Image = global::Artco.Properties.Resources.Storage_FileButton;
             this.btn_OpenUserFile.ImageActive = null;
             this.btn_OpenUserFile.Location = new System.Drawing.Point(885, 8);

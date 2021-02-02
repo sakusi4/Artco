@@ -299,7 +299,7 @@ namespace Artco
         {
             s.arrow = new Random(Guid.NewGuid().GetHashCode()).Next(1, 9); // 1~8 난수 생성
             int n = new Random(Guid.NewGuid().GetHashCode()).Next(1, 6);
-            MoveSprite(s, 20, n, 100);
+            MoveSprite(s, 2, n, 100);
 
             s.pc[line_num] -= 1;
         }
@@ -327,7 +327,7 @@ namespace Artco
             while (i < n) {
                 for (int j = 5; j > 0; j--) {
                     s.arrow = 8;
-                    MoveSprite(s, j * 10, 1, 100);
+                    MoveSprite(s, j, 1, 100);
 
                     if (IsFinish(s, line_num))
                         return;
@@ -335,7 +335,7 @@ namespace Artco
 
                 for (int j = 1; j <= 5; j++) {
                     s.arrow = 6;
-                    MoveSprite(s, j * 10, 1, 100);
+                    MoveSprite(s, j, 1, 100);
 
                     if (IsFinish(s, line_num))
                         return;
@@ -760,7 +760,7 @@ namespace Artco
             int x = s.x;
             int y = s.y;
             if (MainForm.practice_mode.CheckPath(s.arrow, x, y)) {
-                MoveSprite(s, 100, 1);
+                MoveSprite(s, 25, 1);
                 EffectSound.move_successed_sound.Play();
             } else {
                 EffectSound.move_failed_sound.Play();

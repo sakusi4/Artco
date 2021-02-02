@@ -48,7 +48,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1150, 680);
+            this.panel1.Size = new System.Drawing.Size(1280, 680);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -78,7 +78,7 @@
             this.lbl_Details.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbl_Details.Font = new System.Drawing.Font("MS Reference Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Details.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.lbl_Details.Location = new System.Drawing.Point(1049, 9);
+            this.lbl_Details.Location = new System.Drawing.Point(1179, 9);
             this.lbl_Details.Name = "lbl_Details";
             this.lbl_Details.Size = new System.Drawing.Size(89, 16);
             this.lbl_Details.TabIndex = 1;
@@ -101,7 +101,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1150, 680);
+            this.ClientSize = new System.Drawing.Size(1280, 680);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -1857,46 +1857,6 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap PracticeFinish {
-            get {
-                object obj = ResourceManager.GetObject("PracticeFinish", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PracticeNext {
-            get {
-                object obj = ResourceManager.GetObject("PracticeNext", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PracticeRepeat {
-            get {
-                object obj = ResourceManager.GetObject("PracticeRepeat", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap PracticeResultForm {
-            get {
-                object obj = ResourceManager.GetObject("PracticeResultForm", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap PracticeStartBtn {
             get {
                 object obj = ResourceManager.GetObject("PracticeStartBtn", resourceCulture);

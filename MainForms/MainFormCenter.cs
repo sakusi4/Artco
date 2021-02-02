@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using ArtcoCustomControl;
 
 namespace Artco
 {
@@ -125,24 +126,36 @@ namespace Artco
                 EffectSound.finish_game_sound.Play();
                 StopProject();
 
-                var result_form = new PracticeResultForm {
-                    Cursor = new Cursor(Properties.Resources.Cursor.GetHicon()),
-                    Location = new Point(461, 104),
-                    ShowInTaskbar = false
+                PracticeResultControl practice_result_control = new PracticeResultControl {
+                    Dock = DockStyle.Fill
                 };
-                result_form.ShowDialog();
 
-                if (result_form.exit_code == 1) {
+                practice_result_control.NextStepClick += (sernder, e) => {
                     var next_back = Background.GetNextBack();
                     if (next_back == null) {
                         return;
                     }
 
                     SelectBackCB(next_back);
-                } else if (result_form.exit_code == -1) {
+
+                    stage_panel.Controls.Remove(practice_result_control);
+                    practice_result_control.Dispose();
+                };
+
+                practice_result_control.RestartClick += (sernder, e) => {
+                    stage_panel.Controls.Remove(practice_result_control);
+                    practice_result_control.Dispose();
+                };
+
+                practice_result_control.FinishClick += (sernder, e) => {
                     FinishPracticeMode();
                     Btn_SelectBackground_Click(null, null);
-                }
+
+                    stage_panel.Controls.Remove(practice_result_control);
+                    practice_result_control.Dispose();
+                };
+
+                stage_panel.Controls.Add(practice_result_control);
             }
         }
 

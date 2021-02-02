@@ -195,12 +195,6 @@
     </Compile>
     <Compile Include="PictureTools\EditSprite.cs" />
     <Compile Include="PictureTools\ImageUtility.cs" />
-    <Compile Include="PopupForms\PracticeResultForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PopupForms\PracticeResultForm.Designer.cs">
-      <DependentUpon>PracticeResultForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Resources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -341,9 +335,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForms\MakeConditionForm.resx">
       <DependentUpon>MakeConditionForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PopupForms\PracticeResultForm.resx">
-      <DependentUpon>PracticeResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PopupForms\CreateVarForm.resx">
       <DependentUpon>CreateVarForm.cs</DependentUpon>
@@ -789,7 +780,6 @@
     <None Include="bin\Debug\themes\default\Select_Server_Submit.png" />
     <None Include="bin\Debug\themes\default\Block_Outline.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="bin\Debug\themes\chinese\User_tab.png" />
   </ItemGroup>

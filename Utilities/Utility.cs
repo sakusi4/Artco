@@ -49,9 +49,9 @@ namespace Artco
         {
             List<(string, string)> dirs = new List<(string, string)>();
 #if (DEMO)
-            string xml_file = "setting_demo.xml";
+            string xml_file = "./xml/setting_demo.xml";
 #else
-            string xml_file = "setting.xml";
+            string xml_file = "./xml/setting.xml";
 #endif
             XmlDocument xdoc = new XmlDocument();
             xdoc.Load(FileManager.GetStreamFromHTTP(FileManager.http_root_dir + xml_file));

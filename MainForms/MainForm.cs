@@ -497,6 +497,7 @@ namespace Artco
 
         private void SetWindowResolution(string value)
         {
+            SuspendLayout();
             double[] col_factors = { 0.035, 0.17, 0.54, 0.18, 0.030 };
             double[] row_factors = { 0.03, 0.6, 0.3 };
             double col_padding_factor = 0.012;
@@ -508,6 +509,7 @@ namespace Artco
             form_size = new Size(Width, Height);            
             client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height, 
                 form_size.Width, form_size.Height - pnl_Topbar.Height);
+
 
             pnl_BlockTab.Width = (int)(Width * col_factors[0]);
             pnl_Left.Width = (int)(Width * col_factors[1]);
@@ -538,9 +540,11 @@ namespace Artco
             btn_CreateVariable.Width = (pnl_Left.Width / 2) - 10;
             btn_HideVarList.Width = (pnl_Left.Width / 2) - 10;
 
+
             SetStageInfo();
             SetBlocksPosition();
             ActivatedSpriteController.SetSpritesViewSize();
+            ResumeLayout();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

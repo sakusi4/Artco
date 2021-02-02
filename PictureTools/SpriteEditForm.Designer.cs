@@ -155,7 +155,6 @@
             // 
             this.btn_AddText.BackColor = System.Drawing.Color.White;
             this.btn_AddText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_AddText.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_AddText.Image = ((System.Drawing.Image)(resources.GetObject("btn_AddText.Image")));
             this.btn_AddText.ImageActive = null;
             this.btn_AddText.Location = new System.Drawing.Point(818, 0);
@@ -165,14 +164,13 @@
             this.btn_AddText.TabIndex = 46;
             this.btn_AddText.TabStop = false;
             this.btn_AddText.Text = "배경 지우기";
-            this.btn_AddText.Zoom = 2;
+            this.btn_AddText.Zoom = 5;
             this.btn_AddText.Click += new System.EventHandler(this.Btn_AddText_Click);
             // 
             // btn_AddSprite
             // 
             this.btn_AddSprite.BackColor = System.Drawing.Color.White;
             this.btn_AddSprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_AddSprite.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_AddSprite.Image = global::Artco.Properties.Resources.EditAddSprite;
             this.btn_AddSprite.ImageActive = null;
             this.btn_AddSprite.Location = new System.Drawing.Point(408, 0);
@@ -182,14 +180,13 @@
             this.btn_AddSprite.TabIndex = 44;
             this.btn_AddSprite.TabStop = false;
             this.btn_AddSprite.Text = "배경 지우기";
-            this.btn_AddSprite.Zoom = 2;
+            this.btn_AddSprite.Zoom = 5;
             this.btn_AddSprite.Click += new System.EventHandler(this.Btn_AddSprite_Click);
             // 
             // btn_FreeCutImage
             // 
             this.btn_FreeCutImage.BackColor = System.Drawing.Color.White;
             this.btn_FreeCutImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_FreeCutImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_FreeCutImage.Image = global::Artco.Properties.Resources.FreeCutBtn;
             this.btn_FreeCutImage.ImageActive = null;
             this.btn_FreeCutImage.Location = new System.Drawing.Point(572, 0);
@@ -199,14 +196,13 @@
             this.btn_FreeCutImage.TabIndex = 43;
             this.btn_FreeCutImage.TabStop = false;
             this.btn_FreeCutImage.Text = "배경 지우기";
-            this.btn_FreeCutImage.Zoom = 2;
+            this.btn_FreeCutImage.Zoom = 5;
             this.btn_FreeCutImage.Click += new System.EventHandler(this.Btn_FreeCutImage_Click);
             // 
             // btn_LeftRotate
             // 
             this.btn_LeftRotate.BackColor = System.Drawing.Color.White;
             this.btn_LeftRotate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_LeftRotate.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_LeftRotate.Image = global::Artco.Properties.Resources.LRotate;
             this.btn_LeftRotate.ImageActive = null;
             this.btn_LeftRotate.Location = new System.Drawing.Point(164, 0);
@@ -216,14 +212,13 @@
             this.btn_LeftRotate.TabIndex = 39;
             this.btn_LeftRotate.TabStop = false;
             this.btn_LeftRotate.Text = "배경 지우기";
-            this.btn_LeftRotate.Zoom = 2;
+            this.btn_LeftRotate.Zoom = 5;
             this.btn_LeftRotate.Click += new System.EventHandler(this.Btn_LeftRotate_Click);
             // 
             // btn_RightRotate
             // 
             this.btn_RightRotate.BackColor = System.Drawing.Color.White;
             this.btn_RightRotate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_RightRotate.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_RightRotate.Image = global::Artco.Properties.Resources.RRotate;
             this.btn_RightRotate.ImageActive = null;
             this.btn_RightRotate.Location = new System.Drawing.Point(82, 0);
@@ -233,14 +228,13 @@
             this.btn_RightRotate.TabIndex = 40;
             this.btn_RightRotate.TabStop = false;
             this.btn_RightRotate.Text = "배경 지우기";
-            this.btn_RightRotate.Zoom = 2;
+            this.btn_RightRotate.Zoom = 5;
             this.btn_RightRotate.Click += new System.EventHandler(this.Btn_RightRotate_Click);
             // 
             // btn_FlipY
             // 
             this.btn_FlipY.BackColor = System.Drawing.Color.White;
             this.btn_FlipY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_FlipY.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_FlipY.Image = global::Artco.Properties.Resources.FlipYBtn;
             this.btn_FlipY.ImageActive = null;
             this.btn_FlipY.Location = new System.Drawing.Point(900, 0);
@@ -250,14 +244,13 @@
             this.btn_FlipY.TabIndex = 41;
             this.btn_FlipY.TabStop = false;
             this.btn_FlipY.Text = "배경 지우기";
-            this.btn_FlipY.Zoom = 2;
+            this.btn_FlipY.Zoom = 5;
             this.btn_FlipY.Click += new System.EventHandler(this.Btn_FlipY_Click);
             // 
             // btn_FlipX
             // 
             this.btn_FlipX.BackColor = System.Drawing.Color.White;
             this.btn_FlipX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_FlipX.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_FlipX.Image = global::Artco.Properties.Resources.FlipXBtn;
             this.btn_FlipX.ImageActive = null;
             this.btn_FlipX.Location = new System.Drawing.Point(0, 0);
@@ -267,14 +260,13 @@
             this.btn_FlipX.TabIndex = 42;
             this.btn_FlipX.TabStop = false;
             this.btn_FlipX.Text = "배경 지우기";
-            this.btn_FlipX.Zoom = 2;
+            this.btn_FlipX.Zoom = 5;
             this.btn_FlipX.Click += new System.EventHandler(this.Btn_FlipX_Click);
             // 
             // btn_SizeDown
             // 
             this.btn_SizeDown.BackColor = System.Drawing.Color.White;
             this.btn_SizeDown.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_SizeDown.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_SizeDown.Font = new System.Drawing.Font("Gulim", 55F);
             this.btn_SizeDown.Image = global::Artco.Properties.Resources.SizeDecreseBtn;
             this.btn_SizeDown.ImageActive = null;
@@ -285,14 +277,13 @@
             this.btn_SizeDown.TabIndex = 38;
             this.btn_SizeDown.TabStop = false;
             this.btn_SizeDown.Text = "-";
-            this.btn_SizeDown.Zoom = 2;
+            this.btn_SizeDown.Zoom = 5;
             this.btn_SizeDown.Click += new System.EventHandler(this.Btn_SizeDown_Click);
             // 
             // btn_SizeUp
             // 
             this.btn_SizeUp.BackColor = System.Drawing.Color.White;
             this.btn_SizeUp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_SizeUp.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_SizeUp.Font = new System.Drawing.Font("Gulim", 50F);
             this.btn_SizeUp.Image = global::Artco.Properties.Resources.SizeIncreseBtn;
             this.btn_SizeUp.ImageActive = null;
@@ -303,14 +294,13 @@
             this.btn_SizeUp.TabIndex = 37;
             this.btn_SizeUp.TabStop = false;
             this.btn_SizeUp.Text = "+";
-            this.btn_SizeUp.Zoom = 2;
+            this.btn_SizeUp.Zoom = 5;
             this.btn_SizeUp.Click += new System.EventHandler(this.Btn_SizeUp_Click);
             // 
             // btn_ColorEraser
             // 
             this.btn_ColorEraser.BackColor = System.Drawing.Color.White;
             this.btn_ColorEraser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_ColorEraser.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_ColorEraser.Image = global::Artco.Properties.Resources.EraseBtn;
             this.btn_ColorEraser.ImageActive = null;
             this.btn_ColorEraser.Location = new System.Drawing.Point(654, 0);
@@ -320,14 +310,13 @@
             this.btn_ColorEraser.TabIndex = 35;
             this.btn_ColorEraser.TabStop = false;
             this.btn_ColorEraser.Text = "투명 지우개";
-            this.btn_ColorEraser.Zoom = 2;
+            this.btn_ColorEraser.Zoom = 5;
             this.btn_ColorEraser.Click += new System.EventHandler(this.Btn_ColorEraser_Click);
             // 
             // btn_Brush
             // 
             this.btn_Brush.BackColor = System.Drawing.Color.White;
             this.btn_Brush.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_Brush.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_Brush.Image = global::Artco.Properties.Resources.BrushBtn;
             this.btn_Brush.ImageActive = null;
             this.btn_Brush.Location = new System.Drawing.Point(736, 0);
@@ -337,14 +326,13 @@
             this.btn_Brush.TabIndex = 36;
             this.btn_Brush.TabStop = false;
             this.btn_Brush.Text = "투명 지우개";
-            this.btn_Brush.Zoom = 2;
+            this.btn_Brush.Zoom = 5;
             this.btn_Brush.Click += new System.EventHandler(this.Btn_Brush_Click);
             // 
             // btn_CutImage
             // 
             this.btn_CutImage.BackColor = System.Drawing.Color.White;
             this.btn_CutImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_CutImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_CutImage.Image = global::Artco.Properties.Resources.RectCutBtn;
             this.btn_CutImage.ImageActive = null;
             this.btn_CutImage.Location = new System.Drawing.Point(490, 0);
@@ -354,7 +342,7 @@
             this.btn_CutImage.TabIndex = 33;
             this.btn_CutImage.TabStop = false;
             this.btn_CutImage.Text = "배경 지우기";
-            this.btn_CutImage.Zoom = 2;
+            this.btn_CutImage.Zoom = 5;
             this.btn_CutImage.Click += new System.EventHandler(this.Btn_CutImage_Click);
             // 
             // pnl_TopTools
@@ -422,7 +410,6 @@
             // 
             // cmbbox_PenWidth
             // 
-            this.cmbbox_PenWidth.Dock = System.Windows.Forms.DockStyle.Left;
             this.cmbbox_PenWidth.Font = new System.Drawing.Font("Gulim", 10F);
             this.cmbbox_PenWidth.FormattingEnabled = true;
             this.cmbbox_PenWidth.ItemHeight = 13;
@@ -450,7 +437,6 @@
             // 
             this.btn_SetFont.BackColor = System.Drawing.Color.Transparent;
             this.btn_SetFont.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_SetFont.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_SetFont.ErrorImage = null;
             this.btn_SetFont.Image = ((System.Drawing.Image)(resources.GetObject("btn_SetFont.Image")));
             this.btn_SetFont.ImageActive = null;
@@ -468,7 +454,6 @@
             // 
             this.btn_GetColor.BackColor = System.Drawing.Color.Transparent;
             this.btn_GetColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_GetColor.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_GetColor.ErrorImage = null;
             this.btn_GetColor.Image = ((System.Drawing.Image)(resources.GetObject("btn_GetColor.Image")));
             this.btn_GetColor.ImageActive = null;
@@ -486,7 +471,6 @@
             // 
             this.btn_ColorList.BackColor = System.Drawing.Color.Transparent;
             this.btn_ColorList.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_ColorList.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_ColorList.ErrorImage = null;
             this.btn_ColorList.Image = ((System.Drawing.Image)(resources.GetObject("btn_ColorList.Image")));
             this.btn_ColorList.ImageActive = null;
@@ -521,7 +505,6 @@
             this.doubleBufferedPanel2.Controls.Add(this.pnl_239_228_176);
             this.doubleBufferedPanel2.Controls.Add(this.pnl_63_72_204);
             this.doubleBufferedPanel2.Controls.Add(this.pnl_34_177_76);
-            this.doubleBufferedPanel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.doubleBufferedPanel2.Location = new System.Drawing.Point(330, 0);
             this.doubleBufferedPanel2.Name = "doubleBufferedPanel2";
             this.doubleBufferedPanel2.Size = new System.Drawing.Size(269, 54);
@@ -702,7 +685,6 @@
             // 
             this.btn_OriginalImage.BackColor = System.Drawing.Color.Transparent;
             this.btn_OriginalImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_OriginalImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_OriginalImage.Image = global::Artco.Properties.Resources.Edit_Reset;
             this.btn_OriginalImage.ImageActive = null;
             this.btn_OriginalImage.Location = new System.Drawing.Point(220, 0);
@@ -719,7 +701,6 @@
             // 
             this.btn_OpenSprite.BackColor = System.Drawing.Color.Transparent;
             this.btn_OpenSprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_OpenSprite.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_OpenSprite.Image = global::Artco.Properties.Resources.Edit_OpenStorage;
             this.btn_OpenSprite.ImageActive = null;
             this.btn_OpenSprite.Location = new System.Drawing.Point(110, 0);
@@ -736,7 +717,6 @@
             // 
             this.btn_CopySprite.BackColor = System.Drawing.Color.Transparent;
             this.btn_CopySprite.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btn_CopySprite.Dock = System.Windows.Forms.DockStyle.Left;
             this.btn_CopySprite.Image = global::Artco.Properties.Resources.Edit_Copy;
             this.btn_CopySprite.ImageActive = null;
             this.btn_CopySprite.Location = new System.Drawing.Point(0, 0);

@@ -50,6 +50,7 @@ namespace Artco
             this.btn_Tab_8 = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_Tab_9 = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_Tab_10 = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btn_Tab_11 = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_OpenUserFile = new Bunifu.Framework.UI.BunifuImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -67,6 +68,7 @@ namespace Artco
             ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_OpenUserFile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -167,6 +169,7 @@ namespace Artco
             this.pnl_Tabs.Controls.Add(this.btn_Tab_8);
             this.pnl_Tabs.Controls.Add(this.btn_Tab_9);
             this.pnl_Tabs.Controls.Add(this.btn_Tab_10);
+            this.pnl_Tabs.Controls.Add(this.btn_Tab_11);
             this.pnl_Tabs.Controls.Add(this.btn_OpenUserFile);
             this.pnl_Tabs.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnl_Tabs.Location = new System.Drawing.Point(20, 57);
@@ -179,7 +182,7 @@ namespace Artco
             // btn_Tab_0
             // 
             this.btn_Tab_0.BackColor = System.Drawing.Color.Transparent;
-            this.btn_Tab_0.Image = global::Artco.Properties.Resources.User_tab;
+            this.btn_Tab_0.Image = global::Artco.Properties.Resources.Camera_tab;
             this.btn_Tab_0.ImageActive = null;
             this.btn_Tab_0.Location = new System.Drawing.Point(3, 8);
             this.btn_Tab_0.Name = "btn_Tab_0";
@@ -341,12 +344,27 @@ namespace Artco
             this.btn_Tab_10.Zoom = 0;
             this.btn_Tab_10.Click += new System.EventHandler(this.Btn_Tab_Click);
             // 
+            // btn_Tab_11
+            // 
+            this.btn_Tab_11.BackColor = System.Drawing.Color.Transparent;
+            this.btn_Tab_11.Image = global::Artco.Properties.Resources.User_tab;
+            this.btn_Tab_11.ImageActive = null;
+            this.btn_Tab_11.Location = new System.Drawing.Point(1039, 8);
+            this.btn_Tab_11.Name = "btn_Tab_11";
+            this.btn_Tab_11.Size = new System.Drawing.Size(120, 40);
+            this.btn_Tab_11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.btn_Tab_11.TabIndex = 65;
+            this.btn_Tab_11.TabStop = false;
+            this.btn_Tab_11.Tag = "11";
+            this.btn_Tab_11.Zoom = 0;
+            this.btn_Tab_11.Click += new System.EventHandler(this.Btn_Tab_Click);
+            // 
             // btn_OpenUserFile
             // 
             this.btn_OpenUserFile.BackColor = System.Drawing.Color.Transparent;
             this.btn_OpenUserFile.Image = global::Artco.Properties.Resources.Storage_FileButton;
             this.btn_OpenUserFile.ImageActive = null;
-            this.btn_OpenUserFile.Location = new System.Drawing.Point(1039, 8);
+            this.btn_OpenUserFile.Location = new System.Drawing.Point(1165, 8);
             this.btn_OpenUserFile.Name = "btn_OpenUserFile";
             this.btn_OpenUserFile.Size = new System.Drawing.Size(40, 40);
             this.btn_OpenUserFile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -389,6 +407,7 @@ namespace Artco
             ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_Tab_11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_OpenUserFile)).EndInit();
             this.ResumeLayout(false);
 
@@ -415,5 +434,6 @@ namespace Artco
         private Panel panel2;
         private Bunifu.Framework.UI.BunifuImageButton bunifuImageButton1;
         private DoubleBufferedPanel pnl_Contents;
+        private Bunifu.Framework.UI.BunifuImageButton btn_Tab_11;
     }
 }

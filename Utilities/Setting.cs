@@ -20,6 +20,7 @@ namespace Artco
         public static int sample_rate { get; set; }
         public static int channels { get; set; }
         public static int device_number { get; set; }
+        public static string user_sprite_path { get; set; }
         public static string user_sound_path { get; set; }
         public static string user_back_path { get; set; }
         public static string user_music_path { get; set; }
@@ -46,12 +47,16 @@ namespace Artco
                 device_number = -1;
             }
 
+            user_sprite_path = Application.LocalUserAppDataPath + "\\sprites";
             video_path = Application.LocalUserAppDataPath + "\\videos";
             user_sound_path = Application.LocalUserAppDataPath + "\\sounds";
             save_path = Application.LocalUserAppDataPath + "\\saves";
             user_music_path = Application.LocalUserAppDataPath + "\\bgms";
             user_back_path = Application.LocalUserAppDataPath + "\\backgrounds";
             video_fps = 30;
+
+            if (!Directory.Exists(user_sprite_path))
+                Directory.CreateDirectory(user_sprite_path);
 
             if (!Directory.Exists(video_path))
                 Directory.CreateDirectory(video_path);

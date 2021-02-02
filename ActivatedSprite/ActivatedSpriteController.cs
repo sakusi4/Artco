@@ -155,5 +155,16 @@ namespace Artco
                 return sprite_list[_cur_sprite_num];
             }
         }
+
+        public static bool IsActSprite(string name)
+        {            
+            foreach (var item in sprite_list) {
+                var ret = sprite_list.Find(item => item.name.Equals(name));
+                if (ret != null)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

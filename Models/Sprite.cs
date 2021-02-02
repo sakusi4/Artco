@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Net;
 
 namespace Artco
@@ -77,6 +78,19 @@ namespace Artco
                     sprites.Add(new List<Sprite>());
 
                 sprites[category].Add(new Sprite(name, sprite_path, false, null));
+            }
+
+            sprites.Add(new List<Sprite>()); // user tab
+            DirectoryInfo di = new DirectoryInfo(Setting.user_sprite_path);
+            if (!di.Exists)
+                di.Create();
+
+            foreach (var file in di.GetFiles()) {
+                if (file.Extension.Equals(".png")) {
+                    string only_name = file.Name.Substring(0, file.Name.Length - 4);
+                    string local_path = Setting.user_sprite_path + "/" + file.Name;
+                    sprites[sprites.Count - 1].Add(new Sprite(only_name, local_path, false, null));
+                }
             }
         }
 

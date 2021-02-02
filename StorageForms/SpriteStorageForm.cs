@@ -16,8 +16,9 @@ namespace Artco
         private readonly List<List<SpriteStorageView>> _miniviews = new List<List<SpriteStorageView>>();
         private readonly List<Task> _io_tasks = new List<Task>();
 
-        private readonly int _max_tab_num = 11; // +1 index는 검색 탭으로 사용
-        private readonly int _user_tab_num = 0;
+        private readonly int _max_tab_num = 12; // +1 index는 검색 탭으로 사용
+        private readonly int _user_tab_num = 11;
+        private readonly int _camera_tab_num = 0;
         private int _cur_tab_num = 0;
         private bool _is_close;
 
@@ -87,7 +88,7 @@ namespace Artco
                     if (view.content_image != null)
                         continue;
 
-                    if (tab == _user_tab_num)
+                    if (tab == _camera_tab_num)
                         view.content_image = new Bitmap(sprite.user_tab_preview_img);
                     else
                         view.content_image = ImageUtility.GetImageFromPath(sprite.sprite_path, downloader);
@@ -109,7 +110,7 @@ namespace Artco
                 CloseForm();
             };
 
-            if (tab_num == _user_tab_num) {
+            if (tab_num == _camera_tab_num) {
                 miniview.MiniViewRClick += (sender, e) => {
                     EffectSound.mouse_click_sound.Play();
 
@@ -118,13 +119,41 @@ namespace Artco
                     {(sender, e) => {
                         Sprite.sprites[0].Remove(sprite);
                         FileManager.DeleteFileFromFTP(sprite.sprite_path);
-                        _content_panels[_user_tab_num].Controls.Remove(miniview);
+                        _content_panels[_camera_tab_num].Controls.Remove(miniview);
                     }});
                 };
             }
 
+            if (tab_num == _user_tab_num) {
+                //miniview.MiniViewRClick += (sender, e) => {
+                //    var args = (MouseEventArgs)e;
+                //    Utility.ShowContextMenu(sender, args.Location.X, args.Location.Y,
+                //        new string[] { "删除" }, new List<Action<object, EventArgs>>()
+                //        {
+                //            (sender, e) =>
+                //            {
+                //                if(ActivatedSpriteController.IsActSprite(sprite.name)) {
+                //                    new MsgBoxForm("素材正在使用中").ShowDialog();
+                //                    return;
+                //                }
+
+                //                Sprite.sprites[_user_tab_num].Remove(sprite);
+                //                _content_panels[_user_tab_num].Controls.Remove(miniview);
+                                
+                //                miniview.content_image?.Dispose();
+                //                GC.Collect();
+                //                GC.WaitForPendingFinalizers();
+
+                //                if (File.Exists(sprite.sprite_path))
+                //                    File.Delete(sprite.sprite_path);
+                //            }
+                //        });
+                //};
+            }
+
             return miniview;
         }
+
 
         private void ChangeTab(int new_tab_num)
         {
@@ -147,22 +176,34 @@ namespace Artco
 
         private void Btn_OpenUserFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "png files (*.png)|*.png";
+            OpenFileDialog dialog = new OpenFileDialog { Filter = "png files (*.png)|*.png" };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
 
             FileInfo file_info = new FileInfo(dialog.FileName);
-            if (!file_info.Extension.Equals(".png")) {
-                MessageBox.Show("png 파일이 아닙니다");
+            string sprite_path = Setting.user_sprite_path + "/" + file_info.Name;
+
+            if (File.Exists(sprite_path)) {
+                new MsgBoxForm("This file already exists.").ShowDialog();
                 return;
             }
 
-            Sprite sprite = new Sprite(file_info.Name.Substring(0, file_info.Name.Length - 4), null, false, null);
-            sprite.SetTmpImgList(new List<Bitmap>() { new Bitmap(file_info.FullName) });
+            File.Copy(file_info.FullName, sprite_path, true);
 
-            _complete_handler?.Invoke(sprite);
-            CloseForm();
+            Sprite.sprites[_user_tab_num].Clear();
+            _miniviews[_user_tab_num].Clear();
+            _content_panels[_user_tab_num].Controls.Clear();
+
+            DirectoryInfo di = new DirectoryInfo(Setting.user_sprite_path);
+            foreach (var file in di.GetFiles()) {
+                if (file.Extension.Equals(".png")) {
+                    string only_name = file.Name.Substring(0, file.Name.Length - 4);
+                    string local_path = file.FullName;
+                    Sprite.sprites[_user_tab_num].Add(new Sprite(only_name, local_path, false, null));
+                }
+            }
+
+            CreateContents();
         }
 
         private void Pnl_Tabs_Paint(object sender, PaintEventArgs e)

@@ -64,6 +64,9 @@ namespace Artco
 
             Bitmap copy_bitmap = new Bitmap(EditSprite.GetCurSprite().img);
             Bitmap cover_img = ImageUtility.AutoCrop(copy_bitmap);
+            if(cover_img == null)
+                cover_img = new Bitmap(copy_bitmap);
+
             original_imgs.Add(cover_img);
 
             int id = EditSprite.edit_sprites.Count;
@@ -503,7 +506,7 @@ namespace Artco
         }
 
         private SpriteMiniView CreateMiniView(Bitmap image, string name, Bitmap backImage)
-        {
+        {            
             SpriteMiniView miniview = new SpriteMiniView() {
                 spriteImage = new Bitmap(image),
                 spriteName = name

@@ -1260,16 +1260,6 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GlassEditor_Small {
-            get {
-                object obj = ResourceManager.GetObject("GlassEditor_Small", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap GlassFullScreen {
             get {
                 object obj = ResourceManager.GetObject("GlassFullScreen", resourceCulture);

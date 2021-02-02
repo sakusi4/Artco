@@ -9,6 +9,9 @@ namespace Artco
 {
     public partial class MainForm
     {
+        public static Size stage_size { get; set; }
+        public static int moving_unit { get; set; }        
+
         private void StagePaint(object sender, PaintEventArgs e)
         {
             foreach (var sprite in ActivatedSpriteController.sprite_list) {
@@ -180,6 +183,14 @@ namespace Artco
             music_form.ShowDialog();
         }
 
+        private void SetStageInfo()
+        {
+            stage_size = new Size(stage_panel.Width, stage_panel.Height);
+
+            // 무대 사이즈가 거의 2:1이므로 상하좌우를 같은 크기로 움직이게됨
+            moving_unit = stage_size.Width / 200;            
+        }
+
         private void StageMouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
@@ -288,9 +299,7 @@ namespace Artco
             }
 
             ActivatedSpriteController.TranslateSizeAndLoc(is_full);
-            RuntimeEnv.width = stage_panel.Width;
-            RuntimeEnv.height = stage_panel.Height;
-
+           
             btn_ReturnHome.ThreadSafe(x => x.Visible = !is_full);
             btn_FullRunAnimate.ThreadSafe(x => x.Visible = is_full);
             btn_FullStopAnimate.ThreadSafe(x => x.Visible = is_full);
@@ -299,30 +308,30 @@ namespace Artco
             Bitmap close_btn = (is_full) ? Properties.Resources.ReleaseFullModeBtn : Properties.Resources.Close;
             btn_Close.ThreadSafe(x => x.Image = close_btn);
 
+            SetStageInfo();
             InvalidateStageForm();
         }
 
         private void SetPanelsVisible(bool flag)
         {
-            pnl_stage_bottom.Visible = flag;
-            pnl_stage_left.Visible = flag;
-            pnl_stage_right.Visible = flag;
-            pnl_stage_top.Visible = flag;
+            pnl_stage_bottom.ThreadSafe(x => x.Visible = flag);
+            pnl_stage_left.ThreadSafe(x => x.Visible = flag);
+            pnl_stage_right.ThreadSafe(x => x.Visible = flag);
+            pnl_stage_top.ThreadSafe(x => x.Visible = flag);
 
-            pnl_BlockTab.Visible = flag;
-            pnl_Left.Visible = flag;
-            pnl_Menu.Visible = flag;
-            pnl_Right.Visible = flag;
-            pnl_EditorBox.Visible = flag;
+            pnl_BlockTab.ThreadSafe(x => x.Visible = flag);
+            pnl_Left.ThreadSafe(x => x.Visible = flag);
+            pnl_Menu.ThreadSafe(x => x.Visible = flag);
+            pnl_Right.ThreadSafe(x => x.Visible = flag);
+            pnl_EditorBox.ThreadSafe(x => x.Visible = flag);
 
-            pnl_col_padding0.Visible = flag;
-            pnl_col_padding1.Visible = flag;
-            pnl_col_padding2.Visible = flag;
-            pnl_row_padding0.Visible = flag;
-            pnl_row_padding1.Visible = flag;
-            pnl_row_padding2.Visible = flag;
-            pnl_row_padding3.Visible = flag;
-
+            pnl_col_padding0.ThreadSafe(x => x.Visible = flag);
+            pnl_col_padding1.ThreadSafe(x => x.Visible = flag);
+            pnl_col_padding2.ThreadSafe(x => x.Visible = flag);
+            pnl_row_padding0.ThreadSafe(x => x.Visible = flag);
+            pnl_row_padding1.ThreadSafe(x => x.Visible = flag);
+            pnl_row_padding2.ThreadSafe(x => x.Visible = flag);
+            pnl_row_padding3.ThreadSafe(x => x.Visible = flag);
         }
     }
 }

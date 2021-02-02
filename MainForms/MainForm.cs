@@ -41,15 +41,13 @@ namespace Artco
             CodeEditor.parent_panel = pnl_EditorBox;
             SpriteView.sprite_list_panel = pnl_SpriteList;
 
+            SetStagePanelProperties();
             SetWindowResolution(Setting.resolution_list[Properties.Settings.Default.resolution]);
             SetDelegates();
             AttachTooltipRightMenu();
             SetBlocksPosition();
-            SetStagePanelProperties();
             SetWindowFormTheme(Properties.Settings.Default.Theme);
-            SetMouseWheelEvent();
-
-            RuntimeEnv.SetStageSize(pbx_Stage.Width, pbx_Stage.Height);
+            SetMouseWheelEvent();            
         }
 
         private void SetDelegates()
@@ -507,7 +505,7 @@ namespace Artco
             string[] splits = value.Split('x');
             Width = int.Parse(splits[0]);
             Height = int.Parse(splits[1]) - 40;
-            form_size = new Size(Width, Height);
+            form_size = new Size(Width, Height);            
             client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height, 
                 form_size.Width, form_size.Height - pnl_Topbar.Height);
 
@@ -540,6 +538,7 @@ namespace Artco
             btn_CreateVariable.Width = (pnl_Left.Width / 2) - 10;
             btn_HideVarList.Width = (pnl_Left.Width / 2) - 10;
 
+            SetStageInfo();
             SetBlocksPosition();
             ActivatedSpriteController.SetSpritesViewSize();
         }

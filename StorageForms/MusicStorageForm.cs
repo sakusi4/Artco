@@ -22,7 +22,7 @@ namespace Artco
             InitializeComponent();
 
             Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
-#if (DEMO)
+#if (DE2MO)
             btn_OpenUserFile.Enabled = false;
 #else
             btn_OpenUserFile.Enabled = true;

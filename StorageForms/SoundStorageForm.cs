@@ -24,7 +24,7 @@ namespace Artco
             _complete_handler = complete_handler;
 
             Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
-#if (DEMO)
+#if (DE2MO)
             btn_OpenRecordingForm.Enabled = false;
             btn_OpenUserFile.Enabled = false;
 #else

@@ -102,6 +102,10 @@ namespace Artco
                 FinishPracticeMode();
 
             if (stage_player.GetBackground().mode == 1) {
+                if(Properties.Settings.Default.resolution != 0) {
+                    new MsgBoxForm("Please choose 1920x1080 resolution in setting form").Show();
+                    return;
+                }
                 RemoveAllSprite();
                 ShowPracticeMenu();
 

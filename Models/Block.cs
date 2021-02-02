@@ -69,8 +69,7 @@ namespace Artco
             else if (block_type == 7)
                 block_view = new BlockType7();
 
-            block_view.BackgroundImage = new Bitmap(block_img);
-            //block_view.Size = new Size(blocks[0][0].width, blocks[0][0].width);
+            block_view.BackgroundImage = new Bitmap(block_img);            
             block_view.Size = new Size(99, 99);
 
             if (name.Equals("ControlSound")) {
@@ -90,6 +89,7 @@ namespace Artco
                         return;
                     }
 
+                    ((BlockType2)block_view).txtbox.ReadOnly = true;
                     new SpeakInputForm(sender as TextBox).ShowDialog();
                 };
             } else if (name.Equals("ControlChangeBack")) {

@@ -202,9 +202,7 @@ namespace Artco
                         string[] value = values[i].Split(':');
                         if (value.Length > 1) {
                             for (int j = 0; j < codes[i].block_view.controls.Count; j++)
-                                codes[i].block_view.controls[j].Text = value[j];
-
-                            UserVariableManager.AddVariable(value[0], double.Parse(value[1]));
+                                codes[i].block_view.controls[j].Text = value[j];                            
                         } else {
                             codes[i].block_view.controls[0].Text = value[0];
                         }

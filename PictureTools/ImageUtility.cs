@@ -257,6 +257,7 @@ namespace Artco
                     Stream image_stream = downloader.OpenRead(url);
                     download_image = Image.FromStream(image_stream) as Bitmap;
                     downloader.Dispose();
+                    image_stream.Close();
                 } else {
                     download_image = Image.FromStream(web_client.OpenRead(url)) as Bitmap;
                 }

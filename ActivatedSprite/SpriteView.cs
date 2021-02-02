@@ -56,9 +56,8 @@ namespace Artco
 
         private void MiniViewRClick(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
+                return;            
 
             MiniViewLClick(sender, e);
 
@@ -134,9 +133,8 @@ namespace Artco
 
         private void MiniViewDBClick(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
+                return;            
 
             EditSprite(sender, e);
         }
@@ -171,9 +169,8 @@ namespace Artco
 
         private void MiniViewRemoveClick(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
+                return;            
 
             var sprites = ActivatedSpriteController.sprite_list;
             ActivatedSpriteController.Focus(-1);
@@ -220,7 +217,8 @@ namespace Artco
         {
             if (!_disposed_value) {
                 if (disposing) {
-                    sprite_view.Dispose();
+                    sprite_view.spriteImage?.Dispose();
+                    sprite_view?.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

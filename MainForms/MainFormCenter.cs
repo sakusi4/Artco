@@ -80,7 +80,7 @@ namespace Artco
         private void ShowSpeakBox(Point point, string text, PaintEventArgs e)
         {
             Size string_area = Size.Ceiling(MeasureTextArea(text, e));
-            Size speak_box_size = new Size(string_area.Width + 40, string_area.Height + 40);
+            Size speak_box_size = new Size(string_area.Width + 40, string_area.Height + 60);
             Bitmap speak_box = new Bitmap(Properties.Resources.SpeakBox, speak_box_size);
             Point speak_box_point = new Point(point.X + 20, point.Y - speak_box.Height);
             Rectangle text_rect = new Rectangle(speak_box_point.X + 20, speak_box_point.Y + 20, string_area.Width, string_area.Height);

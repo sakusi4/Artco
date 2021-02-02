@@ -22,6 +22,11 @@ namespace Artco
             InitializeComponent();
 
             Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
+#if (DEMO)
+            btn_OpenUserFile.Enabled = false;
+#else
+            btn_OpenUserFile.Enabled = true;
+#endif
         }
 
         private void StorageForm_Load(object sender, EventArgs e)

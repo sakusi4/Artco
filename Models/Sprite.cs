@@ -93,26 +93,19 @@ namespace Artco
 
         private static void AddUserSpriteData()
         {
-#if (DEMO)
             string[] file_names = FileManager.GetFtpFolderItems(FileManager.ftp_root_dir + "sprites/" + Setting.user_name + "/");
             WebClient downloader = FileManager.GetHttpClient();
-#else
-            string[] file_names = FileManager.GetLocalFolderItems("./sprites/" + Setting.user_name + "/");
-#endif
+
             for (int i = 0; i < file_names.Length; i++) {
                 string name = file_names[i].Substring(0, file_names[i].Length - 4);
-#if (DEMO)
+
                 string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
                 Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromPath(sprite_path, downloader));
-#else
-                string sprite_path = "./sprites/" + Setting.user_name + "/" + file_names[i];
-                Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromPath(sprite_path));
-#endif
+
                 sprites[0].Add(sprite);
             }
-#if (DEMO)
+
             downloader.Dispose();
-#endif
         }
     }
 }

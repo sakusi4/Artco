@@ -24,6 +24,13 @@ namespace Artco
             _complete_handler = complete_handler;
 
             Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
+#if (DEMO)
+            btn_OpenRecordingForm.Enabled = false;
+            btn_OpenUserFile.Enabled = false;
+#else
+            btn_OpenRecordingForm.Enabled = true;
+            btn_OpenUserFile.Enabled = true;
+#endif
         }
 
         private void StorageForm_Load(object sender, EventArgs e)

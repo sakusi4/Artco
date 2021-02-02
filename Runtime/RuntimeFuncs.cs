@@ -377,6 +377,7 @@ namespace Artco
                 s.arrow = 5;
 
             int zero_point = s.y;
+            int width = s.width;
 
             int i = (n > 0) ? 0 : -1;
             for (; i < n; i = (n > 0) ? i + 1 : i) {
@@ -384,11 +385,13 @@ namespace Artco
                     if (IsFinish(s, line_num))
                         return;
 
-                    double radian = Math.PI * angle / 180.0;
-                    s.y = (int)(-Math.Sin(radian) * 50.0) + zero_point;
-                    s.x = (s.arrow == 5) ? s.x + 5 : s.x - 5;
+                    if (s.x >= 5 && s.x + width <= MainForm.stage_size.Width) {
+                        double radian = Math.PI * angle / 180.0;
+                        s.y = (int)(-Math.Sin(radian) * 50.0) + zero_point;
+                        s.x = (s.arrow == 5) ? s.x + 5 : s.x - 5;
 
-                    Thread.Sleep(50);
+                        Thread.Sleep(50);
+                    }
                 }
             }
         }
@@ -837,7 +840,7 @@ namespace Artco
             if (x + s.width + n < MainForm.stage_size.Width) {
                 if (y - n > 0) {
                     s.x += n;
-                    s.y -= n;                    
+                    s.y -= n;
                     return -1;
                 } else {
                     return 4;

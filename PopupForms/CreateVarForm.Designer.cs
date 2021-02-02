@@ -110,6 +110,7 @@
             this.txtbox_VarInitVal.Size = new System.Drawing.Size(154, 14);
             this.txtbox_VarInitVal.TabIndex = 19;
             this.txtbox_VarInitVal.Text = "0";
+            this.txtbox_VarInitVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Txtbox_VarInitVal_KeyPress);
             // 
             // CreateVarForm
             // 

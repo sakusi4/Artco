@@ -62,5 +62,15 @@ namespace Artco
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
                 Location = new Point(this.Left - (_mouse_point.X - e.X), this.Top - (_mouse_point.Y - e.Y));
         }
+
+        private void Txtbox_VarInitVal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+                e.Handled = true;
+        }
     }
 }

@@ -318,16 +318,12 @@ namespace Artco
 
         private void SetPanelsVisible(bool flag)
         {
+            SuspendLayout();
+
             pnl_stage_bottom.ThreadSafe(x => x.Visible = flag);
             pnl_stage_left.ThreadSafe(x => x.Visible = flag);
             pnl_stage_right.ThreadSafe(x => x.Visible = flag);
             pnl_stage_top.ThreadSafe(x => x.Visible = flag);
-
-            pnl_BlockTab.ThreadSafe(x => x.Visible = flag);
-            pnl_Left.ThreadSafe(x => x.Visible = flag);
-            pnl_Menu.ThreadSafe(x => x.Visible = flag);
-            pnl_Right.ThreadSafe(x => x.Visible = flag);
-            pnl_EditorBox.ThreadSafe(x => x.Visible = flag);
 
             pnl_col_padding0.ThreadSafe(x => x.Visible = flag);
             pnl_col_padding1.ThreadSafe(x => x.Visible = flag);
@@ -336,6 +332,14 @@ namespace Artco
             pnl_row_padding1.ThreadSafe(x => x.Visible = flag);
             pnl_row_padding2.ThreadSafe(x => x.Visible = flag);
             pnl_row_padding3.ThreadSafe(x => x.Visible = flag);
+
+            pnl_BlockTab.ThreadSafe(x => x.Visible = flag);
+            pnl_Left.ThreadSafe(x => x.Visible = flag);
+            pnl_Menu.ThreadSafe(x => x.Visible = flag);
+            pnl_Right.ThreadSafe(x => x.Visible = flag);
+            pnl_EditorBox.ThreadSafe(x => x.Visible = flag);
+
+            ResumeLayout();
         }
     }
 }

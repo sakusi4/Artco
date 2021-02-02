@@ -48,7 +48,6 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.pnl_TopTools = new Artco.DoubleBufferedPanel();
             this.btn_Undo = new Bunifu.Framework.UI.BunifuImageButton();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.btn_Redo = new Bunifu.Framework.UI.BunifuImageButton();
             this.cmbbox_PenWidth = new System.Windows.Forms.ComboBox();
             this.btn_SetFont = new Bunifu.Framework.UI.BunifuImageButton();
@@ -348,7 +347,6 @@
             // pnl_TopTools
             // 
             this.pnl_TopTools.Controls.Add(this.btn_Undo);
-            this.pnl_TopTools.Controls.Add(this.panel1);
             this.pnl_TopTools.Controls.Add(this.btn_Redo);
             this.pnl_TopTools.Controls.Add(this.cmbbox_PenWidth);
             this.pnl_TopTools.Controls.Add(this.btn_SetFont);
@@ -368,44 +366,34 @@
             // 
             this.btn_Undo.BackColor = System.Drawing.Color.Transparent;
             this.btn_Undo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_Undo.Dock = System.Windows.Forms.DockStyle.Right;
             this.btn_Undo.ErrorImage = null;
             this.btn_Undo.Image = ((System.Drawing.Image)(resources.GetObject("btn_Undo.Image")));
             this.btn_Undo.ImageActive = null;
             this.btn_Undo.InitialImage = null;
-            this.btn_Undo.Location = new System.Drawing.Point(1094, 0);
+            this.btn_Undo.Location = new System.Drawing.Point(1082, 0);
             this.btn_Undo.Name = "btn_Undo";
             this.btn_Undo.Size = new System.Drawing.Size(32, 54);
-            this.btn_Undo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_Undo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btn_Undo.TabIndex = 26;
             this.btn_Undo.TabStop = false;
-            this.btn_Undo.Zoom = 3;
+            this.btn_Undo.Zoom = 5;
             this.btn_Undo.Click += new System.EventHandler(this.Btn_Undo_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1126, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(17, 54);
-            this.panel1.TabIndex = 51;
             // 
             // btn_Redo
             // 
             this.btn_Redo.BackColor = System.Drawing.Color.Transparent;
             this.btn_Redo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_Redo.Dock = System.Windows.Forms.DockStyle.Right;
             this.btn_Redo.ErrorImage = null;
             this.btn_Redo.Image = ((System.Drawing.Image)(resources.GetObject("btn_Redo.Image")));
             this.btn_Redo.ImageActive = null;
             this.btn_Redo.InitialImage = null;
-            this.btn_Redo.Location = new System.Drawing.Point(1143, 0);
+            this.btn_Redo.Location = new System.Drawing.Point(1131, -1);
             this.btn_Redo.Name = "btn_Redo";
             this.btn_Redo.Size = new System.Drawing.Size(32, 54);
-            this.btn_Redo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_Redo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btn_Redo.TabIndex = 26;
             this.btn_Redo.TabStop = false;
-            this.btn_Redo.Zoom = 3;
+            this.btn_Redo.Zoom = 5;
             this.btn_Redo.Click += new System.EventHandler(this.Btn_Redo_Click);
             // 
             // cmbbox_PenWidth
@@ -424,7 +412,7 @@
             "40",
             "45",
             "50"});
-            this.cmbbox_PenWidth.Location = new System.Drawing.Point(728, 0);
+            this.cmbbox_PenWidth.Location = new System.Drawing.Point(747, 15);
             this.cmbbox_PenWidth.Name = "cmbbox_PenWidth";
             this.cmbbox_PenWidth.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cmbbox_PenWidth.Size = new System.Drawing.Size(46, 21);
@@ -444,7 +432,7 @@
             this.btn_SetFont.Location = new System.Drawing.Point(685, 0);
             this.btn_SetFont.Name = "btn_SetFont";
             this.btn_SetFont.Size = new System.Drawing.Size(43, 54);
-            this.btn_SetFont.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_SetFont.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btn_SetFont.TabIndex = 47;
             this.btn_SetFont.TabStop = false;
             this.btn_SetFont.Zoom = 3;
@@ -461,7 +449,7 @@
             this.btn_GetColor.Location = new System.Drawing.Point(642, 0);
             this.btn_GetColor.Name = "btn_GetColor";
             this.btn_GetColor.Size = new System.Drawing.Size(43, 54);
-            this.btn_GetColor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_GetColor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btn_GetColor.TabIndex = 24;
             this.btn_GetColor.TabStop = false;
             this.btn_GetColor.Zoom = 3;
@@ -478,7 +466,7 @@
             this.btn_ColorList.Location = new System.Drawing.Point(599, 0);
             this.btn_ColorList.Name = "btn_ColorList";
             this.btn_ColorList.Size = new System.Drawing.Size(43, 54);
-            this.btn_ColorList.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_ColorList.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.btn_ColorList.TabIndex = 22;
             this.btn_ColorList.TabStop = false;
             this.btn_ColorList.Zoom = 3;
@@ -908,7 +896,6 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private DoubleBufferedPanel doubleBufferedPanel1;
         private DoubleBufferedPanel pnl_TopTools;
-        private System.Windows.Forms.Panel panel1;
         private DoubleBufferedPanel doubleBufferedPanel2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;

@@ -20,5 +20,8 @@
     <Setting Name="version" Type="System.String" Scope="User">
       <Value Profile="(Default)">45.6</Value>
     </Setting>
+    <Setting Name="resolution" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

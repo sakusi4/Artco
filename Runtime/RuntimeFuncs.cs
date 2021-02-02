@@ -133,14 +133,14 @@ namespace Artco
                 bottom = y + height;
 
                 if ((name.Equals(walls[0]) && left > 0) ||
-                    (name.Equals(walls[1]) && right < RuntimeEnv.width) ||
+                    (name.Equals(walls[1]) && right < MainForm.stage_size.Width) ||
                     (name.Equals(walls[2]) && top > 0) ||
-                    (name.Equals(walls[3]) && bottom < RuntimeEnv.height)) {
+                    (name.Equals(walls[3]) && bottom < MainForm.stage_size.Height)) {
                     s.pc[line_num] = -1;
                 }
 
                 if (name.Equals(walls[4])) {
-                    if (left > 0 && right < RuntimeEnv.width && top > 0 && bottom < RuntimeEnv.height)
+                    if (left > 0 && right < MainForm.stage_size.Width && top > 0 && bottom < MainForm.stage_size.Height)
                         s.pc[line_num] = -1;
                 }
 
@@ -175,7 +175,7 @@ namespace Artco
         public void MoveConstant(ActivatedSprite s, int arrow, int n, bool is_delay)
         {
             s.arrow = arrow;
-            MoveSprite(s, n * 10, 1);
+            MoveSprite(s, n, 1);
 
             if (is_delay)
                 Thread.Sleep(1000);
@@ -192,7 +192,7 @@ namespace Artco
                 if (IsFinish(s, line_num))
                     return;
 
-                if ((s.arrow == 5 && s.x + width < RuntimeEnv.width) || (s.arrow == 7 && s.x > 0)) {
+                if ((s.arrow == 5 && s.x + width < MainForm.stage_size.Width) || (s.arrow == 7 && s.x > 0)) {
                     s.x += (s.arrow == 5) ? 10 : -10;
                 } else {
                     FlipXBitmap(s);
@@ -249,7 +249,7 @@ namespace Artco
                     if (IsFinish(s, line_num))
                         return;
 
-                    if ((s.arrow == 5 && s.x + width < RuntimeEnv.width) || (s.arrow == 7 && s.x > 0)) {
+                    if ((s.arrow == 5 && s.x + width < MainForm.stage_size.Width) || (s.arrow == 7 && s.x > 0)) {
                         double radian = Math.PI * angle / 180.0;
                         s.y = (int)(-Math.Sin(radian * factor) * 50.0) + zero_point;
                         s.x += (s.arrow == 5) ? 10 : -10;
@@ -280,7 +280,7 @@ namespace Artco
                     if (IsFinish(s, line_num))
                         return;
 
-                    if ((s.arrow == 6 && s.y + height < RuntimeEnv.height) || (s.arrow == 8 && s.y > 0)) {
+                    if ((s.arrow == 6 && s.y + height < MainForm.stage_size.Height) || (s.arrow == 8 && s.y > 0)) {
                         double radian = Math.PI * angle / 180.0;
                         s.x = (int)(Math.Sin(radian * factor) * 50.0) + zero_point;
                         s.y += (s.arrow == 6) ? 10 : -10;
@@ -316,7 +316,7 @@ namespace Artco
             };
 
             for (int i = 0; i < n; i++) {
-                actions[s.arrow - 1].Invoke(s, value);
+                actions[s.arrow - 1].Invoke(s, value * MainForm.moving_unit);
                 Thread.Sleep(delay);
             }
         }
@@ -785,10 +785,10 @@ namespace Artco
         {
             int y = s.y;
             int next_y = y + n + s.height;
-            if (next_y <= RuntimeEnv.height)
-                s.ChangeLoc(0, n);
+            if (next_y <= MainForm.stage_size.Height)
+                s.y += n;
             else
-                s.y = RuntimeEnv.height - s.height;
+                s.y = MainForm.stage_size.Height - s.height;
 
             return 0;
         }
@@ -797,10 +797,10 @@ namespace Artco
         {
             int x = s.x;
             int next_x = x + n + s.width;
-            if (next_x <= RuntimeEnv.width)
-                s.ChangeLoc(n, 0);
+            if (next_x <= MainForm.stage_size.Width)
+                s.x += n;
             else
-                s.x = RuntimeEnv.width - s.width;
+                s.x = MainForm.stage_size.Width - s.width;
 
             return 0;
         }
@@ -810,7 +810,7 @@ namespace Artco
             int x = s.x;
 
             if (x - n >= 0)
-                s.ChangeLoc(-n, 0);
+                s.x -= n;
             else
                 s.x = 0;
 
@@ -822,7 +822,7 @@ namespace Artco
             int y = s.y;
 
             if (y - n >= 0)
-                s.ChangeLoc(0, -n);
+                s.y -= n;
             else
                 s.y = 0;
 
@@ -834,9 +834,10 @@ namespace Artco
             int x = s.x;
             int y = s.y;
 
-            if (x + s.width + n < RuntimeEnv.width) {
+            if (x + s.width + n < MainForm.stage_size.Width) {
                 if (y - n > 0) {
-                    s.ChangeLoc(n, -n);
+                    s.x += n;
+                    s.y -= n;                    
                     return -1;
                 } else {
                     return 4;
@@ -851,9 +852,10 @@ namespace Artco
             int x = s.x;
             int y = s.y;
 
-            if (x + s.width + n < RuntimeEnv.width) {
-                if (y + s.height + n < RuntimeEnv.height) {
-                    s.ChangeLoc(n, n);
+            if (x + s.width + n < MainForm.stage_size.Width) {
+                if (y + s.height + n < MainForm.stage_size.Height) {
+                    s.x += n;
+                    s.y += n;
                     return -1;
                 } else {
                     return 2;
@@ -869,8 +871,9 @@ namespace Artco
             int y = s.y;
 
             if (x - n > 0) {
-                if (y + s.height + n < RuntimeEnv.height) {
-                    s.ChangeLoc(-n, n);
+                if (y + s.height + n < MainForm.stage_size.Height) {
+                    s.x -= n;
+                    s.y += n;
                     return -1;
                 } else {
                     return 2;
@@ -887,7 +890,8 @@ namespace Artco
 
             if (x - n > 0) {
                 if (y - n > 0) {
-                    s.ChangeLoc(-n, -n);
+                    s.x -= n;
+                    s.y -= n;
                     return -1;
                 } else {
                     return 4;
@@ -917,10 +921,10 @@ namespace Artco
                 return s.y + s.height;
 
             if (value.Equals("Width"))
-                return RuntimeEnv.width;
+                return MainForm.stage_size.Width;
 
             if (value.Equals("Height"))
-                return RuntimeEnv.height;
+                return MainForm.stage_size.Height;
 
             if (double.TryParse(value, out double n)) {
                 return n;

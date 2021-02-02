@@ -17,6 +17,7 @@ namespace Artco
         public int category;
         public int vx; // block panel x pos
         public int vy; // block panel y pos
+        public int width; // block image size
         public int block_type;
         public int event_type;
         public string[] values;
@@ -69,6 +70,8 @@ namespace Artco
                 block_view = new BlockType7();
 
             block_view.BackgroundImage = new Bitmap(block_img);
+            //block_view.Size = new Size(blocks[0][0].width, blocks[0][0].width);
+            block_view.Size = new Size(99, 99);
 
             if (name.Equals("ControlSound")) {
                 ((BlockType2)block_view).txtbox.Click += (sender, e) => {
@@ -130,8 +133,7 @@ namespace Artco
 
                 blocks[category].Add(new Block(name, category, 0, 0, block_type, event_type, block_bit, null));
             }
-
-            SetPnlBlocksPosition();
+            
             SetBlockFunctions();
         }
 
@@ -146,27 +148,28 @@ namespace Artco
             return null;
         }
 
-        public static void SetPnlBlocksPosition()
+        public static void SetBlocksPosition(int pnl_width)
         {
             int x, y;
             int row, col;
-            int width = blocks[0][0].block_img.Width;
-            int height = blocks[0][0].block_img.Height;
+            int width = (pnl_width / 3) - 10;
+            int height = width;
 
             for (int i = 0; i < blocks.Count; i++) {
                 row = 0;
                 col = 0;
                 for (int j = 0; j < blocks[i].Count; j++) {
-                    x = (width * col) + (5 * col) + 15;
+                    x = (width * col) + (5 * col) + 10;
                     if (col == 3) {
-                        x = 17;
+                        x = 10;
                         col = 0;
                         row += 1;
                     }
-                    y = (height * row) + (5 * row) + 20;
+                    y = (height * row) + (5 * row) + 10;
 
                     blocks[i][j].vx = x;
                     blocks[i][j].vy = y;
+                    blocks[i][j].width = width;
 
                     col += 1;
                 }

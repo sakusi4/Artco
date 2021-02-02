@@ -10,6 +10,8 @@ namespace Artco
         private Point _form_loc = new Point(0, 0);
         private bool _is_form_move;
 
+        public static Size form_size { get; set; }
+        public static Area client_area { get; set; }
         public static StagePanel stage_panel { get; set; } = new StagePanel();
         public static StagePlayer stage_player { get; set; }
         public static PracticeMode practice_mode { get; set; }
@@ -17,8 +19,6 @@ namespace Artco
         public static Action<Background> select_back_cb { get; set; }
         public static Action<Sprite> select_sprite_cb { get; set; }
         public static Action<Image> draw_background { get; set; }
-        public static Action<string> set_recording_time { get; set; }
-        public static Action<bool> show_recording_time { get; set; }
         public static Action<bool> show_recording_btn { get; set; }
         public static Action invalidate_stage_form { get; set; }
         public static Action invalidate_editor_panel { get; set; }
@@ -26,8 +26,8 @@ namespace Artco
         public static Action finish_stage_player_cb { get; set; }
         public static Action finish_act_sprites_cb { get; set; }
         public static Action remove_all_sprite { get; set; }
-        public static Action start_project { get; set; }
-        public static Action stop_project { get; set; }
+        public static Func<bool> start_project { get; set; }
+        public static Func<bool> stop_project { get; set; }
         public static Action release_focus { get; set; }
 
         public MainForm()
@@ -38,17 +38,16 @@ namespace Artco
         private void MainForm_Load(object sender, EventArgs e)
         {
             Cursor = new Cursor(Properties.Resources.Cursor.GetHicon());
-
-            SetDelegates();
-            AttachTooltipRightMenu();
-            SetStagePanelProperties();
-            SetWindowFormTheme(Properties.Settings.Default.Theme);
-            SetMouseWheelEvent();
-
-            RuntimeEnv.SetStageSize(pbx_Stage.Width, pbx_Stage.Height);
-
             CodeEditor.parent_panel = pnl_EditorBox;
             SpriteView.sprite_list_panel = pnl_SpriteList;
+
+            SetStagePanelProperties();
+            SetWindowResolution(Setting.resolution_list[Properties.Settings.Default.resolution]);
+            SetDelegates();
+            AttachTooltipRightMenu();
+            SetBlocksPosition();
+            SetWindowFormTheme(Properties.Settings.Default.Theme);
+            SetMouseWheelEvent();            
         }
 
         private void SetDelegates()
@@ -65,8 +64,6 @@ namespace Artco
             remove_all_sprite = RemoveAllSprite;
             stop_project = StopProject;
             start_project = StartProject;
-            set_recording_time = SetRecordingTime;
-            show_recording_time = ShowRecordingTime;
             show_recording_btn = ShowRecordingBtn;
             release_focus = ReleaseFocus;
         }
@@ -88,6 +85,11 @@ namespace Artco
             _right_menu_tooltip.SetToolTip(btn_SettingBtn, "查看公告");
         }
 
+        private void SetBlocksPosition()
+        {
+            Block.SetBlocksPosition(pnl_Blocks.Width);
+        }
+
         private void SetMouseWheelEvent()
         {
             pnl_SpriteList.AutoScrollPosition = new Point(0, 0);
@@ -101,10 +103,7 @@ namespace Artco
         {
             stage_panel.BackColor = Color.Transparent;
             stage_panel.BorderStyle = BorderStyle.None;
-            stage_panel.Width = pbx_Stage.Width;
-            stage_panel.Height = pbx_Stage.Height;
-            stage_panel.Location = new Point(0, 0);
-
+            stage_panel.Dock = DockStyle.Fill;
             stage_panel.Paint += StagePaint;
             stage_panel.MouseDoubleClick += StageMouseDoubleClick;
             stage_panel.MouseDown += StageMouseDown;
@@ -159,16 +158,6 @@ namespace Artco
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void Btn_StartProject_Click(object sender, EventArgs e)
-        {
-            StartProject();
-        }
-
-        private void Btn_StopAnimate_Click(object sender, EventArgs e)
-        {
-            StopProject();
-        }
-        
         private void MainForm_Shown(object sender, EventArgs e)
         {
 
@@ -183,7 +172,6 @@ namespace Artco
 
             StagePlayer.SetFlagZero();
             StagePlayer.SetFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.LOADING, StagePlayer.Flag.NOREPEAT);
-
 
             stage_player = new StagePlayer(draw_background, () => {
                 stage_player = new StagePlayer(draw_background, finish_stage_player_cb);
@@ -201,26 +189,18 @@ namespace Artco
 #endif
         }
 
-        private void MainForm_Paint(object sender, PaintEventArgs e)
-        {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) &&
-                !StagePlayer.ORCheckFlags(StagePlayer.Flag.LOADING)) {
-                e.Graphics.DrawImage(Properties.Resources.StageBackOutline, 427, 70);
-            }
-        }
-
-        private void StartProject()
+        private bool StartProject()
         {
             ReleaseFocus();
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) ||
                 stage_player.GetBackground() == null) {
-                return;
+                return false;
             }
 
             if (!CheckError()) {
                 new MsgBoxForm("错误的编码编辑").ShowDialog();
-                return;
+                return false;
             }
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
@@ -235,7 +215,8 @@ namespace Artco
             RuntimeEnv.RunActivatedSprites();
 
             StagePlayer.SetFlags(StagePlayer.Flag.PLAYING);
-            SafeInvalidateStageOutline();
+
+            return true;
         }
 
         private bool CheckError()
@@ -248,11 +229,29 @@ namespace Artco
             return true;
         }
 
-        private void StopProject()
+        private void Btn_Run_Click(object sender, EventArgs e)
+        {
+            if(int.Parse(btn_Run.Tag.ToString()) == 0) {
+                if (!StartProject()) 
+                    return;
+
+                btn_Run.Tag = 1;
+                btn_Run.Image = Properties.Resources.Button_Stop;
+            } else {
+
+                if (!StopProject())
+                    return;
+
+                btn_Run.Tag = 0;
+                btn_Run.Image = Properties.Resources.Button_Play;
+            }
+        }
+
+        private bool StopProject()
         {
             if (!StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) ||
                 StagePlayer.ORCheckFlags(StagePlayer.Flag.LOADING)) {
-                return;
+                return false;
             }
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
@@ -260,6 +259,7 @@ namespace Artco
             }
 
             RuntimeEnv.StopActivatedSprites();
+            return true;
         }
 
         public void FinishActSpritesCB()
@@ -276,8 +276,7 @@ namespace Artco
 
             Music.StopBackMusic();
 
-            StagePlayer.UnsetFlag(StagePlayer.Flag.PLAYING);
-            SafeInvalidateStageOutline();
+            StagePlayer.UnsetFlag(StagePlayer.Flag.PLAYING);            
 
             _change_screen_state?.Invoke(false);
             _change_screen_state = null;
@@ -349,7 +348,11 @@ namespace Artco
                 return;
             }
 
-            using var setting_form = new SettingForm { change_theme = SetWindowFormTheme };
+            using var setting_form = new SettingForm {
+                change_theme = SetWindowFormTheme,
+                change_resolution = SetWindowResolution
+            };
+
             setting_form.ShowDialog();
         }
 
@@ -418,40 +421,6 @@ namespace Artco
             btn_ToggleBgm.Image = (Music.is_play_bgm) ? Properties.Resources.BgmOnBtn : Properties.Resources.BgmOffBtn;
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _right_menu_tooltip?.Dispose();
-        }
-
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && e.Y < 50) {
-                _is_form_move = true;
-                _form_loc.X = e.X;
-                _form_loc.Y = e.Y;
-            }
-        }
-
-        private void MainForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && _is_form_move) {
-                Location = new Point(Location.X + (e.X - _form_loc.X), Location.Y + (e.Y - _form_loc.Y));
-            }
-        }
-
-        private void MainForm_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (!_is_form_move) {
-                return;
-            }
-
-            if (Math.Abs(Location.X) < 50 && Math.Abs(Location.Y) < 50) {
-                Location = new Point(0, 0);
-            }
-
-            _is_form_move = false;
-        }
-
         private void InvalidateEditorPanel()
         {
             if (pnl_EditorBox.InvokeRequired) {
@@ -503,28 +472,6 @@ namespace Artco
             }
         }
 
-        private void SafeInvalidateStageOutline()
-        {
-            if (InvokeRequired) {
-                var d = new Action(SafeInvalidateStageOutline);
-                Invoke(d);
-            } else {
-                int width = Properties.Resources.StageBackOutline.Width;
-                int height = Properties.Resources.StageBackOutline.Height;
-                Invalidate(new Rectangle(428, 70, width, height), false);
-            }
-        }
-
-        private void SetRecordingTime(string text)
-        {
-            lbl_RecordingTime.ThreadSafe(x => x.Text = text);
-        }
-
-        private void ShowRecordingTime(bool is_show)
-        {
-            lbl_RecordingTime.ThreadSafe(x => x.Visible = is_show);
-        }
-
         private void ShowRecordingBtn(bool is_show)
         {
             btn_RecordingReady.ThreadSafe(x => x.Visible = is_show);
@@ -538,7 +485,7 @@ namespace Artco
         private void SetWindowFormTheme(int idx)
         {
             if (idx == 0) {
-                BackgroundImage = Properties.Resources.WindowFormblue;
+                BackgroundImage = Properties.Resources.WindowFormBlue;
             } else if (idx == 1) {
                 BackgroundImage = Properties.Resources.WindowFormYellow;
             } else if (idx == 2) {
@@ -546,6 +493,106 @@ namespace Artco
             } else if (idx == 3) {
                 BackgroundImage = Properties.Resources.WindowFormRed;
             }
+        }
+
+        private void SetWindowResolution(string value)
+        {
+            double[] col_factors = { 0.035, 0.17, 0.54, 0.18, 0.030 };
+            double[] row_factors = { 0.03, 0.6, 0.3 };
+            double col_padding_factor = 0.012;
+            double row_padding_factor = 0.023;
+
+            string[] splits = value.Split('x');
+            Width = int.Parse(splits[0]);
+            Height = int.Parse(splits[1]) - 40;
+            form_size = new Size(Width, Height);            
+            client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height, 
+                form_size.Width, form_size.Height - pnl_Topbar.Height);
+
+            pnl_BlockTab.Width = (int)(Width * col_factors[0]);
+            pnl_Left.Width = (int)(Width * col_factors[1]);
+            pnl_Center.Width = (int)(Width * col_factors[2]);
+            pnl_Right.Width = (int)(Width * col_factors[3]);
+            pnl_Menu.Width = (int)(Width * col_factors[4]);
+
+            pnl_Topbar.Height = (int)(Height * row_factors[0]);
+            pnl_Center.Height = (int)(Height * row_factors[1]);
+            pnl_EditorBox.Height = (int)(Height * row_factors[2]);
+
+            pnl_col_padding0.Width = (int)(Width * col_padding_factor);
+            pnl_col_padding1.Width = (int)(Width * col_padding_factor);
+            pnl_col_padding2.Width = (int)(Width * col_padding_factor);
+
+            pnl_row_padding0.Height = (int)(Height * row_padding_factor);
+            pnl_row_padding1.Height = (int)(Height * row_padding_factor);
+            pnl_row_padding2.Height = (int)(Height * row_padding_factor);
+
+            pnl_stage_top.Height = (int)(Height * 0.02);
+            pnl_stage_bottom.Height = (int)(Height * 0.055);
+            pnl_stage_left.Width = (int)(Width * 0.01);
+            pnl_stage_right.Width = (int)(Width * 0.01);
+
+            btn_CreateNewSprite.Width = (pnl_Right.Width / 2) - 10;
+            btn_RemoveAllSprite.Width = (pnl_Right.Width / 2) - 10;
+
+            btn_CreateVariable.Width = (pnl_Left.Width / 2) - 10;
+            btn_HideVarList.Width = (pnl_Left.Width / 2) - 10;
+
+            SetStageInfo();
+            SetBlocksPosition();
+            ActivatedSpriteController.SetSpritesViewSize();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _right_menu_tooltip?.Dispose();
+        }
+
+        private void Pnl_Topbar_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && e.Y < 50) {
+                _is_form_move = true;
+                _form_loc.X = e.X;
+                _form_loc.Y = e.Y;
+            }
+        }
+
+        private void Pnl_Topbar_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && _is_form_move) {
+                int x = Location.X + (e.X - _form_loc.X);
+                int y = Location.Y + (e.Y - _form_loc.Y);
+                Location = new Point(x, y);
+                client_area.x = x;
+                client_area.y = y + pnl_Topbar.Height;
+            }
+        }
+
+        private void Pnl_Topbar_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!_is_form_move)
+                return;
+
+            if (Math.Abs(Location.X) < 50 && Math.Abs(Location.Y) < 50)
+                Location = new Point(0, 0);
+
+            _is_form_move = false;            
+        }      
+    }
+
+    public class Area
+    {
+        public int x { get; set; }
+        public int y { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
+
+        public Area(int x, int y, int width, int height)
+        {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.height = height;
         }
     }
 

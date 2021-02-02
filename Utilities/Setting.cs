@@ -12,6 +12,7 @@ namespace Artco
         public static string user_name { get; set; }
         public static string serial_num { get; set; }
         public static string language { get; set; }
+        public static List<string> resolution_list { get; set; }
 
         /* Audio */
         public static IEnumerable<WaveInCapabilities> devices { get; set; }
@@ -30,6 +31,13 @@ namespace Artco
 
         static Setting()
         {
+            resolution_list = new List<string> {
+                "1920x1080",
+                "1600x900",
+                "1440x900",
+                "1280x720"
+            };
+
             devices = Enumerable.Range(-1, WaveIn.DeviceCount + 1).Select(n => WaveIn.GetCapabilities(n)).ToArray();
             if (devices.ToArray().Length > 0) {
                 device = (devices.ToArray())[0];
@@ -45,25 +53,21 @@ namespace Artco
             user_back_path = Application.LocalUserAppDataPath + "\\backgrounds";
             video_fps = 30;
 
-            if (!Directory.Exists(video_path)) {
+            if (!Directory.Exists(video_path))
                 Directory.CreateDirectory(video_path);
-            }
 
-            if (!Directory.Exists(user_sound_path)) {
+            if (!Directory.Exists(user_sound_path))
                 Directory.CreateDirectory(user_sound_path);
-            }
 
-            if (!Directory.Exists(save_path)) {
+            if (!Directory.Exists(save_path))
                 Directory.CreateDirectory(save_path);
-            }
 
-            if (!Directory.Exists(user_music_path)) {
+            if (!Directory.Exists(user_music_path))
                 Directory.CreateDirectory(user_music_path);
-            }
 
-            if (!Directory.Exists(user_back_path)) {
+            if (!Directory.Exists(user_back_path))
                 Directory.CreateDirectory(user_back_path);
-            }
+
         }
     }
 }

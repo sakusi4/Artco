@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MsgBoxForm));
             this.pnl_Back = new System.Windows.Forms.Panel();
             this.txtbox_Text = new System.Windows.Forms.TextBox();
-            this.btn_No = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_Yes = new Bunifu.Framework.UI.BunifuImageButton();
+            this.btn_No = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_Ok = new Bunifu.Framework.UI.BunifuImageButton();
             this.pnl_Back.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_No)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Yes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_No)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Ok)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,21 +70,6 @@
             this.txtbox_Text.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtbox_Text.WordWrap = false;
             // 
-            // btn_No
-            // 
-            this.btn_No.BackColor = System.Drawing.Color.Transparent;
-            this.btn_No.Image = ((System.Drawing.Image)(resources.GetObject("btn_No.Image")));
-            this.btn_No.ImageActive = null;
-            this.btn_No.Location = new System.Drawing.Point(149, 137);
-            this.btn_No.Name = "btn_No";
-            this.btn_No.Size = new System.Drawing.Size(104, 44);
-            this.btn_No.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btn_No.TabIndex = 5;
-            this.btn_No.TabStop = false;
-            this.btn_No.Visible = false;
-            this.btn_No.Zoom = 10;
-            this.btn_No.Click += new System.EventHandler(this.Btn_No_Click);
-            // 
             // btn_Yes
             // 
             this.btn_Yes.BackColor = System.Drawing.Color.Transparent;
@@ -99,6 +84,21 @@
             this.btn_Yes.Visible = false;
             this.btn_Yes.Zoom = 10;
             this.btn_Yes.Click += new System.EventHandler(this.Btn_Yes_Click);
+            // 
+            // btn_No
+            // 
+            this.btn_No.BackColor = System.Drawing.Color.Transparent;
+            this.btn_No.Image = ((System.Drawing.Image)(resources.GetObject("btn_No.Image")));
+            this.btn_No.ImageActive = null;
+            this.btn_No.Location = new System.Drawing.Point(149, 137);
+            this.btn_No.Name = "btn_No";
+            this.btn_No.Size = new System.Drawing.Size(104, 44);
+            this.btn_No.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btn_No.TabIndex = 5;
+            this.btn_No.TabStop = false;
+            this.btn_No.Visible = false;
+            this.btn_No.Zoom = 10;
+            this.btn_No.Click += new System.EventHandler(this.Btn_No_Click);
             // 
             // btn_Ok
             // 
@@ -125,13 +125,13 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MsgBoxForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MsgBoxForm";
             this.Load += new System.EventHandler(this.MsgBoxForm_Load);
             this.pnl_Back.ResumeLayout(false);
             this.pnl_Back.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btn_No)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Yes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btn_No)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Ok)).EndInit();
             this.ResumeLayout(false);
 

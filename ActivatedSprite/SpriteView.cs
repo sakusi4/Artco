@@ -16,10 +16,13 @@ namespace Artco
 
         public SpriteView(ActivatedSprite sprite, string name, Bitmap image)
         {
-            this._sprite = sprite;
+            _sprite = sprite;
+            int width = (sprite_list_panel.Width / 2) - 30;
+            int height = (int)(width * 1.1);
 
             sprite.name = NameDuplicateCheck(name);
             sprite_view = new SpriteMiniView() {
+                Size = new Size(width, height),                
                 spriteName = sprite.name,
                 spriteImage = image
             };

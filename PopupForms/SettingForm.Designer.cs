@@ -35,7 +35,7 @@
             this.btn_ChangeAudioPath = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_OpenSaveFolder = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_ChangeVideoPath = new Bunifu.Framework.UI.BunifuImageButton();
-            this.cmbbox_Language = new System.Windows.Forms.ComboBox();
+            this.cmbbox_Resolution = new System.Windows.Forms.ComboBox();
             this.cmbbox_Theme = new System.Windows.Forms.ComboBox();
             this.cmbbox_InputDevices = new System.Windows.Forms.ComboBox();
             this.cmbbox_AudioFormat = new System.Windows.Forms.ComboBox();
@@ -124,21 +124,21 @@
             this.btn_ChangeVideoPath.Zoom = 10;
             this.btn_ChangeVideoPath.Click += new System.EventHandler(this.Btn_ChangeVideoPath_Click);
             // 
-            // cmbbox_Language
+            // cmbbox_Resolution
             // 
-            this.cmbbox_Language.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmbbox_Language.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.cmbbox_Language.FormattingEnabled = true;
-            this.cmbbox_Language.Items.AddRange(new object[] {
-            "中文",
-            "한국어"});
-            this.cmbbox_Language.Location = new System.Drawing.Point(492, 156);
-            this.cmbbox_Language.Name = "cmbbox_Language";
-            this.cmbbox_Language.Size = new System.Drawing.Size(110, 21);
-            this.cmbbox_Language.TabIndex = 10;
+            this.cmbbox_Resolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbbox_Resolution.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmbbox_Resolution.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.cmbbox_Resolution.FormattingEnabled = true;
+            this.cmbbox_Resolution.Location = new System.Drawing.Point(492, 156);
+            this.cmbbox_Resolution.Name = "cmbbox_Resolution";
+            this.cmbbox_Resolution.Size = new System.Drawing.Size(110, 21);
+            this.cmbbox_Resolution.TabIndex = 10;
+            this.cmbbox_Resolution.SelectedIndexChanged += new System.EventHandler(this.Cmbbox_Resolution_SelectedIndexChanged);
             // 
             // cmbbox_Theme
             // 
+            this.cmbbox_Theme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbox_Theme.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbbox_Theme.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.cmbbox_Theme.FormattingEnabled = true;
@@ -155,6 +155,7 @@
             // 
             // cmbbox_InputDevices
             // 
+            this.cmbbox_InputDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbox_InputDevices.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbbox_InputDevices.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.cmbbox_InputDevices.FormattingEnabled = true;
@@ -166,6 +167,7 @@
             // 
             // cmbbox_AudioFormat
             // 
+            this.cmbbox_AudioFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbox_AudioFormat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbbox_AudioFormat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.cmbbox_AudioFormat.FormattingEnabled = true;
@@ -179,6 +181,7 @@
             // 
             // cmbbox_SampleRate
             // 
+            this.cmbbox_SampleRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbox_SampleRate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbbox_SampleRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.cmbbox_SampleRate.FormattingEnabled = true;
@@ -191,6 +194,7 @@
             // 
             // cmbbox_Channels
             // 
+            this.cmbbox_Channels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbbox_Channels.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbbox_Channels.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.cmbbox_Channels.FormattingEnabled = true;
@@ -231,7 +235,7 @@
             this.pnl_Setting.Controls.Add(this.cmbbox_SampleRate);
             this.pnl_Setting.Controls.Add(this.lbl_UserName);
             this.pnl_Setting.Controls.Add(this.btn_ChangeVideoPath);
-            this.pnl_Setting.Controls.Add(this.cmbbox_Language);
+            this.pnl_Setting.Controls.Add(this.cmbbox_Resolution);
             this.pnl_Setting.Controls.Add(this.cmbbox_AudioFormat);
             this.pnl_Setting.Controls.Add(this.lbl_SerialCode);
             this.pnl_Setting.Controls.Add(this.cmbbox_InputDevices);
@@ -293,7 +297,7 @@
         private Bunifu.Framework.UI.BunifuImageButton btn_ChangeAudioPath;
         private Bunifu.Framework.UI.BunifuImageButton btn_OpenSaveFolder;
         private Bunifu.Framework.UI.BunifuImageButton btn_ChangeVideoPath;
-        private System.Windows.Forms.ComboBox cmbbox_Language;
+        private System.Windows.Forms.ComboBox cmbbox_Resolution;
         private System.Windows.Forms.ComboBox cmbbox_Theme;
         private System.Windows.Forms.ComboBox cmbbox_InputDevices;
         private System.Windows.Forms.ComboBox cmbbox_AudioFormat;

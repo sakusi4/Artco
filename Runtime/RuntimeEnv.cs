@@ -7,16 +7,8 @@ namespace Artco
     internal static class RuntimeEnv
     {
         public static bool is_stop { get; set; }
-        public static int width { get; set; }
-        public static int height { get; set; }
         public static List<RuntimeSprite> runtime_sprites { get; set; } = new List<RuntimeSprite>();
         public static List<Thread> runtime_threads { get; set; } = new List<Thread>();
-
-        public static void SetStageSize(int width, int height)
-        {
-            RuntimeEnv.width = width;
-            RuntimeEnv.height = height;
-        }
 
         public static void RunActivatedSprites()
         {

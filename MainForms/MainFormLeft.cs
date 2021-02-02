@@ -14,7 +14,7 @@ namespace Artco
 
             for (int i = 0; i < size; i++) {
                 var block = Block.blocks[category][i];
-                g.DrawImage(block.block_img, block.vx, block.vy);
+                g.DrawImage(block.block_img, block.vx, block.vy, block.width, block.width);
             }
         }
 
@@ -75,8 +75,8 @@ namespace Artco
 
             ClearMenuBitmaps();
             btn_ControlTab.Image = Properties.Resources.Control2;
-            btn_CreateVariable.Visible = true;
-            btn_HideVarList.Visible = true;
+
+            pnl_VarMenu.Visible = true;
 
             Block.selected_category = 3;
             InvalidateBlockPanel();
@@ -124,8 +124,8 @@ namespace Artco
             btn_MoveTab.Image = Properties.Resources.Move1;
             btn_ActionTab.Image = Properties.Resources.Action1;
             btn_ControlTab.Image = Properties.Resources.Control1;
-            btn_CreateVariable.Visible = false;
-            btn_HideVarList.Visible = false;
+
+            pnl_VarMenu.Visible = false;            
         }
 
         private void Btn_CreateVariable_Click(object sender, EventArgs e)

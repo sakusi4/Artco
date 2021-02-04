@@ -1,33 +1,32 @@
 ﻿namespace Artco
 {
-        partial class LoginForm
+    partial class LoginForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
         {
-                /// <summary>
-                /// Required designer variable.
-                /// </summary>
-                private System.ComponentModel.IContainer components = null;
+            if (disposing && (components != null)) {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-                /// <summary>
-                /// Clean up any resources being used.
-                /// </summary>
-                /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-                protected override void Dispose(bool disposing)
-                {
-                        if (disposing && (components != null))
-                        {
-                                components.Dispose();
-                        }
-                        base.Dispose(disposing);
-                }
+        #region Windows Form Designer generated code
 
-                #region Windows Form Designer generated code
-
-                /// <summary>
-                /// Required method for Designer support - do not modify
-                /// the contents of this method with the code editor.
-                /// </summary>
-                private void InitializeComponent()
-                {
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.txtbox_userpass = new System.Windows.Forms.TextBox();
             this.txtbox_Username = new System.Windows.Forms.TextBox();
@@ -35,9 +34,13 @@
             this.btn_Close = new Bunifu.Framework.UI.BunifuImageButton();
             this.btn_Enter = new Bunifu.Framework.UI.BunifuImageButton();
             this.cmbbox_Resolution = new System.Windows.Forms.ComboBox();
+            this.button_Signup = new Bunifu.Framework.UI.BunifuImageButton();
+            this.button_Findidpw = new Bunifu.Framework.UI.BunifuImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_RememberMe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Enter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.button_Signup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.button_Findidpw)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbox_userpass
@@ -113,6 +116,34 @@
             this.cmbbox_Resolution.Size = new System.Drawing.Size(84, 21);
             this.cmbbox_Resolution.TabIndex = 18;
             // 
+            // button_Signup
+            // 
+            this.button_Signup.BackColor = System.Drawing.Color.Transparent;
+            this.button_Signup.Image = global::Artco.Properties.Resources.SignUpBtn;
+            this.button_Signup.ImageActive = null;
+            this.button_Signup.Location = new System.Drawing.Point(738, 517);
+            this.button_Signup.Name = "button_Signup";
+            this.button_Signup.Size = new System.Drawing.Size(147, 24);
+            this.button_Signup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.button_Signup.TabIndex = 19;
+            this.button_Signup.TabStop = false;
+            this.button_Signup.Zoom = 0;
+            this.button_Signup.Click += new System.EventHandler(this.Button_Signup_Click);
+            // 
+            // button_Findidpw
+            // 
+            this.button_Findidpw.BackColor = System.Drawing.Color.Transparent;
+            this.button_Findidpw.Image = global::Artco.Properties.Resources.FindIDPWBtn;
+            this.button_Findidpw.ImageActive = null;
+            this.button_Findidpw.Location = new System.Drawing.Point(738, 490);
+            this.button_Findidpw.Name = "button_Findidpw";
+            this.button_Findidpw.Size = new System.Drawing.Size(147, 24);
+            this.button_Findidpw.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.button_Findidpw.TabIndex = 20;
+            this.button_Findidpw.TabStop = false;
+            this.button_Findidpw.Zoom = 0;
+            this.button_Findidpw.Click += new System.EventHandler(this.Button_Findidpw_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -120,6 +151,8 @@
             this.BackgroundImage = global::Artco.Properties.Resources.LoginForm;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1150, 680);
+            this.Controls.Add(this.button_Findidpw);
+            this.Controls.Add(this.button_Signup);
             this.Controls.Add(this.cmbbox_Resolution);
             this.Controls.Add(this.btn_Enter);
             this.Controls.Add(this.btn_Close);
@@ -139,17 +172,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbx_RememberMe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Close)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btn_Enter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.button_Signup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.button_Findidpw)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
-                }
+        }
 
-                #endregion
-                private System.Windows.Forms.TextBox txtbox_userpass;
-                private System.Windows.Forms.TextBox txtbox_Username;
-                private System.Windows.Forms.PictureBox pbx_RememberMe;
-                private Bunifu.Framework.UI.BunifuImageButton btn_Close;
-                private Bunifu.Framework.UI.BunifuImageButton btn_Enter;
+        #endregion
+        private System.Windows.Forms.TextBox txtbox_userpass;
+        private System.Windows.Forms.TextBox txtbox_Username;
+        private System.Windows.Forms.PictureBox pbx_RememberMe;
+        private Bunifu.Framework.UI.BunifuImageButton btn_Close;
+        private Bunifu.Framework.UI.BunifuImageButton btn_Enter;
         private System.Windows.Forms.ComboBox cmbbox_Resolution;
+        private Bunifu.Framework.UI.BunifuImageButton button_Signup;
+        private Bunifu.Framework.UI.BunifuImageButton button_Findidpw;
     }
 }

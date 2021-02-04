@@ -1150,6 +1150,16 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FindIDPWBtn {
+            get {
+                object obj = ResourceManager.GetObject("FindIDPWBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap FlipXBtn {
             get {
                 object obj = ResourceManager.GetObject("FlipXBtn", resourceCulture);
@@ -1807,6 +1817,46 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PersonalInfoCancelBtn {
+            get {
+                object obj = ResourceManager.GetObject("PersonalInfoCancelBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PersonalInfoChk {
+            get {
+                object obj = ResourceManager.GetObject("PersonalInfoChk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PersonalInfoOkBtn {
+            get {
+                object obj = ResourceManager.GetObject("PersonalInfoOkBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PersonalInfoUnChk {
+            get {
+                object obj = ResourceManager.GetObject("PersonalInfoUnChk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Play {
             get {
                 object obj = ResourceManager.GetObject("Play", resourceCulture);
@@ -2329,6 +2379,36 @@ namespace Artco.Properties {
         internal static System.Drawing.Bitmap ShowVarListBtn {
             get {
                 object obj = ResourceManager.GetObject("ShowVarListBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUpBtn {
+            get {
+                object obj = ResourceManager.GetObject("SignUpBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUpCancelBtn {
+            get {
+                object obj = ResourceManager.GetObject("SignUpCancelBtn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUpOkBtn {
+            get {
+                object obj = ResourceManager.GetObject("SignUpOkBtn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

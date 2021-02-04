@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -49,7 +50,7 @@ namespace Artco
             option += "-thread_queue_size 1024 -probesize 10M -r 30 -draw_mouse 1 -i desktop -f dshow -channel_layout stereo ";
             option += "-thread_queue_size 1024 -i audio=\"virtual-audio-capturer\" -c:v libx264 -r 30 -preset ultrafast -tune zerolatency -crf 25 ";
             option += "-pix_fmt yuv420p -c:a aac -strict -2 -ac 2 -b:a 128k ";
-            option += "\"" + Setting.video_path + "\\" + _video_name + ".mp4\"";
+            option += "\"" + Setting.video_path + "\\temp.mp4\"";
 
             process_start_info.FileName = "cmd.exe";
             process_start_info.Arguments = option;
@@ -73,14 +74,19 @@ namespace Artco
 
             _prc_ffmpeg.StandardInput.Write("q");
             _prc_ffmpeg.StandardInput.Close();
-            _video_name = null;
-
+                   
             _timer.Stop();
             _sec = 0;
             
             Thread.Sleep(1000);
             _prc_ffmpeg?.Dispose();
 
+            string temp_path = Setting.video_path + "\\temp.mp4";
+            string new_path = Setting.video_path + "\\" + _video_name + ".mp4";
+            if (File.Exists(temp_path))
+                File.Move(temp_path, new_path);
+
+            _video_name = null;
             return true;
         }
     }

@@ -296,7 +296,7 @@ namespace Artco
             // 실행 중이 아니라면 화면 전환
             // 실행 중이라면 배경 완료 스레드에서 처리
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
-                _change_screen_state = ChangeScreenState;
+                return;
             } else {
                 ChangeScreenState(false);
             }

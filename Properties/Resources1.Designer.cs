@@ -2406,6 +2406,26 @@ namespace Artco.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SignUpForm {
+            get {
+                object obj = ResourceManager.GetObject("SignUpForm", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUpFormPI {
+            get {
+                object obj = ResourceManager.GetObject("SignUpFormPI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SignUpOkBtn {
             get {
                 object obj = ResourceManager.GetObject("SignUpOkBtn", resourceCulture);

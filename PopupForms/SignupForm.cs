@@ -21,9 +21,9 @@ namespace Artco
         public SignupForm()
         {
             InitializeComponent();
+            InitBrithComboBox();
 
             _user_info = new UserInfo();
-            _user_info.birth = new string[3];
             _personalinfo_chk = new bool[5];
             _personalinfo_chk_btn = new Bunifu.Framework.UI.BunifuImageButton[5];
             _personalinfo_chk_btn[0] = this.button_Personalinfo1;
@@ -45,6 +45,15 @@ namespace Artco
             this.label_NameC.Visible = false;
             this.label_BirthC.Visible = false;
             this.label_EmailC.Visible = false;
+        }
+
+        private void InitBrithComboBox()
+        {
+            DateTime dt = DateTime.Now;
+
+            for (int i = 0; i < 100; i++) {
+                comboBox_year.Items.Add(dt.Year - i);
+            }
         }
 
         private void Button_Personalinfo_Cancel_Click(object sender, EventArgs e)
@@ -101,15 +110,40 @@ namespace Artco
 
         private void Button_Signup_Ok_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(textBox_id.Text) || string.IsNullOrEmpty(textBox_pw.Text) || 
-                string.IsNullOrEmpty(textBox_pwr.Text) || string.IsNullOrEmpty(textBox_name.Text) ||
-                string.IsNullOrEmpty(textBox_year.Text) || string.IsNullOrEmpty(textBox_month.Text) ||
-                string.IsNullOrEmpty(textBox_day.Text) || string.IsNullOrEmpty(textBox_email.Text)) {
-                return;
-            } else {
-                //need server work
+            if(this.UserInfoCheck()) {
+                //need server work // id 중복 처리, 중복시 "用户名已存在" 메시지박스
                 this.Close();
             }
+        }
+
+        private bool UserInfoCheck()
+        {
+            bool condition = true;
+            if (string.IsNullOrEmpty(textBox_id.Text)) {
+                this.label_IDC.Visible = true;
+                condition = false;
+            }
+            if (string.IsNullOrEmpty(textBox_pw.Text)) {
+                this.label_PWC.Visible = true;
+                condition = false;
+            }
+            if (string.IsNullOrEmpty(textBox_pwr.Text)) {
+                this.label_PWrC.Visible = true;
+                condition = false;
+            }
+            if (string.IsNullOrEmpty(textBox_name.Text)) {
+                this.label_NameC.Visible = true;
+                condition = false;
+            }
+            if (comboBox_year.SelectedItem == null || comboBox_month.SelectedItem == null || comboBox_day.SelectedItem == null) {
+                this.label_BirthC.Visible = true;
+                condition = false;
+            }
+            if (string.IsNullOrEmpty(textBox_email.Text)) {
+                this.label_EmailC.Visible = true;
+                condition = false;
+            }
+            return condition;
         }
 
         private void TextBox_ID_Leave(object sender, EventArgs e)
@@ -155,54 +189,6 @@ namespace Artco
             }
         }
 
-        private void TextBox_Year_Leave(object sender, EventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9_\-]{4,4}$");
-
-            if (regex.IsMatch(textBox_year.Text)) {
-                this._user_info.birth[0] = textBox_year.Text;
-                if(!string.IsNullOrEmpty(textBox_month.Text) && !string.IsNullOrEmpty(textBox_day.Text)) {
-                    this.label_BirthC.Visible = false;
-                } else {
-                    this.label_BirthC.Visible = true;
-                }
-            } else {
-                this.label_BirthC.Visible = true;
-            }
-        }
-
-        private void TextBox_Month_Leave(object sender, EventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9_\-]{1,2}$");
-
-            if (regex.IsMatch(textBox_month.Text)) {
-                this._user_info.birth[1] = textBox_month.Text;
-                if (!string.IsNullOrEmpty(textBox_year.Text) && !string.IsNullOrEmpty(textBox_day.Text)) {
-                    this.label_BirthC.Visible = false;
-                } else {
-                    this.label_BirthC.Visible = true;
-                }
-            } else {
-                this.label_BirthC.Visible = true;
-            }
-        }
-
-        private void TextBox_Day_Leave(object sender, EventArgs e)
-        {
-            Regex regex = new Regex(@"^[0-9_\-]{1,2}$");
-
-            if (regex.IsMatch(textBox_day.Text)) {
-                this._user_info.birth[2] = textBox_day.Text;
-                if (!string.IsNullOrEmpty(textBox_year.Text) && !string.IsNullOrEmpty(textBox_month.Text)) {
-                    this.label_BirthC.Visible = false;
-                } else {
-                    this.label_BirthC.Visible = true;
-                }
-            } else {
-                this.label_BirthC.Visible = true;
-            }
-        }
-
         private void TextBox_Email_Leave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBox_email.Text)) {
@@ -212,6 +198,64 @@ namespace Artco
                 this.label_EmailC.Visible = true;
             }
         }
+
+        private void ComboBox_Year_Leave(object sender, EventArgs e)
+        {
+            if (comboBox_year.SelectedItem != null) {
+                comboBox_month.Items.Clear();
+                for (int i = 1; i <= 12; i++) {
+                    comboBox_month.Items.Add(i);
+                }
+            }
+            this.BirthValueCheck();
+        }
+
+        private void ComboBox_Month_Leave(object sender, EventArgs e)
+        {
+            if (comboBox_year.SelectedItem != null && comboBox_month.SelectedItem != null) {
+                comboBox_day.Items.Clear();
+                int days = DateTime.DaysInMonth(Int32.Parse(comboBox_year.SelectedItem.ToString()),
+                    Int32.Parse(comboBox_month.SelectedItem.ToString()));
+                for (int i = 1; i <= days; i++) {
+                    comboBox_day.Items.Add(i);
+                }
+            }
+            this.BirthValueCheck();
+        }
+
+        private void ComboBox_Day_Leave(object sender, EventArgs e)
+        {
+            if (comboBox_year.SelectedItem != null && comboBox_month.SelectedItem != null && 
+                comboBox_day.SelectedItem != null) {
+                this._user_info.birth = new DateTime(Int32.Parse(comboBox_year.SelectedItem.ToString()),
+                    Int32.Parse(comboBox_month.SelectedItem.ToString()),
+                    Int32.Parse(comboBox_day.SelectedItem.ToString()));
+                this.label_BirthC.Visible = false;
+            } else {
+                this.label_BirthC.Visible = true;
+            }
+            this.BirthValueCheck();
+        }
+
+        private void BirthValueCheck()
+        {
+            if (comboBox_year.SelectedItem == null || comboBox_month.SelectedItem == null || comboBox_day.SelectedItem == null)
+                this.label_BirthC.Visible = true;
+        }
+
+        private void ComboBox_Year_Click(object sender, EventArgs e)
+        {
+            if (comboBox_month.SelectedItem != null || comboBox_day.SelectedItem != null) {
+                comboBox_month.Items.Clear();
+                comboBox_day.Items.Clear();
+            }
+        }
+
+        private void ComboBox_Month_Click(object sender, EventArgs e)
+        {
+            if(comboBox_day.SelectedItem != null)
+                comboBox_day.Items.Clear();
+        }
     }
 
     public struct UserInfo
@@ -219,7 +263,7 @@ namespace Artco
         public string id { get; set; }
         public string pw { get; set; }
         public string name { get; set; }
-        public string[] birth { get; set; }
+        public DateTime birth { get; set; }
         public string email { get; set; }
     }
 }

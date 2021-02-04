@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Artco
@@ -302,7 +303,13 @@ namespace Artco
 
             RenameSpriteForm rename_sprite_form = new RenameSpriteForm(true);
             if (rename_sprite_form.ShowDialog() != DialogResult.OK)
-                return;            
+                return;
+
+            string video_path = Setting.video_path + "\\" + rename_sprite_form.new_name + ".mp4";
+            if (File.Exists(video_path)) {
+                new MsgBoxForm("该文件已存在").ShowDialog();
+                return;
+            }
 
             VideoRecord.SetVideoName(rename_sprite_form.new_name);
             StagePlayer.SetFlags(StagePlayer.Flag.RECORDING);

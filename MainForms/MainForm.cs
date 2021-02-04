@@ -489,9 +489,6 @@ namespace Artco
             Width = int.Parse(splits[0]);
             Height = int.Parse(splits[1]) - 40;
             form_size = new Size(Width, Height);
-            client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height,
-                form_size.Width, form_size.Height - pnl_Topbar.Height);
-
 
             pnl_BlockTab.Width = (int)(Width * col_factors[0]);
             pnl_Left.Width = (int)(Width * col_factors[1]);
@@ -522,6 +519,8 @@ namespace Artco
             btn_CreateVariable.Width = (pnl_Left.Width / 2) - 10;
             btn_HideVarList.Width = (pnl_Left.Width / 2) - 10;
 
+            client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height,
+    form_size.Width, form_size.Height - pnl_Topbar.Height);
 
             SetStageInfo();
             SetBlocksPosition();

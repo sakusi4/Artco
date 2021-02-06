@@ -48,5 +48,35 @@ namespace Artco
             }
             return result.Equals("true");
         }
+
+        public static bool SignUp(UserInfo user_info)
+        {
+            string url = php_root_dir + "SignUp.php";
+            string result;
+            using (WebClient client = new WebClient()) {
+                NameValueCollection post_data = new NameValueCollection(){
+                                        { "id", user_info.id },
+                                        { "passwd", user_info.passwd },
+                                        { "license", user_info.license },
+                                        { "name", user_info.name },
+                                        { "birth", user_info.birth.ToString("yyyy-MM-dd") },
+                                        { "email", user_info.email }
+                                    };
+                try {
+                    result = Encoding.UTF8.GetString(client.UploadValues(url, post_data));
+                } catch (Exception) {
+                    return false;
+                }
+            }
+            if (result.Equals("true")) {
+                return true;
+            } else if (result.Contains("duplicated_ID")) {
+                throw new Exception("用户名已存在");
+            } else if (result.Contains("duplicated_LIC")) {
+                throw new Exception("电脑已被注册");
+            } else {
+                return false;
+            }
+        }
     }
 }

@@ -799,9 +799,6 @@
     <None Include="bin\Debug\themes\default\Block_Outline.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Res\SignUpForm.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="bin\Debug\themes\chinese\User_tab.png" />
   </ItemGroup>
   <ItemGroup>
@@ -863,9 +860,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\themes\chinese\HomeImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Res\SignUpFormPI.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

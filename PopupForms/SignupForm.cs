@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -110,9 +111,26 @@ namespace Artco
 
         private void Button_Signup_Ok_Click(object sender, EventArgs e)
         {
-            if(this.UserInfoCheck()) {
-                //need server work // id 중복 처리, 중복시 "用户名已存在" 메시지박스
-                this.Close();
+            if (this.UserInfoCheck()) {
+                this._user_info.id = textBox_id.Text;
+                this._user_info.passwd = textBox_pw.Text;
+                this._user_info.license = NetworkInterface.GetAllNetworkInterfaces()[0].GetPhysicalAddress().ToString();
+                this._user_info.name = textBox_name.Text;
+                this._user_info.email = textBox_email.Text;
+                this._user_info.birth = new DateTime(Int32.Parse(comboBox_year.SelectedItem.ToString()),
+                                                    Int32.Parse(comboBox_month.SelectedItem.ToString()),
+                                                    Int32.Parse(comboBox_day.SelectedItem.ToString()));
+
+                try {
+                    if (DBManager.SignUp(this._user_info)) {
+                        MessageBox.Show("注册成功", "个人信息收集与保护");
+                        this.Close();
+                    } else {
+                        throw new Exception("注册失败");
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message, "个人信息收集与保护");
+                }
             }
         }
 
@@ -151,7 +169,6 @@ namespace Artco
             Regex regex = new Regex(@"^[a-z0-9_\-]{5,20}$");
 
             if (regex.IsMatch(textBox_id.Text)) {
-                this._user_info.id = textBox_id.Text;
                 this.label_IDC.Visible = false;
             } else {
                 this.label_IDC.Visible = true;
@@ -163,7 +180,6 @@ namespace Artco
             Regex regex = new Regex(@"^[A-Za-z0-9_\-]{8,16}$");
 
             if (regex.IsMatch(textBox_pw.Text)) {
-                this._user_info.pw = textBox_pw.Text;
                 this.label_PWC.Visible = false;
             } else {
                 this.label_PWC.Visible = true;
@@ -172,7 +188,7 @@ namespace Artco
 
         private void TextBox_PWR_Leav(object sender, EventArgs e)
         {
-            if(this._user_info.pw == textBox_pwr.Text) {
+            if (textBox_pw.Text == textBox_pwr.Text) {
                 this.label_PWrC.Visible = false;
             } else {
                 this.label_PWrC.Visible = true;
@@ -182,7 +198,6 @@ namespace Artco
         private void TextBox_Name_Leave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBox_name.Text)) {
-                this._user_info.name = textBox_name.Text;
                 this.label_NameC.Visible = false;
             } else {
                 this.label_NameC.Visible = true;
@@ -192,7 +207,6 @@ namespace Artco
         private void TextBox_Email_Leave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBox_email.Text)) {
-                this._user_info.email = textBox_email.Text;
                 this.label_EmailC.Visible = false;
             } else {
                 this.label_EmailC.Visible = true;
@@ -225,11 +239,8 @@ namespace Artco
 
         private void ComboBox_Day_Leave(object sender, EventArgs e)
         {
-            if (comboBox_year.SelectedItem != null && comboBox_month.SelectedItem != null && 
+            if (comboBox_year.SelectedItem != null && comboBox_month.SelectedItem != null &&
                 comboBox_day.SelectedItem != null) {
-                this._user_info.birth = new DateTime(Int32.Parse(comboBox_year.SelectedItem.ToString()),
-                    Int32.Parse(comboBox_month.SelectedItem.ToString()),
-                    Int32.Parse(comboBox_day.SelectedItem.ToString()));
                 this.label_BirthC.Visible = false;
             } else {
                 this.label_BirthC.Visible = true;
@@ -253,7 +264,7 @@ namespace Artco
 
         private void ComboBox_Month_Click(object sender, EventArgs e)
         {
-            if(comboBox_day.SelectedItem != null)
+            if (comboBox_day.SelectedItem != null)
                 comboBox_day.Items.Clear();
         }
     }
@@ -261,7 +272,8 @@ namespace Artco
     public struct UserInfo
     {
         public string id { get; set; }
-        public string pw { get; set; }
+        public string passwd { get; set; }
+        public string license { get; set; }
         public string name { get; set; }
         public DateTime birth { get; set; }
         public string email { get; set; }

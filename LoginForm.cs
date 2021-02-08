@@ -117,5 +117,16 @@ namespace Artco
         }
 
         private void Btn_Close_Click(object sender, EventArgs e) => Close();
+
+        private void Button_Signup_Click(object sender, EventArgs e)
+        {
+            SignupForm signup_form = new SignupForm();
+            signup_form.ShowDialog();
+        }
+
+        private void Button_Findidpw_Click(object sender, EventArgs e)
+        {
+            //
+        }
     }
 }

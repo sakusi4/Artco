@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Artco
@@ -33,12 +34,13 @@ namespace Artco
 
         public static bool LoginCheck(string id, string passwd)
         {
+            SHA256Managed sha256 = new SHA256Managed();
             string url = php_root_dir + "LoginCheck.php";
             string result;
             using (WebClient client = new WebClient()) {
                 NameValueCollection post_data = new NameValueCollection(){
                                     { "id", id },  //order: {"parameter name", "parameter value"}
-                                    { "passwd", passwd }
+                                    { "passwd", Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(passwd))) }
                                 };
                 try {
                     result = Encoding.UTF8.GetString(client.UploadValues(url, post_data));
@@ -47,6 +49,37 @@ namespace Artco
                 }
             }
             return result.Equals("true");
+        }
+
+        public static bool SignUp(UserInfo user_info)
+        {
+            SHA256Managed sha256 = new SHA256Managed();
+            string url = php_root_dir + "SignUp.php";
+            string result;
+            using (WebClient client = new WebClient()) {
+                NameValueCollection post_data = new NameValueCollection(){
+                                        { "id", user_info.id },
+                                        { "passwd", Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(user_info.passwd))) },
+                                        { "license", user_info.license },
+                                        { "name", user_info.name },
+                                        { "birth", user_info.birth.ToString("yyyy-MM-dd") },
+                                        { "email", user_info.email }
+                                    };
+                try {
+                    result = Encoding.UTF8.GetString(client.UploadValues(url, post_data));
+                } catch (Exception) {
+                    return false;
+                }
+            }
+            if (result.Equals("true")) {
+                return true;
+            } else if (result.Contains("duplicated_ID")) {
+                throw new Exception("用户名已存在");
+            } else if (result.Contains("duplicated_LIC")) {
+                throw new Exception("电脑已被注册");
+            } else {
+                return false;
+            }
         }
     }
 }

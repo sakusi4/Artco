@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Artco
@@ -26,8 +27,8 @@ namespace Artco
         public static Action finish_stage_player_cb { get; set; }
         public static Action finish_act_sprites_cb { get; set; }
         public static Action remove_all_sprite { get; set; }
-        public static Func<bool> start_project { get; set; }
-        public static Func<bool> stop_project { get; set; }
+        public static Action start_project { get; set; }
+        public static Action stop_project { get; set; }
         public static Action release_focus { get; set; }
 
         public MainForm()
@@ -47,7 +48,7 @@ namespace Artco
             AttachTooltipRightMenu();
             SetBlocksPosition();
             SetWindowFormTheme(Properties.Settings.Default.Theme);
-            SetMouseWheelEvent();            
+            SetMouseWheelEvent();
         }
 
         private void SetDelegates()
@@ -189,18 +190,18 @@ namespace Artco
 #endif
         }
 
-        private bool StartProject()
+        private void StartProject()
         {
             ReleaseFocus();
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) ||
                 stage_player.GetBackground() == null) {
-                return false;
+                return;
             }
 
             if (!CheckError()) {
                 new MsgBoxForm("错误的编码编辑").ShowDialog();
-                return false;
+                return;
             }
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
@@ -216,7 +217,8 @@ namespace Artco
 
             StagePlayer.SetFlags(StagePlayer.Flag.PLAYING);
 
-            return true;
+            btn_Run.Tag = 1;
+            btn_Run.Image = Properties.Resources.Button_Stop;
         }
 
         private bool CheckError()
@@ -231,27 +233,17 @@ namespace Artco
 
         private void Btn_Run_Click(object sender, EventArgs e)
         {
-            if(int.Parse(btn_Run.Tag.ToString()) == 0) {
-                if (!StartProject()) 
-                    return;
-
-                btn_Run.Tag = 1;
-                btn_Run.Image = Properties.Resources.Button_Stop;
-            } else {
-
-                if (!StopProject())
-                    return;
-
-                btn_Run.Tag = 0;
-                btn_Run.Image = Properties.Resources.Button_Play;
-            }
+            if (int.Parse(btn_Run.Tag.ToString()) == 0)
+                StartProject();
+            else
+                StopProject();
         }
 
-        private bool StopProject()
+        private void StopProject()
         {
             if (!StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING) ||
                 StagePlayer.ORCheckFlags(StagePlayer.Flag.LOADING)) {
-                return false;
+                return;
             }
 
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
@@ -259,7 +251,9 @@ namespace Artco
             }
 
             RuntimeEnv.StopActivatedSprites();
-            return true;
+
+            btn_Run.Tag = 0;
+            btn_Run.Image = Properties.Resources.Button_Play;
         }
 
         public void FinishActSpritesCB()
@@ -276,7 +270,7 @@ namespace Artco
 
             Music.StopBackMusic();
 
-            StagePlayer.UnsetFlag(StagePlayer.Flag.PLAYING);            
+            StagePlayer.UnsetFlag(StagePlayer.Flag.PLAYING);
 
             _change_screen_state?.Invoke(false);
             _change_screen_state = null;
@@ -287,18 +281,16 @@ namespace Artco
 
         private void StartRecording()
         {
-            if (!VideoRecord.Start()) {
-                return;
-            }
+            if (!VideoRecord.Start())
+                return;            
 
             btn_RecordingReady.Visible = false;
         }
 
         private void StopRecording()
         {
-            if (!VideoRecord.Stop()) {
-                return;
-            }
+            if (!VideoRecord.Stop())
+                return;            
 
             StagePlayer.UnsetFlag(StagePlayer.Flag.RECORDING);
             btn_RecordingReady.Visible = true;
@@ -306,12 +298,16 @@ namespace Artco
 
         private void Btn_RecordingReady_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING))
+                return;            
 
             RenameSpriteForm rename_sprite_form = new RenameSpriteForm(true);
-            if (rename_sprite_form.ShowDialog() != DialogResult.OK) {
+            if (rename_sprite_form.ShowDialog() != DialogResult.OK)
+                return;
+
+            string video_path = Setting.video_path + "\\" + rename_sprite_form.new_name + ".mp4";
+            if (File.Exists(video_path)) {
+                new MsgBoxForm("该文件已存在").ShowDialog();
                 return;
             }
 
@@ -321,9 +317,8 @@ namespace Artco
 
         private void Btn_SelectSound_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
+                return;            
 
             EffectSound.mouse_click_sound.Play();
 
@@ -333,9 +328,8 @@ namespace Artco
 
         private void Btn_Update_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING))
+                return;            
 
             Sprite.UpdateSpriteData();
             using var msg_box = new MsgBoxForm("刷新成功");
@@ -344,9 +338,8 @@ namespace Artco
 
         private void Btn_SettingBtn_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING))
+                return;            
 
             using var setting_form = new SettingForm {
                 change_theme = SetWindowFormTheme,
@@ -358,9 +351,8 @@ namespace Artco
 
         private void Btn_OpenDocBtn_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) 
+                return;            
 
             using var about_form = new AboutForm();
             about_form.ShowDialog();
@@ -368,13 +360,11 @@ namespace Artco
 
         private void Btn_ReturnHome_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING))
+                return;            
 
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.GAME)) {
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.GAME))
                 FinishPracticeMode();
-            }
 
             RemoveAllSprite();
             StagePlayer.SetHomeImage();
@@ -413,9 +403,8 @@ namespace Artco
 
         private void Btn_ToggleBgm_Click(object sender, EventArgs e)
         {
-            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME)) {
-                return;
-            }
+            if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING, StagePlayer.Flag.GAME))
+                return;            
 
             Music.is_play_bgm ^= true;
             btn_ToggleBgm.Image = (Music.is_play_bgm) ? Properties.Resources.BgmOnBtn : Properties.Resources.BgmOffBtn;
@@ -506,10 +495,7 @@ namespace Artco
             string[] splits = value.Split('x');
             Width = int.Parse(splits[0]);
             Height = int.Parse(splits[1]) - 40;
-            form_size = new Size(Width, Height);            
-            client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height, 
-                form_size.Width, form_size.Height - pnl_Topbar.Height);
-
+            form_size = new Size(Width, Height);
 
             pnl_BlockTab.Width = (int)(Width * col_factors[0]);
             pnl_Left.Width = (int)(Width * col_factors[1]);
@@ -540,6 +526,8 @@ namespace Artco
             btn_CreateVariable.Width = (pnl_Left.Width / 2) - 10;
             btn_HideVarList.Width = (pnl_Left.Width / 2) - 10;
 
+            client_area = new Area(Location.X, Location.Y + pnl_Topbar.Height,
+    form_size.Width, form_size.Height - pnl_Topbar.Height);
 
             SetStageInfo();
             SetBlocksPosition();
@@ -580,8 +568,8 @@ namespace Artco
             if (Math.Abs(Location.X) < 50 && Math.Abs(Location.Y) < 50)
                 Location = new Point(0, 0);
 
-            _is_form_move = false;            
-        }      
+            _is_form_move = false;
+        }
     }
 
     public class Area

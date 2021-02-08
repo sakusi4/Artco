@@ -29,7 +29,7 @@ namespace Artco
 
             Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
 
-#if (DEMO)            
+#if (DE2MO)            
             btn_OpenUserFile.Enabled = false;
 #else            
             btn_OpenUserFile.Enabled = true;
@@ -125,30 +125,28 @@ namespace Artco
             }
 
             if (tab_num == _user_tab_num) {
-                //miniview.MiniViewRClick += (sender, e) => {
-                //    var args = (MouseEventArgs)e;
-                //    Utility.ShowContextMenu(sender, args.Location.X, args.Location.Y,
-                //        new string[] { "删除" }, new List<Action<object, EventArgs>>()
-                //        {
-                //            (sender, e) =>
-                //            {
-                //                if(ActivatedSpriteController.IsActSprite(sprite.name)) {
-                //                    new MsgBoxForm("素材正在使用中").ShowDialog();
-                //                    return;
-                //                }
+                miniview.MiniViewRClick += (sender, e) => {
+                    var args = (MouseEventArgs)e;
+                    Utility.ShowContextMenu(sender, args.Location.X, args.Location.Y,
+                        new string[] { "删除" }, new List<Action<object, EventArgs>>() {
+                            (sender, e) => {
+                                if(ActivatedSpriteController.IsActSprite(sprite.name)) {
+                                    new MsgBoxForm("素材正在使用中").ShowDialog();
+                                    return;
+                                }
 
-                //                Sprite.sprites[_user_tab_num].Remove(sprite);
-                //                _content_panels[_user_tab_num].Controls.Remove(miniview);
-                                
-                //                miniview.content_image?.Dispose();
-                //                GC.Collect();
-                //                GC.WaitForPendingFinalizers();
+                                Sprite.sprites[_user_tab_num].Remove(sprite);
+                                _content_panels[_user_tab_num].Controls.Remove(miniview);
 
-                //                if (File.Exists(sprite.sprite_path))
-                //                    File.Delete(sprite.sprite_path);
-                //            }
-                //        });
-                //};
+                                miniview.content_image?.Dispose();
+                                GC.Collect();
+                                GC.WaitForPendingFinalizers();
+
+                                if (File.Exists(sprite.sprite_path))
+                                    File.Delete(sprite.sprite_path);
+                            }
+                        });
+                };
             }
 
             return miniview;
@@ -262,6 +260,12 @@ namespace Artco
                     task.Wait();
                 }
             });
+            
+            foreach (var views in _miniviews) {
+                foreach(var view in views) {
+                    view.content_image?.Dispose();
+                }
+            }
 
             Close();
         }

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using ArtcoCustomControl;
 
 namespace Artco
 {
@@ -80,7 +81,7 @@ namespace Artco
         private void ShowSpeakBox(Point point, string text, PaintEventArgs e)
         {
             Size string_area = Size.Ceiling(MeasureTextArea(text, e));
-            Size speak_box_size = new Size(string_area.Width + 40, string_area.Height + 40);
+            Size speak_box_size = new Size(string_area.Width + 40, string_area.Height + 60);
             Bitmap speak_box = new Bitmap(Properties.Resources.SpeakBox, speak_box_size);
             Point speak_box_point = new Point(point.X + 20, point.Y - speak_box.Height);
             Rectangle text_rect = new Rectangle(speak_box_point.X + 20, speak_box_point.Y + 20, string_area.Width, string_area.Height);
@@ -125,24 +126,36 @@ namespace Artco
                 EffectSound.finish_game_sound.Play();
                 StopProject();
 
-                var result_form = new PracticeResultForm {
-                    Cursor = new Cursor(Properties.Resources.Cursor.GetHicon()),
-                    Location = new Point(461, 104),
-                    ShowInTaskbar = false
+                PracticeResultControl practice_result_control = new PracticeResultControl {
+                    Dock = DockStyle.Fill
                 };
-                result_form.ShowDialog();
 
-                if (result_form.exit_code == 1) {
+                practice_result_control.NextStepClick += (sernder, e) => {
                     var next_back = Background.GetNextBack();
                     if (next_back == null) {
                         return;
                     }
 
                     SelectBackCB(next_back);
-                } else if (result_form.exit_code == -1) {
+
+                    stage_panel.Controls.Remove(practice_result_control);
+                    practice_result_control.Dispose();
+                };
+
+                practice_result_control.RestartClick += (sernder, e) => {
+                    stage_panel.Controls.Remove(practice_result_control);
+                    practice_result_control.Dispose();
+                };
+
+                practice_result_control.FinishClick += (sernder, e) => {
                     FinishPracticeMode();
                     Btn_SelectBackground_Click(null, null);
-                }
+
+                    stage_panel.Controls.Remove(practice_result_control);
+                    practice_result_control.Dispose();
+                };
+
+                stage_panel.Controls.Add(practice_result_control);
             }
         }
 
@@ -283,7 +296,7 @@ namespace Artco
             // 실행 중이 아니라면 화면 전환
             // 실행 중이라면 배경 완료 스레드에서 처리
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.PLAYING)) {
-                _change_screen_state = ChangeScreenState;
+                return;
             } else {
                 ChangeScreenState(false);
             }

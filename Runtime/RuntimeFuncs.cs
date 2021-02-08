@@ -299,7 +299,7 @@ namespace Artco
         {
             s.arrow = new Random(Guid.NewGuid().GetHashCode()).Next(1, 9); // 1~8 난수 생성
             int n = new Random(Guid.NewGuid().GetHashCode()).Next(1, 6);
-            MoveSprite(s, 20, n, 100);
+            MoveSprite(s, 2, n, 100);
 
             s.pc[line_num] -= 1;
         }
@@ -327,7 +327,7 @@ namespace Artco
             while (i < n) {
                 for (int j = 5; j > 0; j--) {
                     s.arrow = 8;
-                    MoveSprite(s, j * 10, 1, 100);
+                    MoveSprite(s, j, 1, 100);
 
                     if (IsFinish(s, line_num))
                         return;
@@ -335,7 +335,7 @@ namespace Artco
 
                 for (int j = 1; j <= 5; j++) {
                     s.arrow = 6;
-                    MoveSprite(s, j * 10, 1, 100);
+                    MoveSprite(s, j, 1, 100);
 
                     if (IsFinish(s, line_num))
                         return;
@@ -377,6 +377,7 @@ namespace Artco
                 s.arrow = 5;
 
             int zero_point = s.y;
+            int width = s.width;
 
             int i = (n > 0) ? 0 : -1;
             for (; i < n; i = (n > 0) ? i + 1 : i) {
@@ -384,11 +385,13 @@ namespace Artco
                     if (IsFinish(s, line_num))
                         return;
 
-                    double radian = Math.PI * angle / 180.0;
-                    s.y = (int)(-Math.Sin(radian) * 50.0) + zero_point;
-                    s.x = (s.arrow == 5) ? s.x + 5 : s.x - 5;
+                    if (s.x >= 5 && s.x + width <= MainForm.stage_size.Width) {
+                        double radian = Math.PI * angle / 180.0;
+                        s.y = (int)(-Math.Sin(radian) * 50.0) + zero_point;
+                        s.x = (s.arrow == 5) ? s.x + 5 : s.x - 5;
 
-                    Thread.Sleep(50);
+                        Thread.Sleep(50);
+                    }
                 }
             }
         }
@@ -760,7 +763,7 @@ namespace Artco
             int x = s.x;
             int y = s.y;
             if (MainForm.practice_mode.CheckPath(s.arrow, x, y)) {
-                MoveSprite(s, 100, 1);
+                MoveSprite(s, 25, 1);
                 EffectSound.move_successed_sound.Play();
             } else {
                 EffectSound.move_failed_sound.Play();
@@ -837,7 +840,7 @@ namespace Artco
             if (x + s.width + n < MainForm.stage_size.Width) {
                 if (y - n > 0) {
                     s.x += n;
-                    s.y -= n;                    
+                    s.y -= n;
                     return -1;
                 } else {
                     return 4;

@@ -114,7 +114,7 @@ namespace Artco
         {
             foreach (var sprite in sprite_list) {
                 foreach (var clone in sprite.cloned_sprite_list)
-                    clone.Dispose();
+                    clone?.Dispose();
 
                 sprite.cloned_sprite_list.Clear();
                 sprite.wait_signal_obj.Clear();

@@ -48,7 +48,7 @@ namespace Artco
         public static List<(string, string)> ReadSettingDirs()
         {
             List<(string, string)> dirs = new List<(string, string)>();
-#if (DEMO)
+#if (FREE)
             string xml_file = "./xml/setting_demo.xml";
 #else
             string xml_file = "./xml/setting.xml";

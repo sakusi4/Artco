@@ -34,7 +34,7 @@ namespace Artco
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]) - 5;
-#if (DEMO)
+#if (FREE)
                 string background_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".jpg";
 #else
@@ -70,7 +70,7 @@ namespace Artco
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
                 int mode = int.Parse(datas[i + 3]);
-#if (DEMO)
+#if (FREE)
                 string background_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".jpg";
 #else

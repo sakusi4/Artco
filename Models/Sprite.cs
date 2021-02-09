@@ -69,7 +69,7 @@ namespace Artco
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
-#if (DEMO)
+#if (FREE)
                 string sprite_path = FileManager.http_root_dir + datas[i + 3];
 #else
                 string sprite_path = "./" + datas[i + 3];

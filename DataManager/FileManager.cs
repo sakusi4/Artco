@@ -165,7 +165,12 @@ namespace Artco
             RemoveOldVersion();
 
             File.Move("./Artco.exe", "./tmp");
-            if (!DownloadFileFromHTTP(http_root_dir + "Artco.exe", "./Artco.exe")) {
+#if(FREE)
+            string server_exe_path = http_root_dir + "/bin/free/Artco.exe";
+#else
+            string server_exe_path = http_root_dir + "/bin/pay/Artco.exe";
+#endif
+            if (!DownloadFileFromHTTP(server_exe_path, "./Artco.exe")) {
                 update_rich_textbox?.Invoke("Failed DownloadExecutableFile Function\n");
 
                 if (File.Exists("./Artco.exe"))

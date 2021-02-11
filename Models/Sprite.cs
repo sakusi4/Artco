@@ -65,19 +65,25 @@ namespace Artco
             // 저장소 유저 이미지 미리 다운로드
             AddUserSpriteData();
 
-            const int row_cnt = 4;
+            const int row_cnt = 5;
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
-#if (FREE)
-                string sprite_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3];
-#else
-                string sprite_path = "./" + datas[i + 3];
-#endif
+                string license = datas[i + 4];
+
                 for (; category >= sprites.Count;)
                     sprites.Add(new List<Sprite>());
+#if (FREE)
+                string sprite_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3];
 
-                sprites[category].Add(new Sprite(name, sprite_path, false, null));
+                if (license.Contains("free"))
+                    sprites[category].Add(new Sprite(name, sprite_path, false, null));
+#else
+                string sprite_path = "./" + datas[i + 3];
+                
+                if (license.Contains("pay"))
+                    sprites[category].Add(new Sprite(name, sprite_path, false, null));
+#endif
             }
 
             sprites.Add(new List<Sprite>()); // user tab

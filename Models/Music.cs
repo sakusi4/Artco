@@ -52,17 +52,23 @@ namespace Artco
 
         public static void AddMusicData(string[] datas)
         {
-            const int row_cnt = 5;
+            const int row_cnt = 6;
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
                 //int idx = int.Parse(datas[i + 3]);
                 string path = "./" + datas[i + 4] + ".wav";
+                string license = datas[i + 5];
 
                 for (; category >= musics.Count;)
                     musics.Add(new List<Music>());
-
-                musics[category].Add(new Music(name, path));
+#if (FREE)
+                if (license.Contains("free"))
+                    musics[category].Add(new Music(name, path));
+#else
+                if (license.Contains("pay"))
+                    musics[category].Add(new Music(name, path));
+#endif
             }
 
             musics.Add(new List<Music>()); // user tab

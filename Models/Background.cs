@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Artco
@@ -30,21 +31,27 @@ namespace Artco
 
         public static void AddBackgroundData(string[] datas)
         {
-            const int row_cnt = 4;
+            const int row_cnt = 5;
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]) - 5;
+                string license = datas[i + 4];
+
+                for (; category >= backgrounds[0].Count;)
+                    backgrounds[0].Add(new List<Background>());
 #if (FREE)
                 string background_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3].Replace(" ", "%20") + ".mp4";
                 string preview_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3].Replace(" ", "%20") + ".jpg";
+
+                if (license.Contains("free"))
+                    backgrounds[0][category].Add(new Background(name, 0, 0, background_path, preview_path, false));
 #else
                 string background_path = "./" + datas[i + 3] + ".mp4";
                 string preview_path = "./" + datas[i + 3] + ".jpg";
-#endif
-                for (; category >= backgrounds[0].Count;)
-                    backgrounds[0].Add(new List<Background>());
 
-                backgrounds[0][category].Add(new Background(name, 0, 0, background_path, preview_path, false));
+                if (license.Contains("pay"))
+                    backgrounds[0][category].Add(new Background(name, 0, 0, background_path, preview_path, false));
+#endif
             }
 
             backgrounds[0].Add(new List<Background>()); // user tab

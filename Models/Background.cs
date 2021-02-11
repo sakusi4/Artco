@@ -35,8 +35,8 @@ namespace Artco
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]) - 5;
 #if (FREE)
-                string background_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".mp4";
-                string preview_path = FileManager.http_root_dir + datas[i + 3].Replace(" ", "%20") + ".jpg";
+                string background_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3].Replace(" ", "%20") + ".mp4";
+                string preview_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3].Replace(" ", "%20") + ".jpg";
 #else
                 string background_path = "./" + datas[i + 3] + ".mp4";
                 string preview_path = "./" + datas[i + 3] + ".jpg";
@@ -71,8 +71,8 @@ namespace Artco
                 int category = int.Parse(datas[i + 2]);
                 int mode = int.Parse(datas[i + 3]);
 #if (FREE)
-                string background_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".mp4";
-                string preview_path = FileManager.http_root_dir + datas[i + 4].Replace(" ", "%20") + ".jpg";
+                string background_path = FileManager.http_root_dir + "resource/free/" + datas[i + 4].Replace(" ", "%20") + ".mp4";
+                string preview_path = FileManager.http_root_dir + "resource/free/" + datas[i + 4].Replace(" ", "%20") + ".jpg";
 #else
                 string background_path = "./" + datas[i + 4] + ".mp4";
                 string preview_path = "./" + datas[i + 4] + ".jpg";

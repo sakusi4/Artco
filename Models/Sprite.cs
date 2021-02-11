@@ -65,19 +65,25 @@ namespace Artco
             // 저장소 유저 이미지 미리 다운로드
             AddUserSpriteData();
 
-            const int row_cnt = 4;
+            const int row_cnt = 5;
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 int category = int.Parse(datas[i + 2]);
-#if (FREE)
-                string sprite_path = FileManager.http_root_dir + datas[i + 3];
-#else
-                string sprite_path = "./" + datas[i + 3];
-#endif
+                string license = datas[i + 4];
+
                 for (; category >= sprites.Count;)
                     sprites.Add(new List<Sprite>());
+#if (FREE)
+                string sprite_path = FileManager.http_root_dir + "resource/free/" + datas[i + 3];
 
-                sprites[category].Add(new Sprite(name, sprite_path, false, null));
+                if (license.Contains("free"))
+                    sprites[category].Add(new Sprite(name, sprite_path, false, null));
+#else
+                string sprite_path = "./" + datas[i + 3];
+                
+                if (license.Contains("pay"))
+                    sprites[category].Add(new Sprite(name, sprite_path, false, null));
+#endif
             }
 
             sprites.Add(new List<Sprite>()); // user tab
@@ -107,19 +113,21 @@ namespace Artco
 
         private static void AddUserSpriteData()
         {
-            string[] file_names = FileManager.GetFtpFolderItems(FileManager.ftp_root_dir + "sprites/" + Setting.user_name + "/");
+#if (!FREE)
+            string[] file_names = FileManager.GetFtpFolderItems(FileManager.ftp_root_dir + "resource/pay/sprites/" + Setting.user_name + "/");
             WebClient downloader = FileManager.GetHttpClient();
 
             for (int i = 0; i < file_names.Length; i++) {
                 string name = file_names[i].Substring(0, file_names[i].Length - 4);
 
-                string sprite_path = FileManager.http_root_dir + "sprites/" + Setting.user_name + "/" + file_names[i];
+                string sprite_path = FileManager.http_root_dir + "resource/pay/sprites/" + Setting.user_name + "/" + file_names[i];
                 Sprite sprite = new Sprite(name, sprite_path, true, ImageUtility.GetImageFromPath(sprite_path, downloader));
 
                 sprites[0].Add(sprite);
             }
 
             downloader.Dispose();
+#endif
         }
     }
 }

@@ -21,17 +21,23 @@ namespace Artco
 
         public static void AddSoundData(string[] datas)
         {
-            const int row_cnt = 5;
+            const int row_cnt = 6;
             for (int i = 0; i <= datas.Length - row_cnt; i += row_cnt) {
                 string name = (Setting.language.Equals("Korean")) ? datas[i] : datas[i + 1];
                 //int idx = int.Parse(datas[i + 2]);
                 int category = int.Parse(datas[i + 3]);
                 string local_path = "./" + datas[i + 4];
+                string license = datas[i + 5];
 
                 for (; category >= sounds.Count;)
                     sounds.Add(new List<Sound>());
-
-                sounds[category].Add(new Sound(name, local_path));
+#if (FREE)
+                if (license.Contains("free"))
+                    sounds[category].Add(new Sound(name, local_path));
+#else
+                if (license.Contains("pay"))
+                    sounds[category].Add(new Sound(name, local_path));
+#endif
             }
 
             sounds.Add(new List<Sound>()); // user tab

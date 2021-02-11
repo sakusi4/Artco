@@ -33,7 +33,11 @@ namespace Artco
             foreach (var dir in dirs) {
                 string remote_dir = http_root_dir + dir.Item2;
                 string local_dir = "./" + dir.Item2;
-
+#if (FREE)
+                local_dir = local_dir.Replace("resource/free/", "");
+#else
+                local_dir = local_dir.Replace("resource/pay/", "");
+#endif
                 _remote_dirs[dir.Item1] = remote_dir;
                 _local_dirs[dir.Item1] = local_dir;
                 check_list.Add(dir.Item2);
@@ -165,7 +169,7 @@ namespace Artco
             RemoveOldVersion();
 
             File.Move("./Artco.exe", "./tmp");
-#if(FREE)
+#if (FREE)
             string server_exe_path = http_root_dir + "/bin/free/Artco.exe";
 #else
             string server_exe_path = http_root_dir + "/bin/pay/Artco.exe";
@@ -188,10 +192,10 @@ namespace Artco
         {
             string local_version_path = "version.txt";
             if (!File.Exists(local_version_path))
-                File.WriteAllText(local_version_path, "0.0");            
+                File.WriteAllText(local_version_path, "0.0");
 
             double local_ver = double.Parse(File.ReadAllText(local_version_path));
-            double remote_ver = double.Parse(new StreamReader(GetStreamFromHTTP(http_root_dir + "version.txt")).ReadLine());            
+            double remote_ver = double.Parse(new StreamReader(GetStreamFromHTTP(http_root_dir + "version.txt")).ReadLine());
             return (local_ver < remote_ver) ? remote_ver.ToString() : null;
         }
 
@@ -311,8 +315,7 @@ namespace Artco
                     file_name.Add(item.Name);
                 }
                 return file_name.ToArray();
-            }
-            catch(DirectoryNotFoundException) {
+            } catch (DirectoryNotFoundException) {
                 return new string[] { };
             }
         }
@@ -341,7 +344,7 @@ namespace Artco
         {
             string temp = @".\tmp";
             if (File.Exists(temp)) {
-                try {                    
+                try {
                     File.Delete(temp);
                 } catch (Exception) { }
             }

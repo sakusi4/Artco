@@ -298,6 +298,9 @@ namespace Artco
 
         private void Btn_RecordingReady_Click(object sender, EventArgs e)
         {
+#if (FREE)
+            MessageBox.Show("应版权方要求，需购买付费版Artco软件开通ⅤIP权限", "Artco");
+#else
             if (StagePlayer.ORCheckFlags(StagePlayer.Flag.RECORDING))
                 return;            
 
@@ -313,6 +316,7 @@ namespace Artco
 
             VideoRecord.SetVideoName(rename_sprite_form.new_name);
             StagePlayer.SetFlags(StagePlayer.Flag.RECORDING);
+#endif
         }
 
         private void Btn_SelectSound_Click(object sender, EventArgs e)

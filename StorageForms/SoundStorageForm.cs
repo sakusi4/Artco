@@ -24,13 +24,6 @@ namespace Artco
             _complete_handler = complete_handler;
 
             Size = new Size(MainForm.form_size.Width, MainForm.form_size.Height);
-#if (DE2MO)
-            btn_OpenRecordingForm.Enabled = false;
-            btn_OpenUserFile.Enabled = false;
-#else
-            btn_OpenRecordingForm.Enabled = true;
-            btn_OpenUserFile.Enabled = true;
-#endif
         }
 
         private void StorageForm_Load(object sender, EventArgs e)
@@ -156,6 +149,9 @@ namespace Artco
 
         private void Btn_OpenRecordingForm_Click(object sender, EventArgs e)
         {
+#if (FREE)
+            MessageBox.Show("应版权方要求，需购买付费版Artco软件开通ⅤIP权限", "Artco");
+#else
             using AudioRecordingForm audio_recording_form = new AudioRecordingForm();
             audio_recording_form.ShowDialog();
 
@@ -173,10 +169,14 @@ namespace Artco
             }
 
             CreateContents();
+#endif
         }
 
         private void Btn_OpenUserFile_Click(object sender, EventArgs e)
         {
+#if (FREE)
+            MessageBox.Show("应版权方要求，需购买付费版Artco软件开通ⅤIP权限", "Artco");
+#else
             OpenFileDialog dialog = new OpenFileDialog { Filter = "wav files (*.wav)|*.wav" };
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -205,6 +205,7 @@ namespace Artco
             }
 
             CreateContents();
+#endif
         }
 
         private void Pnl_Tabs_Paint(object sender, PaintEventArgs e)
